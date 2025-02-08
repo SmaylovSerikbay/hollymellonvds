@@ -1,4 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Hero Slider
+    const initHeroSlider = () => {
+        const slides = document.querySelectorAll('.hero__slide');
+        if (!slides.length) return;
+
+        let currentSlide = 0;
+        const slideInterval = 5000; // 5 секунд между слайдами
+
+        // Показать первый слайд
+        slides[0].classList.add('active');
+
+        // Функция переключения слайдов
+        const nextSlide = () => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        };
+
+        // Запуск автоматического переключения
+        setInterval(nextSlide, slideInterval);
+    };
+
+    // Инициализация слайдера
+    initHeroSlider();
+
     // DOM Elements
     const header = document.querySelector('.header');
     const themeBtn = document.getElementById('themeBtn');
@@ -265,20 +290,48 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Обработчики для мобильного меню
+    // Обработка выбора города в мобильном меню
     if (mobileLocationBtn && mobileCitiesList) {
-        mobileLocationBtn.addEventListener('click', () => {
+        mobileLocationBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
             mobileCitiesList.classList.toggle('active');
         });
+    }
 
-        mobileCities.forEach(city => {
-            city.addEventListener('click', () => {
-                const cityId = city.dataset.cityId;
-                const cityName = city.textContent.trim();
-                updateCity(cityId, cityName);
+    mobileCities.forEach(city => {
+        city.addEventListener('click', function() {
+            const cityId = this.dataset.cityId;
+            const cityName = this.textContent.trim();
+
+            // Обновляем активный класс
+            mobileCities.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+
+            // Обновляем текст кнопки
+            const btnText = mobileLocationBtn.querySelector('span');
+            if (btnText) {
+                btnText.textContent = cityName;
+            }
+
+            // Закрываем меню
+            mobileLocationBtn.classList.remove('active');
+            mobileCitiesList.classList.remove('active');
+
+            // Отправляем запрос на сервер
+            fetch(`/set-city/${cityId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                }
             });
         });
-    }
+    });
 
     // Закрытие меню при клике вне
     document.addEventListener('click', () => {

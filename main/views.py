@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-from .models import Brand, City, BrandTicker, BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement
+from .models import Brand, City, BrandTicker, BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement, HomeHero
 import json
 from django.views.decorators.cache import cache_page
 import requests
@@ -17,14 +17,20 @@ def home(request):
     if current_city_id:
         latest_brands = Brand.objects.filter(location_id=current_city_id).order_by('-id')[:4]
         latest_albums = PhotoAlbum.objects.filter(city_id=current_city_id).order_by('-date')[:10]
+        announcements = Announcement.objects.filter(
+            is_active=True,
+            city_id=current_city_id
+        ).order_by('order', '-created_at')
         current_city = City.objects.get(id=current_city_id).name
     else:
         latest_brands = Brand.objects.all().order_by('-id')[:4]
         latest_albums = PhotoAlbum.objects.all().order_by('-date')[:10]
+        announcements = Announcement.objects.filter(is_active=True).order_by('order', '-created_at')
         current_city = None
     
     context = {
-        'announcements': Announcement.objects.filter(is_active=True),
+        'hero_slides': HomeHero.objects.filter(is_active=True).order_by('order'),
+        'announcements': announcements,
         'site_settings': SiteSettings.objects.first(),
         'latest_brands': latest_brands,
         'latest_albums': latest_albums,

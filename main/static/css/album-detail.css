@@ -412,6 +412,43 @@ body:not(.light) .photo-item {
     }
 }
 
+/* Мобильные стили для фотогалереи */
+@media (max-width: 767px) {
+    .album-header {
+        padding: 20px var(--container-padding-mobile);
+    }
+
+    .photos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+        padding: 0 var(--container-padding-mobile);
+    }
+
+    .photo-item {
+        border-radius: var(--border-radius-small);
+    }
+
+    .photo-actions {
+        opacity: 1;
+        transform: none;
+    }
+
+    .photo-action-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    /* Улучшенный лайтбокс */
+    .pswp__top-bar {
+        padding: 10px;
+    }
+
+    .pswp__button {
+        width: 40px;
+        height: 40px;
+    }
+}
+
 /* Анимации */
 @keyframes fadeInUp {
     from {

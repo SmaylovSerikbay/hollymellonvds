@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Brand, TopGalleryImage, BottomGalleryImage, Feature, SpecialOffer, City, BrandTicker, BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement, AnnouncementItem
+from .models import Brand, TopGalleryImage, BottomGalleryImage, Feature, SpecialOffer, City, BrandTicker, BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement, AnnouncementItem, AnnouncementMedia, HomeHero
 from .utils import get_yandex_folders
 
 @admin.register(City)
@@ -140,6 +140,11 @@ class SiteSettingsAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
+class AnnouncementMediaInline(admin.TabularInline):
+    model = AnnouncementMedia
+    extra = 1
+    fields = ('file', 'is_video', 'order')
+
 class AnnouncementItemInline(admin.TabularInline):
     model = AnnouncementItem
     extra = 1
@@ -147,16 +152,16 @@ class AnnouncementItemInline(admin.TabularInline):
 
 @admin.register(Announcement)
 class AnnouncementAdmin(admin.ModelAdmin):
-    list_display = ('id', 'type', 'is_active', 'order', 'created_at')
-    list_filter = ('is_active', 'type')
+    list_display = ('id', 'type', 'city', 'is_active', 'order', 'created_at')
+    list_filter = ('is_active', 'type', 'city')
     search_fields = ('header', 'items__title', 'items__description')
     list_editable = ('is_active', 'order')
     ordering = ('order', '-created_at')
-    inlines = [AnnouncementItemInline]
+    inlines = [AnnouncementMediaInline, AnnouncementItemInline]
     
     fieldsets = (
         ('Основная информация', {
-            'fields': ('type', 'is_active', 'order'),
+            'fields': ('type', 'city', 'is_active', 'order'),
         }),
         ('Заголовок события', {
             'fields': ('header',),
@@ -175,3 +180,15 @@ class AnnouncementAdmin(admin.ModelAdmin):
         if db_field.name == 'icon':
             field.help_text = field.help_text + ' <br>Доступные иконки можно посмотреть на <a href="https://fontawesome.com/icons" target="_blank">Font Awesome</a>'
         return field
+
+@admin.register(HomeHero)
+class HomeHeroAdmin(admin.ModelAdmin):
+    list_display = ('id', 'is_active', 'order')
+    list_editable = ('is_active', 'order')
+    ordering = ('order',)
+    
+    fieldsets = (
+        ('Настройки', {
+            'fields': ('background_image', 'is_active', 'order'),
+        }),
+    )

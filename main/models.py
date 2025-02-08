@@ -221,6 +221,7 @@ class Announcement(models.Model):
 
     type = models.CharField('Тип анонса', max_length=20, choices=ANNOUNCEMENT_TYPES, default='promo')
     header = models.TextField('Заголовок анонса', blank=True, help_text='Например: "Готовимся к захватывающему событию: уже [дата] мы ждем вас на [название мероприятия]"')
+    city = models.ForeignKey(City, on_delete=models.PROTECT, verbose_name='Город', null=True, blank=True)
     is_active = models.BooleanField('Активно', default=True)
     order = models.IntegerField('Порядок', default=0)
     created_at = models.DateTimeField('Дата создания', auto_now_add=True)
@@ -233,6 +234,20 @@ class Announcement(models.Model):
 
     def __str__(self):
         return f"Анонс #{self.id}"
+
+class AnnouncementMedia(models.Model):
+    announcement = models.ForeignKey(Announcement, on_delete=models.CASCADE, related_name='media', verbose_name='Анонс')
+    file = models.FileField('Медиафайл', upload_to='announcements/')
+    is_video = models.BooleanField('Это видео', default=False)
+    order = models.IntegerField('Порядок', default=0)
+
+    class Meta:
+        verbose_name = 'Медиафайл анонса'
+        verbose_name_plural = 'Медиафайлы анонса'
+        ordering = ['order']
+
+    def __str__(self):
+        return f"Медиафайл {self.id} анонса {self.announcement.id}"
 
 class AnnouncementItem(models.Model):
     announcement = models.ForeignKey(Announcement, on_delete=models.CASCADE, related_name='items', verbose_name='Анонс')
@@ -247,3 +262,16 @@ class AnnouncementItem(models.Model):
 
     def __str__(self):
         return self.title
+
+class HomeHero(models.Model):
+    background_image = models.ImageField('Фоновое изображение', upload_to='hero/')
+    is_active = models.BooleanField('Активно', default=True)
+    order = models.IntegerField('Порядок', default=0)
+
+    class Meta:
+        verbose_name = 'Hero секция'
+        verbose_name_plural = 'Hero секции'
+        ordering = ['order']
+
+    def __str__(self):
+        return f"Hero изображение #{self.id}"

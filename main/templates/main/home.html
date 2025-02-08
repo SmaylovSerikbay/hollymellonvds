@@ -2,29 +2,43 @@
 {% load static %}
 
 {% block content %}
+{% if hero_slides %}
 <section class="hero">
+    <div class="hero__slider">
+        {% for slide in hero_slides %}
+        <div class="hero__slide" style="background-image: url('{{ slide.background_image.url }}');">
+        </div>
+        {% endfor %}
+    </div>
     <div class="hero__footer">
         <div class="ticker">
             <div class="ticker__content">
-                <span>АТМОСФЕРА</span>
-                <span class="ticker__divider">★</span>
-                <span>СТИЛЬ</span>
-                <span class="ticker__divider">★</span>
-                <span>МУЗЫКА</span>
-                <span class="ticker__divider">★</span>
-                <span>ВПЕЧАТЛЕНИЯ</span>
+                <span>АТМОСФЕРА</span><span class="ticker__divider">
+                    <img src="{% static 'icons/anonces/decor-light.svg' %}" alt="Разделитель">
+                </span><span>СТИЛЬ</span><span class="ticker__divider">
+                    <img src="{% static 'icons/anonces/decor-light.svg' %}" alt="Разделитель">
+                </span><span>МУЗЫКА</span><span class="ticker__divider">
+                    <img src="{% static 'icons/anonces/decor-light.svg' %}" alt="Разделитель">
+                </span><span>ВПЕЧАТЛЕНИЯ</span><span class="ticker__divider">
+                    <img src="{% static 'icons/anonces/decor-light.svg' %}" alt="Разделитель">
+                </span>
             </div>
         </div>
         <div class="socials">
-            <a href="#" class="social-link">
+            {% if site_settings.instagram_link %}
+            <a href="{{ site_settings.instagram_link }}" class="social-link" target="_blank">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a href="#" class="social-link">
-                <i class="fab fa-telegram"></i>
+            {% endif %}
+            {% if site_settings.tiktok_link %}
+            <a href="{{ site_settings.tiktok_link }}" class="social-link" target="_blank">
+                <i class="fab fa-tiktok"></i>
             </a>
+            {% endif %}
         </div>
     </div>
 </section>
+{% endif %}
 
 <section class="recent-events">
     <div class="container">
@@ -101,9 +115,25 @@
                         </div>
                     {% endif %}
                     <div class="announcements__group">
+                        {% if announcement.media.exists %}
+                            <div class="announcements__media">
+                                {% for media in announcement.media.all %}
+                                    <div class="announcements__media-item">
+                                        {% if media.is_video %}
+                                            <video controls>
+                                                <source src="{{ media.file.url }}" type="video/mp4">
+                                                Ваш браузер не поддерживает видео.
+                                            </video>
+                                        {% else %}
+                                            <img src="{{ media.file.url }}" alt="Изображение анонса">
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                         {% for item in announcement.items.all %}
                             <div class="announcement-card">
-                                <div class="announcement-card__icon">
+                                <div class="announcement-card__icon" style="background: none;">
                                     {% if request.theme == 'light' %}
                                         <img src="{% static 'icons/anonces/decor-light.svg' %}" alt="Иконка">
                                     {% else %}
