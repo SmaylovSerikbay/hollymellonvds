@@ -98,6 +98,110 @@ body {
     padding: 20px 0;
 }
 
+.logo {
+    display: block;
+    height: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.logo img {
+    height: 100%;
+    width: auto;
+    max-height: 50px;
+    object-fit: contain;
+    opacity: 1;
+    filter: none;
+    mix-blend-mode: normal;
+    transition: opacity 0.3s ease;
+}
+
+/* Медиа-запросы для мобильной версии */
+@media screen and (max-width: 768px) {
+    :root {
+        --header-height: 80px;
+        --container-padding: 20px;
+    }
+
+    .logo {
+        height: 40px;
+    }
+    
+    .logo img {
+        max-height: 35px;
+    }
+    
+    .header {
+        padding: 10px 0;
+    }
+
+    .header__nav {
+        gap: 20px;
+    }
+
+    .header__menu {
+        display: none;
+    }
+
+    .mobile-toggle {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    :root {
+        --header-height: 70px;
+        --container-padding: 15px;
+    }
+
+    .logo {
+        height: 35px;
+    }
+    
+    .logo img {
+        max-height: 30px;
+    }
+    
+    .header {
+        padding: 8px 0;
+    }
+
+    .header__nav {
+        gap: 15px;
+    }
+
+    .location-btn {
+        padding: 8px 12px;
+        font-size: 1.2rem;
+    }
+
+    .action-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.6rem;
+    }
+}
+
+.light-theme-logo {
+    display: block;
+    opacity: 1;
+}
+
+.dark-theme-logo {
+    display: none;
+    opacity: 0;
+}
+
+[data-theme="dark"] .light-theme-logo {
+    display: none;
+    opacity: 0;
+}
+
+[data-theme="dark"] .dark-theme-logo {
+    display: block;
+    opacity: 1;
+}
+
 .header__nav {
     max-inline-size: var(--container-width);
     inline-size: 100%;
@@ -2257,6 +2361,157 @@ body.light .announcement-card__description {
 
 .announcements__media-item video {
     background: #000;
+}
+
+/* Photo Albums Page */
+.photo-albums {
+    padding: 60px 0;
+}
+
+.photo-albums__filters {
+    margin-bottom: 40px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.filter-group label {
+    font-size: 1.4rem;
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.filter-select {
+    padding: 10px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--color-white);
+    border-radius: 8px;
+    font-size: 1.4rem;
+    min-width: 200px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-select:hover {
+    border-color: var(--color-gold);
+}
+
+.albums-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.album-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.album-card:hover {
+    transform: translateY(-5px);
+}
+
+.album-cover {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.album-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.album-card:hover .album-cover img {
+    transform: scale(1.05);
+}
+
+.album-info {
+    padding: 20px;
+}
+
+.album-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-white);
+    margin-bottom: 10px;
+}
+
+.album-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-white);
+    opacity: 0.7;
+    font-size: 1.4rem;
+}
+
+.album-brand {
+    color: var(--color-gold);
+    font-weight: 500;
+}
+
+.album-date {
+    font-size: 1.3rem;
+}
+
+.album-description {
+    margin-top: 10px;
+    font-size: 1.4rem;
+    color: var(--color-white);
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+@media screen and (max-width: 768px) {
+    .photo-albums {
+        padding: 40px 0;
+    }
+
+    .albums-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .album-info {
+        padding: 15px;
+    }
+
+    .album-title {
+        font-size: 1.6rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .photo-albums {
+        padding: 30px 0;
+    }
+
+    .photo-albums__filters {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .filter-select {
+        width: 100%;
+    }
+
+    .albums-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
 }
 
 

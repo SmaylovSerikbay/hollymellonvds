@@ -216,14 +216,26 @@
     --primary-color: #ff6b6b;
     --primary-color-dark: #ff4757;
     --primary-color-light: #ff7b7b;
+    --bg-color: #f5f5f5;
+    --text-color: #333;
+    --text-color-secondary: #666;
+    --card-bg: #fff;
+    --card-bg-secondary: #f0f0f0;
+    --card-bg-hover: #e8e8e8;
+    --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --border-color: #e0e0e0;
 }
 
 /* Темная тема (по умолчанию) */
 body:not(.light) {
-    --bg-color: #1a1a1a;
-    --text-color: #fff;
-    --card-bg: #2d2d2d;
-    --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --text-color-secondary: #b0b0b0;
+    --card-bg: #1a1a1a;
+    --card-bg-secondary: #2d2d2d;
+    --card-bg-hover: #333333;
+    --card-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    --border-color: #333333;
 }
 
 body:not(.light) .ticker {
@@ -398,4 +410,10 @@ body.light .ticker {
 .ticker__divider {
     color: rgba(255, 255, 255, 0.5);
     padding: 0 10px !important;
+}
+
+/* Обновляем стиль хедера для темной темы */
+body:not(.light) .header.scrolled {
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
 }

@@ -191,26 +191,41 @@ class SiteSettings(models.Model):
     def __str__(self):
         return 'Настройки сайта'
 
+class Photographer(models.Model):
+    name = models.CharField('Имя фотографа', max_length=100)
+    is_active = models.BooleanField('Активен', default=True)
+    order = models.IntegerField('Порядок', default=0)
+
+    class Meta:
+        verbose_name = 'Фотограф'
+        verbose_name_plural = 'Фотографы'
+        ordering = ['order', 'name']
+
+    def __str__(self):
+        return self.name
+
 class PhotoAlbum(models.Model):
-    title = models.CharField(max_length=200, verbose_name='Название')
-    cover_image = models.ImageField(upload_to='album_covers/', verbose_name='Обложка', null=True, blank=True)
+    brand = models.ForeignKey(Brand, on_delete=models.PROTECT, verbose_name='Заведение', null=True, blank=True)
+    photographer = models.ForeignKey(Photographer, on_delete=models.PROTECT, verbose_name='Фотограф', null=True, blank=True)
+    cover_image = models.ImageField('Обложка', upload_to='albums/covers/', blank=True)
     yandex_folder = models.CharField(
         max_length=200, 
         verbose_name='Папка на Яндекс.Диске',
         help_text='Укажите путь к папке на Яндекс.Диске (например: Photos/Events/2024)'
     )
-    city = models.ForeignKey(City, on_delete=models.PROTECT, verbose_name='Город')
     date = models.DateField(verbose_name='Дата')
+    is_active = models.BooleanField(default=True, verbose_name='Активен')
+    order = models.IntegerField(default=0, verbose_name='Порядок')
     created_at = models.DateTimeField(auto_now_add=True)
     yandex_preview_url = models.URLField(max_length=500, blank=True)
 
     class Meta:
         verbose_name = 'Фотоальбом'
         verbose_name_plural = 'Фотоальбомы'
-        ordering = ['-date']
+        ordering = ['-date', 'order']
 
     def __str__(self):
-        return self.title
+        return f"{self.brand.name} - {self.date.strftime('%d.%m.%Y')}"
 
 class Announcement(models.Model):
     ANNOUNCEMENT_TYPES = [
@@ -275,3 +290,18 @@ class HomeHero(models.Model):
 
     def __str__(self):
         return f"Hero изображение #{self.id}"
+
+class SiteLogo(models.Model):
+    light_theme_logo = models.ImageField(upload_to='logos/', verbose_name='Логотип для светлой темы')
+    dark_theme_logo = models.ImageField(upload_to='logos/', verbose_name='Логотип для темной темы')
+    is_active = models.BooleanField(default=True, verbose_name='Активный')
+    
+    class Meta:
+        verbose_name = 'Логотип сайта'
+        verbose_name_plural = 'Логотипы сайта'
+    
+    def save(self, *args, **kwargs):
+        if self.is_active:
+            # Деактивируем все другие логотипы
+            SiteLogo.objects.exclude(id=self.id).update(is_active=False)
+        super().save(*args, **kwargs)

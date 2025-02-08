@@ -19,8 +19,9 @@
     <header class="header">
         <div class="container">
             <nav class="header__nav">
-                <a href="/" class="header__logo">
-                    <img src="{% static 'images/logo.png' %}" alt="HollyMellon">
+                <a href="{% url 'home' %}" class="logo">
+                    <img src="{{ light_logo }}" alt="Holly Mellon" class="light-theme-logo">
+                    <img src="{{ dark_logo }}" alt="Holly Mellon" class="dark-theme-logo">
                 </a>
 
                 <div class="header__location">

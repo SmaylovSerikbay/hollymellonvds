@@ -50,10 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function setTheme(theme) {
         if (theme === 'light') {
             body.classList.add('light');
+            body.setAttribute('data-theme', 'light');
             themeIcon.classList.remove('fa-sun');
             themeIcon.classList.add('fa-moon');
         } else {
             body.classList.remove('light');
+            body.setAttribute('data-theme', 'dark');
             themeIcon.classList.remove('fa-moon');
             themeIcon.classList.add('fa-sun');
         }

@@ -113,10 +113,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
-    BASE_DIR / 'main' / 'static',
+    BASE_DIR / 'main/static',
 ]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -132,9 +133,6 @@ SESSION_COOKIE_AGE = 1209600  # 2 недели в секундах
 
 # Добавим настройку для безопасности
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
-
-# Добавьте в settings.py
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 # Настройки кэширования
 CACHES = {

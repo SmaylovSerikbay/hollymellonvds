@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Brand, TopGalleryImage, BottomGalleryImage, Feature, SpecialOffer, City, BrandTicker, BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement, AnnouncementItem, AnnouncementMedia, HomeHero
+from .models import Brand, TopGalleryImage, BottomGalleryImage, Feature, SpecialOffer, City, BrandTicker, BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement, AnnouncementItem, AnnouncementMedia, HomeHero, SiteLogo, Photographer
 from .utils import get_yandex_folders
 
 @admin.register(City)
@@ -108,18 +108,40 @@ class PhotoAlbumForm(forms.ModelForm):
         model = PhotoAlbum
         fields = '__all__'
 
+@admin.register(Photographer)
+class PhotographerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'is_active', 'order')
+    list_editable = ('is_active', 'order')
+    search_fields = ('name',)
+    ordering = ['order', 'name']
+
 @admin.register(PhotoAlbum)
 class PhotoAlbumAdmin(admin.ModelAdmin):
     form = PhotoAlbumForm
-    list_display = ('title', 'city', 'date', 'created_at')
-    list_filter = ('city', 'date')
-    search_fields = ('title', 'city__name')
+    list_display = ['brand', 'photographer', 'date', 'is_active']
+    list_filter = ['brand', 'photographer', 'is_active', 'date']
+    search_fields = ['brand__name', 'photographer__name']
+    ordering = ['-date', 'order']
+    readonly_fields = ['created_at']
+    
+    fieldsets = (
+        ('Основная информация', {
+            'fields': ('brand', 'photographer', 'date')
+        }),
+        ('Медиа', {
+            'fields': ('cover_image', 'yandex_folder',)
+        }),
+        ('Дополнительно', {
+            'fields': ('is_active', 'order', 'created_at')
+        })
+    )
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
         settings = SiteSettings.objects.first()
         if not settings or not settings.yandex_token:
-            self.message_user(request, 'Добавьте токен Яндекс.Диска в настройках сайта', level='WARNING')
+            form.base_fields['yandex_folder'].widget.attrs['readonly'] = True
+            form.base_fields['yandex_folder'].help_text = 'Для выбора папки необходимо добавить токен Яндекс.Диска в настройках сайта'
         return form
 
 @admin.register(SiteSettings)
@@ -192,3 +214,8 @@ class HomeHeroAdmin(admin.ModelAdmin):
             'fields': ('background_image', 'is_active', 'order'),
         }),
     )
+
+@admin.register(SiteLogo)
+class SiteLogoAdmin(admin.ModelAdmin):
+    list_display = ['id', 'is_active']
+    list_editable = ['is_active']

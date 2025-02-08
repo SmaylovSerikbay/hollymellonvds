@@ -4,52 +4,233 @@
 {% block title %}Фото и видео{% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <link rel="stylesheet" href="{% static 'css/photo-gallery.css' %}">
+<style>
+    .photo-gallery {
+        padding: 40px 0;
+        background: var(--background-color);
+        min-height: calc(100vh - var(--header-height));
+    }
+
+    .filters-container {
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .filter-button {
+        background: var(--background-color);
+        border: 1px solid var(--border-color);
+        border-radius: 100px;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--text-color);
+        transition: all 0.2s ease;
+    }
+
+    .filter-button:hover {
+        border-color: var(--accent-color);
+    }
+
+    .filter-button.active {
+        background: var(--accent-color);
+        border-color: var(--accent-color);
+        color: white;
+    }
+
+    .filter-button i {
+        font-size: 16px;
+        opacity: 0.7;
+    }
+
+    .reset-filters {
+        background: var(--background-color-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 100px;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--text-color);
+        transition: all 0.2s ease;
+        margin-left: auto;
+    }
+
+    .reset-filters:hover {
+        background: var(--background-color);
+        border-color: var(--accent-color);
+    }
+
+    .flatpickr-calendar {
+        margin-top: 5px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        border: none !important;
+    }
+
+    .flatpickr-day {
+        border-radius: 8px !important;
+    }
+
+    .flatpickr-day.selected {
+        background: var(--accent-color) !important;
+        border-color: var(--accent-color) !important;
+    }
+
+    @media (max-width: 768px) {
+        .filters {
+            flex-direction: column;
+        }
+
+        .filter-button {
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .reset-filters {
+            width: 100%;
+            justify-content: center;
+            margin-left: 0;
+        }
+
+        .flatpickr-calendar {
+            position: fixed !important;
+            bottom: 0 !important;
+            top: auto !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            border-radius: 20px 20px 0 0 !important;
+            transform: none !important;
+        }
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="gallery-page">
-    <div class="gallery-header">
-        <h1>Фото и видео</h1>
-        <p class="subtitle">Фотоотчеты с наших мероприятий</p>
-    </div>
+<section class="photo-gallery">
+    <div class="container">
+        <div class="filters-container">
+            <div class="filters">
+                <button type="button" class="filter-button {% if request.GET.date %}active{% endif %}" data-filter="date">
+                    <i class="far fa-calendar"></i>
+                    <span>{% if request.GET.date %}{{ request.GET.date|date:"d.m.Y" }}{% else %}Выберите дату{% endif %}</span>
+                </button>
+                
+                <button type="button" class="filter-button {% if request.GET.city %}active{% endif %}" onclick="applyFilter('city', '{% if request.GET.city %}{% else %}{{ cities.0.id }}{% endif %}')">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>{% if current_city %}{{ current_city }}{% else %}Выберите город{% endif %}</span>
+                </button>
+                
+                <button type="button" class="filter-button {% if request.GET.venue %}active{% endif %}" onclick="applyFilter('venue', '{% if request.GET.venue %}{% else %}{{ brands.0.id }}{% endif %}')">
+                    <i class="fas fa-store"></i>
+                    <span>{% if selected_venue %}{{ selected_venue.name }}{% else %}Выберите заведение{% endif %}</span>
+                </button>
 
-    {% if current_city %}
-    <div class="current-location">
-        <i class="fas fa-map-marker-alt"></i>
-        <span>{{ current_city }}</span>
-    </div>
-    {% endif %}
+                <button type="button" class="filter-button {% if request.GET.photographer %}active{% endif %}" onclick="applyFilter('photographer', '{% if request.GET.photographer %}{% else %}{{ photographers.0.id }}{% endif %}')">
+                    <i class="fas fa-camera"></i>
+                    <span>{% if selected_photographer %}{{ selected_photographer.name }}{% else %}Выберите фотографа{% endif %}</span>
+                </button>
 
-    <div class="albums-grid">
-        {% for album in albums %}
-        <a href="{% url 'album_detail' album.id %}" class="album-card">
-            <div class="album-cover">
-                <img src="{{ album.cover_image.url }}" alt="{{ album.title }}">
-                <div class="album-overlay">
-                    <div class="album-date">
-                        <i class="far fa-calendar"></i>
-                        {{ album.date|date:"d.m.Y" }}
-                    </div>
-                    <div class="album-location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        {{ album.city.name }}
-                    </div>
-                </div>
+                {% if request.GET %}
+                <button type="button" class="reset-filters" onclick="window.location.href='?'">
+                    <i class="fas fa-times"></i>
+                    <span>Сбросить все</span>
+                </button>
+                {% endif %}
             </div>
-            <div class="album-info">
-                <h3>{{ album.title }}</h3>
-                <div class="album-meta">
-                    <span class="view-album">Смотреть альбом <i class="fas fa-arrow-right"></i></span>
-                </div>
-            </div>
-        </a>
-        {% empty %}
-        <div class="no-albums">
-            <i class="far fa-images"></i>
-            <p>В этом городе пока нет фотоальбомов</p>
         </div>
-        {% endfor %}
+
+        <div class="albums-grid">
+            {% for album in albums %}
+            <article class="album-card">
+                <a href="{% url 'album_detail' album.id %}">
+                    <div class="album-cover">
+                        {% if album.cover_image %}
+                            <img src="{{ album.cover_image.url }}" alt="{{ album.brand.name }}">
+                        {% else %}
+                            <img src="{% static 'images/default-album-cover.jpg' %}" alt="{{ album.brand.name }}">
+                        {% endif %}
+                    </div>
+                    <div class="album-location">{{ album.brand.location.name }}</div>
+                    <div class="album-info">
+                        <h3 class="album-title">{{ album.brand.name }}</h3>
+                        <time class="album-date">{{ album.date|date:"d F Y" }}</time>
+                    </div>
+                </a>
+            </article>
+            {% empty %}
+            <div class="no-albums">
+                <p>По вашему запросу ничего не найдено</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-</div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/ru.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dateButton = document.querySelector(".filter-button[data-filter='date']");
+    const dateSpan = dateButton.querySelector('span');
+    
+    flatpickr(dateButton, {
+        locale: "ru",
+        dateFormat: "Y-m-d",
+        defaultDate: "{{ request.GET.date|default_if_none:'' }}",
+        onChange: function(selectedDates, dateStr) {
+            if (selectedDates[0]) {
+                const day = selectedDates[0].getDate().toString().padStart(2, '0');
+                const month = (selectedDates[0].getMonth() + 1).toString().padStart(2, '0');
+                const year = selectedDates[0].getFullYear();
+                const formattedDate = `${day}.${month}.${year}`;
+                dateSpan.textContent = formattedDate;
+                applyFilter('date', dateStr);
+            }
+        }
+    });
+});
+
+function applyFilter(filterType, value) {
+    const params = new URLSearchParams(window.location.search);
+    
+    if (value && value !== '') {
+        params.set(filterType, value);
+    } else {
+        params.delete(filterType);
+    }
+    
+    // Сохраняем все остальные активные фильтры
+    if (filterType !== 'date' && params.has('date')) {
+        params.set('date', params.get('date'));
+    }
+    if (filterType !== 'city' && params.has('city')) {
+        params.set('city', params.get('city'));
+    }
+    if (filterType !== 'venue' && params.has('venue')) {
+        params.set('venue', params.get('venue'));
+    }
+    if (filterType !== 'photographer' && params.has('photographer')) {
+        params.set('photographer', params.get('photographer'));
+    }
+    
+    window.location.href = `?${params.toString()}`;
+}
+</script>
 {% endblock %} 
