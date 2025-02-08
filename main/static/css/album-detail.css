@@ -1,0 +1,511 @@
+/* Основные стили для страницы альбома */
+.album-detail {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: var(--container-padding);
+    background: var(--light-bg);
+    min-height: calc(100vh - var(--header-height));
+}
+
+/* Стили для заголовка альбома */
+.album-header {
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.album-breadcrumb {
+    margin-bottom: 2rem;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--light-text-secondary);
+    text-decoration: none;
+    font-size: 1.6rem;
+    transition: all 0.3s ease;
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.back-link:hover {
+    color: var(--light-text);
+    background: rgba(0, 0, 0, 0.1);
+    transform: translateX(-5px);
+}
+
+.back-link i {
+    margin-right: 1rem;
+    font-size: 1.8rem;
+}
+
+.album-header h1 {
+    font-family: 'Aeroport', sans-serif;
+    font-size: 3.6rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--light-text);
+    line-height: 1.2;
+}
+
+/* Метаданные альбома */
+.album-meta {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    color: var(--light-text-secondary);
+    font-size: 1.6rem;
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.meta-item:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.meta-item i {
+    margin-right: 1rem;
+    font-size: 1.8rem;
+    color: var(--color-gold);
+}
+
+/* Кнопки действий */
+.album-actions {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.action-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 1.2rem 2.5rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--light-text);
+    min-width: 250px;
+}
+
+.action-button:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.action-button.primary-action {
+    background: var(--color-gold);
+    color: var(--color-black);
+}
+
+.action-button.primary-action:hover {
+    background: #c4a130;
+}
+
+.action-button i {
+    margin-right: 1rem;
+    font-size: 1.8rem;
+}
+
+.action-button .counter {
+    margin-left: 1rem;
+    opacity: 0.8;
+    font-size: 1.4rem;
+}
+
+/* Сетка фотографий */
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.photo-item {
+    position: relative;
+    margin: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    aspect-ratio: 1;
+}
+
+.photo-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Оверлей фотографии */
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.photo-item:hover .photo-overlay {
+    opacity: 1;
+}
+
+.overlay-content {
+    color: var(--color-white);
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover .overlay-content {
+    transform: translateY(0);
+}
+
+.overlay-content i {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+}
+
+.overlay-text {
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+/* Кнопки действий с фото */
+.photo-actions {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    z-index: 2;
+}
+
+.photo-action-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-white);
+    color: var(--color-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.photo-item:hover .photo-action-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.photo-action-btn:hover {
+    background: var(--color-white);
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.photo-action-btn i {
+    font-size: 1.8rem;
+}
+
+/* Состояние выбранного фото */
+.photo-item.selected {
+    box-shadow: 0 0 0 3px var(--color-gold), 0 15px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+}
+
+.photo-item.selected .select-photo i {
+    color: var(--color-gold);
+}
+
+.photo-item.selected img {
+    transform: scale(1.05);
+}
+
+/* PhotoSwipe кастомизация */
+.pswp {
+    --pswp-bg-color: rgba(0, 0, 0, 0.95);
+}
+
+.pswp__bg {
+    background: var(--pswp-bg-color);
+}
+
+.pswp__button {
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s ease;
+    margin: 0 5px;
+}
+
+.pswp__button:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: scale(1.1);
+}
+
+.pswp__button i {
+    font-size: 1.8rem;
+}
+
+.pswp__top-bar {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.pswp__counter {
+    color: white;
+    font-size: 1.6rem;
+    margin-right: 15px;
+}
+
+/* Темная тема */
+body:not(.light) .album-detail {
+    background: var(--dark-bg);
+}
+
+body:not(.light) .album-header h1 {
+    color: var(--dark-text);
+}
+
+body:not(.light) .back-link {
+    color: var(--dark-text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+body:not(.light) .back-link:hover {
+    color: var(--dark-text);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body:not(.light) .meta-item {
+    color: var(--dark-text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+body:not(.light) .meta-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body:not(.light) .action-button {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--dark-text);
+}
+
+body:not(.light) .action-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body:not(.light) .photo-item {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .photos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .album-detail {
+        padding: var(--container-padding-mobile);
+    }
+
+    .album-header h1 {
+        font-size: 2.8rem;
+    }
+
+    .album-meta {
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .meta-item {
+        font-size: 1.4rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .album-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .action-button {
+        width: 100%;
+        min-width: unset;
+        justify-content: center;
+        padding: 1rem 2rem;
+    }
+
+    .photos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .photo-action-btn {
+        width: 36px;
+        height: 36px;
+        opacity: 1;
+        transform: none;
+    }
+
+    .photo-action-btn i {
+        font-size: 1.6rem;
+    }
+
+    .pswp__button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .pswp__button i {
+        font-size: 1.6rem;
+    }
+}
+
+/* Анимации */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.photo-item {
+    animation: fadeInUp 0.6s ease backwards;
+    animation-delay: calc(var(--photo-index) * 0.1s);
+}
+
+/* Улучшенные эффекты наведения */
+.photo-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.photo-item:hover::after {
+    opacity: 1;
+}
+
+/* Анимация для счетчика выбранных фото */
+.counter {
+    transition: all 0.3s ease;
+}
+
+.primary-action .counter {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 0.2rem 0.8rem;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+/* Состояние загрузки */
+.loading-overlay {
+    backdrop-filter: blur(5px);
+}
+
+.loading-text {
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Сообщение об ошибке */
+.error-message {
+    background: rgba(255, 0, 0, 0.1);
+    color: #ff3b3b;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.6rem;
+}
+
+.error-message i {
+    font-size: 2rem;
+}
+
+/* Состояние пустого альбома */
+.no-photos {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 6rem 2rem;
+    color: var(--light-text-secondary);
+}
+
+.no-photos i {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    opacity: 0.5;
+}
+
+.no-photos p {
+    font-size: 1.8rem;
+}
+
+body:not(.light) .no-photos {
+    color: var(--dark-text-secondary);
+} 

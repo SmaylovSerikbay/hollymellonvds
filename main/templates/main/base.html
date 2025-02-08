@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}HollyMellon{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="header__nav">
+                <a href="/" class="header__logo">
+                    <img src="{% static 'images/logo.png' %}" alt="HollyMellon">
+                </a>
+
+                <div class="header__location">
+                    <button class="location-btn">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ current_city|default:"ВЫБЕРИТЕ ГОРОД" }}</span>
+                    </button>
+                    <div class="location-menu">
+                        {% for city in cities %}
+                            <div class="location-option {% if city.name == current_city %}active{% endif %}" data-city-id="{{ city.id }}">
+                                {{ city.name }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="header__menu">
+                    <a href="{% url 'brands' %}">БРЕНДЫ</a>
+                    <a href="{% url 'photo_gallery' %}">ФОТО И ВИДЕО</a>
+                    <a href="#announcements">АНОНСЫ</a>
+                    <a href="#about">О НАС</a>
+                    <a href="#team">КОМАНДА</a>
+                </div>
+
+                <div class="header__actions">
+                    <button class="action-btn" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="action-btn" id="themeBtn">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="main">
+        {% block content %}
+        <!-- Здесь будет контент из дочерних шаблонов -->
+        {% endblock %}
+    </main>
+
+    <!-- Search Modal -->
+    <div class="search-modal">
+        <div class="search-modal__content">
+            <input type="text" class="search-modal__input" placeholder="Поиск...">
+            <button class="search-modal__close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- После header -->
+    <div class="mobile-menu">
+        <div class="mobile-menu__location">
+            <button class="mobile-menu__location-btn">
+                <span>{{ current_city|default:"ВЫБЕРИТЕ ГОРОД" }}</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="mobile-menu__cities">
+                {% for city in cities %}
+                    <div class="mobile-menu__city {% if city.name == current_city %}active{% endif %}" data-city-id="{{ city.id }}">
+                        {{ city.name }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <nav class="mobile-menu__nav">
+            <a href="{% url 'brands' %}">БРЕНДЫ</a>
+            <a href="{% url 'photo_gallery' %}">ФОТО И ВИДЕО</a>
+            <a href="#announcements">АНОНСЫ</a>
+            <a href="#about">О НАС</a>
+            <a href="#team">КОМАНДА</a>
+        </nav>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/gallery-slider.js' %}"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function createTicker(selector) {
+            const ticker = document.querySelector(selector);
+            if (!ticker) return;
+
+            const originalContent = ticker.innerHTML;
+            
+            // Создаем трек для анимации
+            const track = document.createElement('div');
+            track.className = 'ticker__track';
+            
+            // Создаем элементы бегущей строки
+            function createTickerItem(text) {
+                const item = document.createElement('div');
+                item.className = 'ticker__item';
+                item.innerHTML = text;
+                return item;
+            }
+            
+            // Функция для обновления контента
+            function updateContent() {
+                // Очищаем трек
+                track.innerHTML = '';
+                
+                // Создаем временный элемент для измерения ширины
+                const tempItem = createTickerItem(originalContent);
+                track.appendChild(tempItem);
+                const itemWidth = tempItem.offsetWidth;
+                
+                // Вычисляем количество повторений для заполнения экрана
+                const screenWidth = window.innerWidth;
+                const repeatCount = Math.ceil((screenWidth * 2) / itemWidth) + 1;
+                
+                // Очищаем трек снова
+                track.innerHTML = '';
+                
+                // Добавляем элементы с отрицательным смещением для мгновенного заполнения
+                track.style.transform = 'translateX(-50%)';
+                
+                // Добавляем нужное количество элементов
+                for (let i = 0; i < repeatCount; i++) {
+                    track.appendChild(createTickerItem(originalContent));
+                }
+                
+                // Запускаем анимацию
+                requestAnimationFrame(() => {
+                    track.style.animation = 'none';
+                    track.offsetHeight; // Trigger reflow
+                    track.style.animation = 'marquee 240s linear infinite';
+                });
+            }
+            
+            // Очищаем тикер и добавляем трек
+            ticker.innerHTML = '';
+            ticker.appendChild(track);
+            
+            // Начальное обновление
+            updateContent();
+            
+            // Обновляем при изменении размера окна
+            window.addEventListener('resize', updateContent);
+            
+            // Перезапускаем анимацию при необходимости
+            track.addEventListener('animationend', updateContent);
+        }
+
+        // Инициализируем все бегущие строки
+        createTicker('.ticker');
+        createTicker('.brand-ticker');
+    });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+
+    <script>
+    // Обработка клика по ссылкам на секции главной страницы
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const currentPath = window.location.pathname;
+            if (currentPath !== '/') {
+                // Если мы не на главной странице, перенаправляем на главную с хэшем
+                const hash = this.getAttribute('href');
+                window.location.href = '/' + hash;
+                e.preventDefault();
+            }
+        });
+    });
+    </script>
+</body>
+</html> 

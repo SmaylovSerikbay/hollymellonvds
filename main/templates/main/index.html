@@ -1,0 +1,85 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Announcements Section -->
+<section class="announcements" id="announcements">
+    <div class="container">
+        <h2 class="section-title">АНОНСЫ</h2>
+        <div class="announcements__list">
+            {% for announcement in announcements %}
+            <div class="announcement-card">
+                <div class="announcement-card__icon">
+                    <i class="fas fa-{{ announcement.icon }}"></i>
+                </div>
+                <div class="announcement-card__content">
+                    <h3 class="announcement-card__title">{{ announcement.title }}</h3>
+                    <p class="announcement-card__description">{{ announcement.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+    <div class="container">
+        <h2 class="section-title">О НАС</h2>
+        <div class="about__content">
+            <h3 class="about__title">НАША КОМПАНИЯ</h3>
+            <p class="about__description">{{ site_settings.about_text }}</p>
+            <div class="about__contacts">
+                <h4>Контакты</h4>
+                <div class="about__contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a>
+                </div>
+                {% if site_settings.instagram_link %}
+                <div class="about__contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <a href="{{ site_settings.instagram_link }}" target="_blank">Мы в INSTAGRAM</a>
+                </div>
+                {% endif %}
+                {% if site_settings.gis_link %}
+                <div class="about__contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <a href="{{ site_settings.gis_link }}" target="_blank">Мы в 2GIS</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Плавная прокрутка к секциям
+    function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // Обработка клика по ссылкам в меню
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const sectionId = this.getAttribute('href').substring(1);
+            scrollToSection(sectionId);
+        });
+    });
+
+    // Проверка URL при загрузке страницы
+    if (window.location.hash) {
+        const sectionId = window.location.hash.substring(1);
+        setTimeout(() => {
+            scrollToSection(sectionId);
+        }, 100);
+    }
+});
+</script>
+{% endblock %} 

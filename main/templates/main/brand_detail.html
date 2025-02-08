@@ -1,0 +1,240 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}{{ brand.name }} - HollyMellon{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/brand-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="brand-detail">
+    <!-- Hero Section -->
+    <section class="brand-hero">
+        {% if brand.hero_image %}
+        <div class="brand-hero__image-container">
+            <img src="{{ brand.hero_image.url }}" 
+                 alt="{{ brand.name }}" 
+                 class="brand-hero__image">
+            
+            <!-- Hero Content -->
+            <div class="brand-hero__overlay"></div>
+            <div class="brand-hero__content">
+                <h1 class="brand-hero__title">{{ brand.name }}</h1>
+                {% if brand.subtitle %}
+                <p class="brand-hero__subtitle">{{ brand.subtitle }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </section>
+
+    <!-- Ticker после hero section -->
+    <div class="ticker">
+        <div class="ticker__content">
+            <span>АТМОСФЕРА</span>
+            <span class="ticker__divider">★</span>
+            <span>СТИЛЬ</span>
+            <span class="ticker__divider">★</span>
+            <span>МУЗЫКА</span>
+            <span class="ticker__divider">★</span>
+            <span>ВПЕЧАТЛЕНИЯ</span>
+            <!-- Дублируем контент для плавной анимации -->
+            <span>АТМОСФЕРА</span>
+            <span class="ticker__divider">★</span>
+            <span>СТИЛЬ</span>
+            <span class="ticker__divider">★</span>
+            <span>МУЗЫКА</span>
+            <span class="ticker__divider">★</span>
+            <span>ВПЕЧАТЛЕНИЯ</span>
+        </div>
+    </div>
+
+    <div class="brand-section">
+        <!-- Верхний блок -->
+        <div class="top-section">
+            <!-- Информация о бренде -->
+            <div class="info-column">
+                <div class="brand-description">
+                    {{ brand.description|linebreaks }}
+                </div>
+
+                <!-- Контактная информация -->
+                <div class="contact-info">
+                    <!-- Адрес -->
+                    {% if brand.address %}
+                    <div class="contact-item full-width">
+                        <div class="contact-content">
+                            <div class="contact-header">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <h3>АДРЕС</h3>
+                            </div>
+                            <div class="address-line">
+                                <p>{{ brand.address }}</p>
+                                {% if brand.two_gis %}
+                                <a href="{{ brand.two_gis }}" target="_blank" rel="noopener">
+                                    <i class="fas fa-map"></i>
+                                    Открыть в 2GIS
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="contact-row">
+                        <!-- Время работы -->
+                        {% if brand.work_hours_weekdays or brand.work_hours_weekends %}
+                        <div class="contact-item">
+                            <div class="contact-content">
+                                <div class="contact-header">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <h3>ВРЕМЯ РАБОТЫ</h3>
+                                </div>
+                                <div class="work-hours">
+                                    {% if brand.work_hours_weekdays %}
+                                    <div class="work-day">
+                                        <span>Пн-Пт:</span>
+                                        <span>{{ brand.work_hours_weekdays }}</span>
+                                    </div>
+                                    {% endif %}
+                                    {% if brand.work_hours_weekends %}
+                                    <div class="work-day">
+                                        <span>Сб-Вс:</span>
+                                        <span>{{ brand.work_hours_weekends }}</span>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Контакты -->
+                        {% if brand.phone or brand.whatsapp %}
+                        <div class="contact-item">
+                            <div class="contact-content">
+                                <div class="contact-header">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <h3>КОНТАКТЫ</h3>
+                                </div>
+                                {% if brand.phone %}
+                                <p>{{ brand.phone }}</p>
+                                {% endif %}
+                                {% if brand.whatsapp %}
+                                <div class="contact-links">
+                                    <a href="https://wa.me/{{ brand.whatsapp }}" target="_blank" rel="noopener">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Написать в WhatsApp
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Галерея -->
+            <div class="gallery-column">
+                {% if top_gallery %}
+                <div class="main-slider">
+                    <div class="main-image">
+                        <img src="{{ top_gallery.0.image.url }}" alt="{{ brand.name }}" class="main-slide">
+                    </div>
+                    {% if top_gallery|length > 1 %}
+                    <div class="thumbnails">
+                        {% for image in top_gallery %}
+                        <div class="thumb {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}">
+                            <img src="{{ image.image.url }}" alt="{{ brand.name }}">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- История бренда -->
+        {% if brand.brand_history %}
+        <div class="brand-history">
+            <div class="brand-history-inner">
+                <div class="brand-history-header">
+                    <h2>BRAND HISTORY</h2>
+                </div>
+                <div class="history-content">
+                    {{ brand.brand_history|linebreaks }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Особенности -->
+        {% if brand.features.exists %}
+        <div class="brand-features">
+            <div class="brand-features-inner">
+                <h2>ОСОБЕННОСТИ</h2>
+                <div class="features-list">
+                    {% for feature in brand.features.all %}
+                    <div class="feature-item">
+                        <h3>{{ feature.title }}</h3>
+                        <p>{{ feature.description }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Нижний блок -->
+        <div class="bottom-section">
+            <!-- Специальные предложения -->
+            {% if brand.special_offers.exists %}
+            <div class="offers-column">
+                <h2>СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</h2>
+                <div class="offers-list">
+                    {% for offer in brand.special_offers.all %}
+                    <div class="offer-item">
+                        <h3>{{ offer.title }}</h3>
+                        <p>{{ offer.description }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Нижняя галерея -->
+            {% if bottom_gallery %}
+            <div class="bottom-gallery">
+                {% for image in bottom_gallery %}
+                <div class="gallery-item">
+                    <img src="{{ image.image.url }}" alt="{{ brand.name }}">
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Отладочная информация -->
+    {% if debug %}
+    <div style="display: none;">
+        Ticker text: {{ brand.ticker_text }}
+        Lines: {% for line in brand.ticker_text.splitlines %}
+            "{{ line }}"
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/brand-detail.js' %}"></script>
+{% endblock %} 
