@@ -166,6 +166,8 @@ class AnnouncementMediaInline(admin.TabularInline):
     model = AnnouncementMedia
     extra = 1
     fields = ('file', 'is_video', 'order')
+    can_delete = True
+    show_change_link = True
 
 class AnnouncementItemInline(admin.TabularInline):
     model = AnnouncementItem

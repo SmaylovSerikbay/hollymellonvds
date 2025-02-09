@@ -262,7 +262,15 @@ class AnnouncementMedia(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return f"Медиафайл {self.id} анонса {self.announcement.id}"
+        return f'Медиафайл для {self.announcement}'
+
+    def delete(self, *args, **kwargs):
+        # Удаляем файл с диска
+        if self.file:
+            storage = self.file.storage
+            if storage.exists(self.file.name):
+                storage.delete(self.file.name)
+        super().delete(*args, **kwargs)
 
 class AnnouncementItem(models.Model):
     announcement = models.ForeignKey(Announcement, on_delete=models.CASCADE, related_name='items', verbose_name='Анонс')
