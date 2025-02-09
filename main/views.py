@@ -193,6 +193,8 @@ def album_detail(request, pk):
             folder_path = folder_path[5:]  # Убираем 'disk:'
         folder_path = folder_path.strip('/')  # Убираем слэши в начале и конце
         
+        print(f"Debug: Folder path = {folder_path}")  # Выводим путь к папке
+        
         # Получаем информацию о папке с превью
         response = requests.get(
             'https://cloud-api.yandex.net/v1/disk/resources',
@@ -201,7 +203,7 @@ def album_detail(request, pk):
                 'limit': 100,
                 'sort': 'name',
                 'fields': '_embedded.items.name,_embedded.items.mime_type,_embedded.items.path,_embedded.items.file,_embedded.items.preview,_embedded.items.size',
-                'preview_size': 'L'  # Используем размер L для оптимального соотношения качества и скорости
+                'preview_size': 'L'
             },
             headers={'Authorization': f'OAuth {yandex_token}'}
         )
@@ -221,12 +223,10 @@ def album_detail(request, pk):
                             'name': item.get('name', ''),
                             'preview': preview_url,
                             'thumbnail': preview_url,
-                            'url': file_url,  # Оригинальный файл для скачивания
-                            'size': item.get('size', 0)
+                            'url': file_url or preview_url
                         }
                         photos.append(photo_data)
         
-        # Сортируем фотографии по имени
         photos.sort(key=lambda x: x['name'])
         
         context = get_base_context(request)
@@ -253,6 +253,17 @@ def album_detail(request, pk):
         context.update({
             'album': album,
             'error': error_message,
+            'cities': City.objects.filter(is_active=True).order_by('order', 'name'),
+            'current_city': current_city,
+            'photos': []
+        })
+        return render(request, 'main/album_detail.html', context)
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        context = get_base_context(request)
+        context.update({
+            'album': album,
+            'error': 'Произошла неожиданная ошибка',
             'cities': City.objects.filter(is_active=True).order_by('order', 'name'),
             'current_city': current_city,
             'photos': []
