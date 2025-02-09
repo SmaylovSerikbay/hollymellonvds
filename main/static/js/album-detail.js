@@ -8,12 +8,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const loadingOverlay = document.querySelector('.loading-overlay');
     const loadingSpinner = document.querySelector('.loading-spinner');
     const albumPath = document.querySelector('.photos-grid').dataset.folderPath;
+    const qualityDialog = document.querySelector('.quality-dialog');
+    let currentDownloadUrl = null;
+    let currentDownloadCallback = null;
 
     // Создаем индикатор прогресса
     const progressIndicator = document.createElement('div');
     progressIndicator.className = 'progress-indicator';
     progressIndicator.innerHTML = `
-        <div class="progress-text">Подготовка архива...</div>
+        <div class="progress-text">Подготовка файлов...</div>
         <div class="progress-bar">
             <div class="progress-fill"></div>
         </div>
@@ -21,6 +24,25 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     loadingSpinner.innerHTML = ''; // Очищаем спиннер
     loadingSpinner.appendChild(progressIndicator);
+
+    // Функция для показа индикатора загрузки
+    function showLoading(message = 'Загрузка...') {
+        loadingOverlay.style.display = 'flex';
+        progressIndicator.style.display = 'block';
+        progressIndicator.querySelector('.progress-text').textContent = message;
+    }
+
+    // Функция для скрытия индикатора загрузки
+    function hideLoading() {
+        loadingOverlay.style.display = 'none';
+        progressIndicator.style.display = 'none';
+    }
+
+    // Функция для обновления прогресса
+    function updateProgress(percent, status) {
+        progressIndicator.querySelector('.progress-fill').style.width = `${percent}%`;
+        progressIndicator.querySelector('.progress-status').textContent = status;
+    }
 
     // Создаем скрытую кнопку для скачивания
     const downloadLink = document.createElement('a');
@@ -47,14 +69,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
+    // Функция для получения размеров изображения
+    function getImageDimensions(url) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = function() {
+                resolve({ width: this.width, height: this.height });
+            };
+            img.onerror = reject;
+            img.src = url;
+        });
+    }
+
     // Обработка клика по фотографии
-    function openPhotoSwipe(index) {
+    async function openPhotoSwipe(index) {
         const items = Array.from(gallery.querySelectorAll('.photo-item')).map(item => {
-            const originalUrl = item.querySelector('img').dataset.fullSize;
+            const img = item.querySelector('img');
+            const naturalWidth = img.naturalWidth || 800;
+            const naturalHeight = img.naturalHeight || 600;
+            const aspectRatio = naturalHeight / naturalWidth;
+            
             return {
-                src: `/proxy-photo/?url=${encodeURIComponent(originalUrl)}`,
-                w: 1200,
-                h: 800
+                src: img.dataset.fullSize,
+                msrc: img.src,
+                w: naturalWidth || 800,
+                h: naturalHeight || Math.round(800 * aspectRatio),
+                title: img.alt
             };
         });
 
@@ -64,24 +104,43 @@ document.addEventListener('DOMContentLoaded', function() {
             showHideOpacity: true,
             history: false,
             shareEl: false,
+            showAnimationDuration: 333,
+            hideAnimationDuration: 333,
             getThumbBoundsFn: (index) => {
                 const thumbnail = gallery.querySelectorAll('.photo-item img')[index];
                 const pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
                 const rect = thumbnail.getBoundingClientRect();
                 return {x: rect.left, y: rect.top + pageYScroll, w: rect.width};
-            }
+            },
+            zoomEl: true,
+            getDoubleTapZoom: function(isMouseClick, item) {
+                return isMouseClick ? 2 : 1;
+            },
+            pinchToClose: true,
+            closeOnScroll: false,
+            closeOnVerticalDrag: true,
+            captionEl: false,
+            fullscreenEl: true,
+            tapToToggleControls: true
         };
 
         const pswp = new PhotoSwipe(document.querySelector('.pswp'), PhotoSwipeUI_Default, items, options);
         
-        pswp.listen('imageLoadComplete', function(index, item) {
-            const img = new Image();
-            img.onload = function() {
-                item.w = this.width;
-                item.h = this.height;
-                pswp.updateSize(true);
-            };
-            img.src = item.src;
+        // Загружаем реальные размеры изображения в фоновом режиме для уточнения
+        pswp.listen('gettingData', function(index, item) {
+            if (!item.loaded) {
+                const img = new Image();
+                img.onload = function() {
+                    // Обновляем размеры только если они существенно отличаются
+                    if (Math.abs(item.w - this.width) > 50 || Math.abs(item.h - this.height) > 50) {
+                        item.w = this.width;
+                        item.h = this.height;
+                        item.loaded = true;
+                        pswp.updateSize(true);
+                    }
+                };
+                img.src = item.src;
+            }
         });
 
         pswp.init();
@@ -102,6 +161,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Функция для показа диалога выбора качества
+    function showQualityDialog(url, callback) {
+        currentDownloadUrl = url;
+        currentDownloadCallback = callback;
+        qualityDialog.style.display = 'flex';
+    }
+
+    // Обработчики для диалога выбора качества
+    qualityDialog.querySelector('.quality-dialog-close').addEventListener('click', () => {
+        qualityDialog.style.display = 'none';
+    });
+
+    qualityDialog.querySelectorAll('.quality-option').forEach(button => {
+        button.addEventListener('click', () => {
+            const quality = button.dataset.quality;
+            qualityDialog.style.display = 'none';
+            
+            if (currentDownloadCallback) {
+                const finalUrl = quality === 'mobile' ? 
+                    currentDownloadUrl.replace('&preview=1', '') : 
+                    currentDownloadUrl;
+                currentDownloadCallback(finalUrl, quality === 'mobile');
+            }
+        });
+    });
+
     // Обработчики для кнопок действий с фотографиями
     document.querySelectorAll('.photo-item').forEach(photo => {
         const downloadBtns = photo.querySelectorAll('.download-photo');
@@ -113,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                downloadPhoto(url);
+                showQualityDialog(url, downloadPhoto);
             });
         });
 
@@ -136,16 +221,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Функция скачивания фото
-    async function downloadPhoto(url) {
+    // Функция скачивания фото с индикацией прогресса
+    async function downloadPhoto(url, showProgress = true, isMobileQuality = false) {
+        if (isMobileQuality) {
+            // Для мобильной версии используем прямую ссылку на превью
+            const img = document.querySelector(`img[data-full-size="${url}"]`);
+            if (img) {
+                const previewUrl = img.src.replace('/proxy-photo/?url=', '');
+                window.location.href = decodeURIComponent(previewUrl);
+                return;
+            }
+        }
+
+        // Для оригинального качества
+        if (showProgress) {
+            showLoading('Подготовка файла к скачиванию...');
+        }
+        
         try {
-            // Используем наш прокси для загрузки фотографий
-            const proxyUrl = `/proxy-photo/?url=${encodeURIComponent(url)}`;
-            const response = await fetch(proxyUrl);
+            const response = await fetch(url);
             if (!response.ok) throw new Error('Ошибка при загрузке фотографии');
             
             const blob = await response.blob();
-            const filename = url.split('/').pop();
+            const filename = url.split('/').pop().split('?')[0];
             
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -156,6 +254,10 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             console.error('Ошибка при скачивании:', error);
             alert('Произошла ошибка при скачивании фотографии');
+        } finally {
+            if (showProgress) {
+                hideLoading();
+            }
         }
     }
 
@@ -211,29 +313,37 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Функция для скачивания нескольких файлов
-    function downloadMultipleFiles(urls) {
-        const urlsArray = Array.from(urls);
-        let currentIndex = 0;
-        let totalFiles = urlsArray.length;
+    async function downloadMultipleFiles(urls) {
+        showQualityDialog(null, async (_, isMobileQuality) => {
+            if (isMobileQuality) {
+                // Для мобильной версии открываем все превью в новых вкладках
+                Array.from(urls).forEach(url => {
+                    const img = document.querySelector(`img[data-full-size="${url}"]`);
+                    if (img) {
+                        const previewUrl = img.src.replace('/proxy-photo/?url=', '');
+                        window.open(decodeURIComponent(previewUrl), '_blank');
+                    }
+                });
+                return;
+            }
 
-        loadingOverlay.style.display = 'flex';
-        progressIndicator.style.display = 'block';
+            // Для оригинального качества оставляем как есть
+            const urlsArray = Array.from(urls);
+            let currentIndex = 0;
+            let totalFiles = urlsArray.length;
 
-        function downloadNext() {
-            if (currentIndex < urlsArray.length) {
-                downloadPhoto(urlsArray[currentIndex]);
+            showLoading('Подготовка файлов к скачиванию...');
+
+            for (const url of urlsArray) {
                 currentIndex++;
                 const percent = Math.round((currentIndex / totalFiles) * 100);
-                progressIndicator.querySelector('.progress-fill').style.width = `${percent}%`;
-                progressIndicator.querySelector('.progress-status').textContent = 
-                    `Загружено ${currentIndex} из ${totalFiles} файлов`;
-                setTimeout(downloadNext, 500);
-            } else {
-                loadingOverlay.style.display = 'none';
-                progressIndicator.style.display = 'none';
+                updateProgress(percent, `Загружено ${currentIndex} из ${totalFiles} файлов`);
+                
+                await downloadPhoto(url, false, false);
+                await new Promise(resolve => setTimeout(resolve, 300));
             }
-        }
 
-        downloadNext();
+            hideLoading();
+        });
     }
 }); 
