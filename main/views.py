@@ -107,8 +107,8 @@ def brand_detail(request, slug):
         'brand': brand,
         'cities': City.objects.filter(is_active=True).order_by('order', 'name'),
         'current_city': current_city,
-        'top_gallery': brand.top_gallery.all(),
-        'bottom_gallery': brand.bottom_gallery.all()
+        'top_gallery': brand.gallery.all(),
+        'bottom_gallery': brand.gallery.all()
     })
     return render(request, 'main/brand_detail.html', context)
 

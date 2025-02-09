@@ -66,28 +66,21 @@ class Brand(models.Model):
         super().save(*args, **kwargs)
 
 class TopGalleryImage(models.Model):
-    """Верхняя галерея (слайдер рядом с описанием)"""
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='top_gallery')
-    image = models.ImageField('Изображение', upload_to='brands/top_gallery/')
+    """Галерея изображений бренда"""
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='gallery')
+    image = models.ImageField('Изображение', upload_to='brands/gallery/')
 
     class Meta:
-        verbose_name = 'Изображение верхней галереи'
-        verbose_name_plural = 'Верхняя галерея'
-
-    def __str__(self):
-        return f'Слайд галереи {self.brand.name}'
-
-class BottomGalleryImage(models.Model):
-    """Нижняя галерея (справа от специальных предложений)"""
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='bottom_gallery')
-    image = models.ImageField('Изображение', upload_to='brands/bottom_gallery/')
-
-    class Meta:
-        verbose_name = 'Изображение нижней галереи'
-        verbose_name_plural = 'Нижняя галерея'
+        verbose_name = 'Изображение галереи'
+        verbose_name_plural = 'Галерея'
 
     def __str__(self):
         return f'Изображение галереи {self.brand.name}'
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            self.image = compress_image(self.image)
+        super().save(*args, **kwargs)
 
 class Feature(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='features')

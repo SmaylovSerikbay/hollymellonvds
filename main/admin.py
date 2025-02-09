@@ -1,6 +1,10 @@
 from django.contrib import admin
 from django import forms
-from .models import Brand, TopGalleryImage, BottomGalleryImage, Feature, SpecialOffer, City, BrandTicker, BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement, AnnouncementItem, AnnouncementMedia, HomeHero, SiteLogo, Photographer
+from .models import (
+    Brand, TopGalleryImage, Feature, SpecialOffer, City, BrandTicker,
+    BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement,
+    AnnouncementItem, AnnouncementMedia, HomeHero, SiteLogo, Photographer
+)
 from .utils import get_yandex_folders
 
 @admin.register(City)
@@ -16,12 +20,6 @@ class TopGalleryInline(admin.TabularInline):
     verbose_name = 'Изображение верхней галереи'
     verbose_name_plural = 'Верхняя галерея (слайдер)'
 
-class BottomGalleryInline(admin.TabularInline):
-    model = BottomGalleryImage
-    extra = 1
-    verbose_name = 'Изображение нижней галереи'
-    verbose_name_plural = 'Нижняя галерея'
-
 class FeatureInline(admin.TabularInline):
     model = Feature
     extra = 1
@@ -36,6 +34,7 @@ class BrandAdmin(admin.ModelAdmin):
     list_filter = ('location', 'rating')
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
+    inlines = [TopGalleryInline, FeatureInline, SpecialOfferInline]
 
     fieldsets = (
         ('Основная информация', {
@@ -60,8 +59,6 @@ class BrandAdmin(admin.ModelAdmin):
             'fields': ('work_hours_weekdays', 'work_hours_weekends')
         })
     )
-
-    inlines = [TopGalleryInline, BottomGalleryInline, FeatureInline, SpecialOfferInline]
 
     def show_rating(self, obj):
         return '⭐' * obj.rating

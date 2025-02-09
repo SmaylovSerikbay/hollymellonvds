@@ -46,10 +46,7 @@ body.light .ticker__content span {
     color: var(--color-gold);
 }
 
-body.light .brand-history {
-    background: rgba(0, 0, 0, 0.03);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
+
 
 body.light .history-content {
     color: var(--light-text);
@@ -109,7 +106,7 @@ body.light .history-content {
     align-items: center;
     height: 100%;
     padding: 0 20px;
-    color: var(--color-gold);
+    color: #000cb3;
     font-weight: 500;
     text-transform: uppercase;
     font-size: 16px;
@@ -157,7 +154,7 @@ body.light .history-content {
 
 .brand-hero__subtitle {
     font-size: 24px;
-    color: var(--color-gold);
+    color: #fff;
     font-weight: 500;
     letter-spacing: 0.05em;
     margin: 0;
@@ -168,53 +165,62 @@ body.light .history-content {
 .brand-section {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 80px var(--container-padding);
+    padding: 60px var(--container-padding);
 }
 
 /* Top Section */
 .top-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 60px;
     margin-bottom: 80px;
     align-items: start;
 }
 
+/* Информационная колонка */
 .info-column {
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap: 40px;
+    height: 100%;
 }
 
 .brand-description {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Contact Info */
+/* Контактная информация */
 .contact-info {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
+    height: 100%;
 }
 
 .contact-row {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 30px;
+    margin-top: auto;
 }
 
 .contact-item {
     background: rgba(255, 255, 255, 0.03);
-    border-radius: 16px;
-    padding: 25px;
+    border-radius: 24px;
+    padding: 30px;
     transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .contact-item:hover {
     background: rgba(255, 255, 255, 0.05);
     transform: translateY(-5px);
+    border-color: #000cb3;
 }
 
 .contact-item.full-width {
@@ -225,17 +231,38 @@ body.light .history-content {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    text-align: left;
 }
 
 .contact-header {
     display: flex;
     align-items: center;
     gap: 10px;
+    text-align: left;
+    padding: 0;
 }
 
 .contact-icon {
-    color: var(--color-gold);
-    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 24px;
+    padding: 0;
+}
+
+/* Цвета иконок для разных типов контактов */
+.contact-icon i.fa-map-marker-alt {
+    color: #DE4032; /* Google Maps красный */
+}
+
+.contact-icon i.fa-clock {
+    color: #2196F3; /* Синий для времени */
+}
+
+.contact-icon i.fa-phone {
+    color: #000000; /* Черный для телефона */
 }
 
 .contact-content h3 {
@@ -243,6 +270,7 @@ body.light .history-content {
     font-weight: 600;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.6);
+    text-align: left;
 }
 
 .contact-content h3::after {
@@ -256,17 +284,33 @@ body.light .history-content {
     line-height: 1.5;
 }
 
+.work-hours {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+.work-day {
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-white);
+    font-size: 14px;
+    text-align: left;
+}
+
 .address-line {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    text-align: left;
 }
 
 .address-line a {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--color-gold);
+    color: #000cb3;
     text-decoration: none;
     font-size: 14px;
     transition: all 0.3s ease;
@@ -280,13 +324,14 @@ body.light .history-content {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    text-align: left;
 }
 
 .contact-links a {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--color-gold);
+    color: #25D366; /* Цвет текста WhatsApp */
     text-decoration: none;
     font-size: 14px;
     transition: all 0.3s ease;
@@ -296,22 +341,61 @@ body.light .history-content {
     opacity: 0.8;
 }
 
-.work-hours {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.contact-links a i.fa-whatsapp {
+    color: #25D366; /* WhatsApp зеленый */
+    font-size: 24px;
 }
 
-.work-day {
-    display: flex;
-    justify-content: space-between;
-    color: var(--color-white);
-    font-size: 14px;
+.contact-links a i.fa-map {
+    color: #DE4032; /* 2GIS красный */
+    font-size: 24px;
 }
 
 @media (max-width: 768px) {
     .contact-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin: 0;
+    }
+
+    /* Карточки времени работы и контактов всегда в одну строку */
+    .contact-item.work-hours-card,
+    .contact-item.contacts-card {
+        grid-column: span 1;
+    }
+
+    /* Остальные карточки на всю ширину */
+    .contact-item:not(.work-hours-card):not(.contacts-card) {
+        grid-column: 1 / -1;
+    }
+
+    /* Специальные предложения */
+    .offers-list {
+        display: grid;
         grid-template-columns: 1fr;
+        gap: 10px;
+        margin: 0;
+    }
+
+    .offer-item {
+        margin-bottom: 0;
+    }
+
+    /* Уменьшаем высоту карточек контактов */
+    .contact-item.work-hours-card,
+    .contact-item.contacts-card {
+        min-height: 100px;
+        padding: 15px;
+    }
+
+    /* Компактный вид для времени работы */
+    .work-hours {
+        gap: 3px;
+    }
+
+    .work-day {
+        font-size: 13px;
+        padding: 3px 0;
     }
 
     /* Hero секция */
@@ -347,8 +431,6 @@ body.light .history-content {
     .brand-hero__content {
         position: absolute;
         bottom: 80px;
-        left: 0;
-        right: 0;
         z-index: 3;
         padding: 0 20px;
     }
@@ -367,7 +449,7 @@ body.light .history-content {
         font-size: 16px;
         line-height: 1.4;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        color: var(--color-gold);
+        color: #ffffff;
         max-width: 100%;
         font-weight: 500;
         letter-spacing: 0.02em;
@@ -539,7 +621,7 @@ body.light .history-content {
 
     .thumb.active {
         opacity: 1;
-        border-color: var(--color-gold);
+        border-color: #000cb3;
     }
 
     .thumb img {
@@ -567,7 +649,7 @@ body.light .history-content {
     .offers-column h2 {
         font-size: 28px;
         margin-bottom: 20px;
-        color: var(--color-gold);
+        color: var(--color-black);
         text-transform: uppercase;
         letter-spacing: 0.05em;
     }
@@ -659,34 +741,7 @@ body.light .history-content {
 }
 
 /* Светлая тема */
-@media (max-width: 768px) {
-    body.light .brand-description,
-    body.light .contact-item,
-    body.light .feature-item,
-    body.light .offer-item,
-    body.light .brand-history-inner {
-        background: rgba(0, 0, 0, 0.03);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
 
-    body.light .thumbnails {
-        background: linear-gradient(
-            to top,
-            rgba(255, 255, 255, 0.95),
-            transparent
-        );
-    }
-
-    body.light .work-day {
-        border-bottom-color: rgba(0, 0, 0, 0.1);
-    }
-
-    body.light .contact-content p,
-    body.light .feature-item p,
-    body.light .offer-item p {
-        color: rgba(0, 0, 0, 0.8);
-    }
-}
 
 /* Улучшения для тач-устройств */
 @media (hover: none) {
@@ -710,12 +765,12 @@ body.light .history-content {
     width: 100%;
     max-width: 1440px;
     margin: 50px auto;
-    padding: 0 var(--container-padding);
+    padding: 0;
 }
 
 .brand-history-inner {
     width: 100%;
-    padding: 30px;
+    padding: 30px var(--container-padding);
     background: rgba(255, 255, 255, 0.03);
     border-radius: 16px;
 }
@@ -723,7 +778,7 @@ body.light .history-content {
 .brand-history h2 {
     font-size: 3.6rem;
     margin-bottom: 20px;
-    color: var(--color-gold);
+    color: var(--color-black);
     letter-spacing: 0.1em;
     text-align: left;
 }
@@ -793,10 +848,8 @@ body.light .history-content {
 
 /* Bottom Section */
 .bottom-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    margin-top: 100px;
+    width: 100%;
+    margin-top: 80px;
 }
 
 /* Offers */
@@ -804,7 +857,7 @@ body.light .history-content {
 .categories-column h2 {
     font-size: 3.6rem;
     margin-bottom: 40px;
-    color: var(--color-gold);
+    color: var(--color-black);
     letter-spacing: 0.1em;
 }
 
@@ -827,7 +880,7 @@ body.light .history-content {
 
 .offer-item h3 {
     font-size: 24px;
-    color: var(--color-gold);
+    color: var(--color-white);
     margin-bottom: 15px;
 }
 
@@ -954,8 +1007,12 @@ body.light .feature-item:hover {
 
 .feature-item h3 {
     font-size: 24px;
-    color: var(--color-gold);
+    color: var(--color-white);
     margin-bottom: 15px;
+}
+
+body.light .feature-item h3 {
+    color: var(--color-black);
 }
 
 .feature-item p {
@@ -1026,4 +1083,688 @@ body.light .feature-item:hover {
         height: 60px;
         border-radius: var(--border-radius-small);
     }
+}
+
+/* Стили для галереи */
+.gallery-column {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand-gallery {
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.swiper-slide-active .gallery-image {
+    opacity: 1;
+}
+
+/* Стили для кнопок навигации */
+.swiper-button-next,
+.swiper-button-prev {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background: #000cb3;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 20px;
+}
+
+/* Стили для пагинации */
+.swiper-pagination {
+    bottom: 20px !important;
+}
+
+.swiper-pagination-bullet {
+    width: 30px;
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    width: 50px;
+    background: #000cb3;
+    opacity: 1;
+}
+
+/* Стили для светлой темы */
+body.light .gallery-column {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light .swiper-button-next,
+body.light .swiper-button-prev {
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+}
+
+body.light .swiper-pagination-bullet {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+body.light .swiper-pagination-bullet-active {
+    background: #000cb3;
+}
+
+/* Медиа-запросы */
+@media (max-width: 1200px) {
+    .gallery-column {
+        height: 500px;
+    }
+}
+
+@media (max-width: 992px) {
+    .gallery-column {
+        height: 450px;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-column {
+        height: 400px;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+        font-size: 16px;
+    }
+    
+    .swiper-pagination-bullet {
+        width: 32px;
+        height: 3px;
+    }
+    
+    .swiper-pagination-bullet-active {
+        width: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-column {
+        height: 300px;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* Специальные предложения */
+.special-offers {
+    width: 100%;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.special-offers-header {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.special-offers-header h2 {
+    font-size: 3.6rem;
+    color: var(--color-black);
+    letter-spacing: 0.1em;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.special-offers-subtitle {
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.offer-item {
+    padding: 35px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 24px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: 100%;
+}
+
+.offer-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-5px);
+    border-color: #000cb3;
+}
+
+.offer-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    height: 100%;
+}
+
+.offer-icon {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.offer-icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.light-theme-icon {
+    display: none;
+}
+
+.dark-theme-icon {
+    display: block;
+}
+
+body.light .light-theme-icon {
+    display: block;
+}
+
+body.light .dark-theme-icon {
+    display: none;
+}
+
+/* Цвета для разных иконок в предложениях */
+.offer-icon i.fa-cocktail {
+    color: #9C27B0; /* Фиолетовый для коктейлей */
+}
+
+.offer-icon i.fa-music {
+    color: #E91E63; /* Розовый для музыки */
+}
+
+.offer-icon i.fa-glass-cheers {
+    color: #2196F3; /* Синий для напитков */
+}
+
+.offer-icon i.fa-users {
+    color: #FF9800; /* Оранжевый для вечеринок */
+}
+
+.offer-icon i.fa-star {
+    color: #FFC107; /* Желтый для VIP */
+}
+
+.offer-icon i.fa-crown {
+    color: #FFD700; /* Золотой для короны */
+}
+
+.offer-icon i.fa-certificate {
+    color: #4CAF50; /* Зеленый для сертификатов */
+}
+
+.offer-icon i.fa-ticket-alt {
+    color: #FF5722; /* Оранжево-красный для билетов/специальных предложений */
+}
+
+.offer-item:hover .offer-icon {
+    transform: scale(1.1);
+}
+
+/* Светлая тема */
+body.light .special-offers {
+    background: var(--color-white);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light .special-offers-subtitle {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+body.light .offer-item {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light .offer-item:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+body.light .offer-info h3 {
+    color: var(--color-black);
+}
+
+body.light .offer-info p {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* Медиа-запросы */
+@media (max-width: 768px) {
+    .bottom-section {
+        margin-top: 40px;
+    }
+
+    .special-offers {
+        padding: 30px 20px;
+    }
+
+    .special-offers-header h2 {
+        font-size: 2.8rem;
+    }
+
+    .special-offers-subtitle {
+        font-size: 1.6rem;
+    }
+
+    .offers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .offer-item {
+        padding: 25px;
+    }
+
+    .offer-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .offer-icon img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .offer-info h3 {
+        font-size: 20px;
+    }
+
+    .offer-info p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bottom-section {
+        margin-top: 30px;
+    }
+
+    .special-offers-header h2 {
+        font-size: 2.4rem;
+    }
+
+    .special-offers-subtitle {
+        font-size: 1.4rem;
+    }
+
+    .offer-content {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Общие стили для всех секций */
+    .brand-section,
+    .brand-info,
+    .brand-history,
+    .special-offers,
+    .features,
+    .contact-info {
+        padding: 0 20px;
+        margin: 20px 0;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Контейнер для всех секций */
+    .container {
+        padding: 0 20px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Унифицированные стили для всех карточек */
+    .contact-item,
+    .offer-item,
+    .feature-item,
+    .brand-history-inner {
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        height: 100%;
+        min-height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    /* Сетка для контактов */
+    .contact-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin: 0;
+    }
+
+    /* Карточки времени работы и контактов всегда в одну строку */
+    .contact-item.work-hours-card,
+    .contact-item.contacts-card {
+        grid-column: span 1;
+    }
+
+    /* Остальные карточки на всю ширину */
+    .contact-item:not(.work-hours-card):not(.contacts-card) {
+        grid-column: 1 / -1;
+    }
+
+    /* Отступы внутри карточек */
+    .contact-content,
+    .offer-content,
+    .feature-content,
+    .history-content {
+        gap: 10px;
+    }
+
+    /* Заголовки внутри карточек */
+    .contact-content h3,
+    .offer-item h3,
+    .feature-item h3 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    /* Текст внутри карточек */
+    .contact-content p,
+    .offer-item p,
+    .feature-item p,
+    .history-content p {
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 0;
+    }
+
+    /* Списки предложений и особенностей */
+    .offers-list,
+    .features-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin: 0;
+    }
+
+    /* Иконки */
+    .contact-icon,
+    .offer-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    /* Специфичные стили для контактов */
+    .work-hours {
+        gap: 5px;
+    }
+
+    .work-day {
+        font-size: 14px;
+        padding: 5px 0;
+    }
+
+    /* Специфичные стили для истории */
+    .brand-history {
+        margin: 20px 0;
+    }
+
+    .brand-history-inner {
+        padding: 20px;
+    }
+
+    .brand-history h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    /* Специфичные стили для специальных предложений */
+    .special-offers {
+        padding: 0 20px;
+    }
+
+    .special-offers h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Общие отступы */
+    .brand-section,
+    .brand-info,
+    .brand-history,
+    .special-offers,
+    .features,
+    .contact-info,
+    .container {
+        padding: 0 15px;
+    }
+
+    /* Сетка контактов для маленьких экранов */
+    .contact-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    /* Карточки */
+    .contact-item,
+    .offer-item,
+    .feature-item,
+    .brand-history-inner {
+        padding: 15px;
+        min-height: 100px;
+    }
+
+    .contact-content h3,
+    .offer-item h3,
+    .feature-item h3 {
+        font-size: 15px;
+    }
+
+    .contact-content p,
+    .offer-item p,
+    .feature-item p,
+    .history-content p {
+        font-size: 13px;
+    }
+
+    /* Сохраняем карточки времени работы и контактов в одну строку */
+    .contact-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .contact-item.work-hours-card,
+    .contact-item.contacts-card {
+        grid-column: span 1;
+    }
+
+    /* Специальные предложения с минимальными отступами */
+    .offers-list {
+        gap: 8px;
+    }
+
+    .offer-item {
+        padding: 12px;
+        min-height: 90px;
+    }
+}
+
+.phone-number {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-white);
+}
+
+body.light .phone-number {
+    color: var(--color-black);
+}
+
+@media (max-width: 768px) {
+    .phone-number {
+        font-size: 28px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .phone-number {
+        font-size: 24px;
+    }
+}
+
+.contacts-card .contact-content {
+    flex-direction: column;
+    gap: 15px;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.contacts-card .contact-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.contact-icon i.fa-phone {
+    color: var(--color-white);
+    font-size: 24px;
+}
+
+body.light .contact-icon i.fa-phone {
+    color: var(--color-black);
+}
+
+@media (max-width: 768px) {
+    .contacts-card .contact-content {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        min-height: 120px;
+        height: 100%;
+    }
+
+    .contacts-card .contact-header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .contact-item.contacts-card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        min-height: 120px;
+    }
+
+    /* Специальные предложения */
+    .special-offers {
+        padding: 30px 20px;
+        margin: 30px 0;
+    }
+
+    .special-offers-header {
+        margin-bottom: 30px;
+    }
+
+    .offers-grid {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .special-offers {
+        padding: 20px 15px;
+        margin: 20px 0;
+    }
+
+    .contact-item.contacts-card {
+        min-height: 100px;
+        padding: 12px;
+    }
+}
+
+/* Исправляем цвета заголовков в светлой теме */
+body.light .brand-history h2,
+body.light .special-offers-header h2,
+body.light .offers-column h2,
+body.light .categories-column h2 {
+    color: var(--color-black);
 } 
