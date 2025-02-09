@@ -651,6 +651,7 @@ body:not(.light) .no-photos {
     color: black;
 }
 
+
 /* Для очень маленьких экранов */
 @media (max-width: 360px) {
     .photos-grid {
