@@ -69,7 +69,8 @@
                 src="/proxy-photo/?url={{ photo.thumbnail|urlencode }}"
                 alt="{{ photo.name }}"
                 loading="lazy"
-                data-full-size="/proxy-photo/?url={{ photo.url|urlencode }}"
+                data-full-size="{{ photo.url }}"
+                data-preview="{{ photo.preview }}"
             >
             <!-- Десктопная версия кнопок -->
             <div class="photo-actions">

@@ -203,7 +203,7 @@ def album_detail(request, pk):
                 'limit': 100,
                 'sort': 'name',
                 'fields': '_embedded.items.name,_embedded.items.mime_type,_embedded.items.path,_embedded.items.file,_embedded.items.preview,_embedded.items.size',
-                'preview_size': 'L'
+                'preview_size': 'XL'
             },
             headers={'Authorization': f'OAuth {yandex_token}'}
         )
@@ -398,28 +398,60 @@ def proxy_yandex_photo(request):
     if not url:
         return JsonResponse({'error': 'URL не указан'}, status=400)
     
+    # Проверяем, не является ли URL уже прокси-URL
+    if '/proxy-photo/' in url:
+        return JsonResponse({'error': 'Некорректный URL'}, status=400)
+    
     # Получаем токен Яндекс.Диска
     yandex_token = get_yandex_token()
     if not yandex_token:
         return JsonResponse({'error': 'Не настроен токен Яндекс.Диска'}, status=401)
     
     try:
-        # Добавляем токен авторизации в заголовки запроса
-        headers = {'Authorization': f'OAuth {yandex_token}'}
+        print(f"Trying to proxy URL: {url}")  # Добавляем логирование
         
-        # Добавляем обработку редиректов
-        response = requests.get(url, stream=True, allow_redirects=True, headers=headers)
+        # Добавляем токен авторизации и необходимые заголовки в запрос
+        headers = {
+            'Authorization': f'OAuth {yandex_token}',
+            'Accept': 'image/*',
+            'User-Agent': 'Mozilla/5.0'
+        }
+        
+        # Сначала получаем ссылку на скачивание
+        response = requests.get(url, headers=headers, allow_redirects=False)
+        print(f"Initial response status: {response.status_code}")  # Добавляем логирование
+        
+        # Если получили редирект, следуем по нему
+        if response.status_code in (301, 302):
+            download_url = response.headers.get('Location')
+            print(f"Redirect URL: {download_url}")  # Добавляем логирование
+            
+            if not download_url:
+                return JsonResponse({'error': 'Не удалось получить ссылку на скачивание'}, status=500)
+            
+            # Делаем запрос к финальному URL уже без токена
+            response = requests.get(download_url, stream=True)
+            print(f"Final response status: {response.status_code}")  # Добавляем логирование
+        
         response.raise_for_status()
+        
+        # Получаем content-type
+        content_type = response.headers.get('content-type', 'application/octet-stream')
+        print(f"Content-Type: {content_type}")  # Добавляем логирование
         
         # Копируем заголовки ответа
         proxy_response = HttpResponse(
-            response.raw,
-            content_type=response.headers.get('content-type', 'application/octet-stream')
+            response.content,
+            content_type=content_type
         )
         
         # Добавляем CORS заголовки к ответу
         for key, value in cors_headers.items():
             proxy_response[key] = value
+        
+        # Добавляем заголовки для скачивания
+        filename = url.split('/')[-1].split('?')[0]
+        proxy_response['Content-Disposition'] = f'attachment; filename="{filename}"'
         
         # Добавляем заголовки кэширования
         proxy_response['Cache-Control'] = 'public, max-age=31536000'  # 1 год
@@ -430,10 +462,12 @@ def proxy_yandex_photo(request):
         error_message = str(e)
         if hasattr(e.response, 'status_code'):
             status_code = e.response.status_code
+            print(f"Request error: {error_message}, Status: {status_code}")  # Добавляем логирование
+            print(f"Response content: {e.response.content}")  # Добавляем логирование содержимого ответа
         else:
             status_code = 500
-        print(f"Proxy error: {error_message}")  # Добавляем логирование ошибки
+            print(f"Request error without status: {error_message}")  # Добавляем логирование
         return JsonResponse({'error': error_message}, status=status_code)
     except Exception as e:
-        print(f"Unexpected proxy error: {str(e)}")  # Добавляем логирование неожиданных ошибок
+        print(f"Unexpected error: {str(e)}")  # Добавляем логирование
         return JsonResponse({'error': str(e)}, status=500)
