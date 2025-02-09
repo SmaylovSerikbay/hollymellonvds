@@ -25,10 +25,34 @@
 
 /* Variables */
 :root {
-    /* Colors */
+    /* Основные цвета */
+    --color-primary: #000cb3;
     --color-black: #000000;
-    --color-white: #FFFFFF;
-    --color-gold: #D4AF37;
+    --color-white: #ffffff;
+    --color-gray: #f5f5f5;
+    
+    /* Замена gold на синий */
+    --accent-color: #000cb3;
+    --accent-hover: #0009a0;
+    
+    /* Текст */
+    --text-primary: var(--color-black);
+    --text-secondary: rgba(0, 0, 0, 0.7);
+    --text-light: var(--color-white);
+    
+    /* Фоны */
+    --bg-primary: var(--color-white);
+    --bg-secondary: var(--color-gray);
+    --bg-dark: var(--color-black);
+    
+    /* Границы */
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border-dark: rgba(0, 0, 0, 0.1);
+    
+    /* Тени */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
     
     /* Header Colors */
     --header-dark: rgba(0, 0, 0, 0.7);
@@ -73,7 +97,9 @@ body {
     font-size: 1.6rem;
     background: var(--color-black);
     color: var(--color-white);
-    min-block-size: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
@@ -94,6 +120,7 @@ body {
     z-index: 100;
     transition: all 0.3s ease;
     padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .logo {
@@ -215,14 +242,14 @@ body {
     inset-inline-start: 0;
     inline-size: 100%;
     block-size: 2px;
-    background-color: var(--color-gold);
+    background-color: var(--color-primary);
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.3s ease;
 }
 
 .header__menu a:hover {
-    color: var(--color-gold);
+    color: var(--color-primary);
 }
 
 .header__menu a:hover::before {
@@ -274,7 +301,7 @@ body {
 }
 
 .action-btn:hover {
-    color: var(--color-gold);
+    color: var(--color-primary);
 }
 
 .action-btn:hover i {
@@ -317,7 +344,7 @@ body {
 .location-btn i {
     position: relative;
     z-index: 1;
-    color: var(--color-gold);
+    color: #DE4032;
     transition: transform 0.3s ease;
 }
 
@@ -406,12 +433,13 @@ body {
 }
 
 .mobile-menu__nav a:hover {
-    color: var(--color-gold);
+    color: var(--color-primary);
 }
 
 /* Light Theme */
 body.light .header {
     background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 body.light .mobile-toggle span {
@@ -427,7 +455,7 @@ body.light .mobile-menu__nav a {
 }
 
 body.light .mobile-menu__nav a:hover {
-    color: var(--color-gold);
+    color: var(--color-primary);
 }
 
 /* Location */
@@ -456,12 +484,15 @@ body.light .mobile-menu__nav a:hover {
 }
 
 .location-btn i {
-    color: var(--color-gold);
+    color: #DE4032;
 }
 
 /* Main Content Layout */
 .main {
-    margin-block-start: var(--header-height);
+ 
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Page Sections */
@@ -546,7 +577,7 @@ body.light .mobile-menu__nav a:hover {
 
 .hero__control:hover {
     background: rgba(0, 0, 0, 0.8);
-    color: var(--color-gold);
+    color: var(--color-primary);
 }
 
 .hero__content {
@@ -584,7 +615,7 @@ body.light .mobile-menu__nav a:hover {
     align-items: center;
     justify-content: center;
     padding: 16px 40px;
-    background: var(--color-gold);
+    background: var(--color-primary);
     color: var(--color-black);
     font-size: 1.8rem;
     font-weight: 600;
@@ -595,7 +626,7 @@ body.light .mobile-menu__nav a:hover {
 
 .hero__button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .hero__footer {
@@ -649,7 +680,7 @@ body.light .mobile-menu__nav a:hover {
     font-size: 1.4rem;
     font-weight: 500;
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--accent-color);
     text-transform: uppercase;
 }
 
@@ -693,7 +724,7 @@ body.light .mobile-menu__nav a:hover {
 }
 
 .social-link:hover {
-    color: var(--color-gold);
+    color: var(--color-primary);
 }
 
 /* Socials */
@@ -709,7 +740,7 @@ body.light .mobile-menu__nav a:hover {
 }
 
 .social-link:hover {
-    color: var(--color-gold);
+    color: var(--color-primary);
 }
 
 /* Animations */
@@ -761,7 +792,7 @@ body.light .ticker__content span {
 }
 
 body.light .ticker__divider {
-    color: var(--color-gold) !important;
+    color: var(--color-primary) !important;
 }
 
 body.light .social-link {
@@ -769,7 +800,7 @@ body.light .social-link {
 }
 
 body.light .social-link:hover {
-    color: var(--color-gold) !important;
+    color: var(--color-primary) !important;
 }
 
 /* Search Modal */
@@ -815,7 +846,7 @@ body.light .social-link:hover {
 
 .search-modal__input:focus {
     outline: none;
-    border-color: var(--color-gold);
+    border-color: var(--color-primary);
 }
 
 .search-modal__input::placeholder {
@@ -836,7 +867,7 @@ body.light .social-link:hover {
 }
 
 .search-modal__close:hover {
-    color: var(--color-gold);
+    color: var(--color-primary);
 }
 
 /* Light Theme Search Modal */
@@ -893,7 +924,7 @@ body.light .search-modal__close {
 
 .location-option:hover {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--color-gold);
+    color: var(--color-primary);
 }
 
 .location-option:not(:last-child) {
@@ -922,8 +953,7 @@ body.light .search-modal__close {
 }
 
 .location-btn i {
-    color: var(--color-gold);
-    font-size: 1.6rem;
+    color: #DE4032;
 }
 
 /* Our Brands Section */
@@ -959,7 +989,7 @@ body.light .brand-card:hover {
 .brand-card:first-child .brand-card__arrow {
     right: 2.5rem;
     transform: translateX(0) rotate(-45deg);
-    background-color: var(--color-gold);
+    background-color: var(--color-primary);
 }
 
 .brand-card:first-child .brand-card__overlay {
@@ -997,7 +1027,7 @@ body.light .brand-card:hover {
 }
 
 body.light .section-title {
-    background: var(--light-text);
+    background: #285AEB;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: none;
@@ -1103,9 +1133,7 @@ body.light .section-title {
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: 0.02em;
-    background: linear-gradient(45deg, var(--color-gold), #FFFFFF);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--color-white);
 }
 
 .brand-card__location {
@@ -1117,7 +1145,7 @@ body.light .section-title {
 }
 
 .brand-card__location i {
-    color: var(--color-gold);
+    color: #DE4032;
 }
 
 .brand-card__arrow {
@@ -1140,7 +1168,7 @@ body.light .section-title {
 .brand-card:hover .brand-card__arrow {
     right: 2.5rem;
     transform: translateX(0) rotate(-45deg);
-    background-color: var(--color-gold);
+    background-color: var(--color-primary);
 }
 
 .brand-card__arrow:hover {
@@ -1168,7 +1196,7 @@ body.light .location-option {
 
 body.light .location-option:hover {
     background: rgba(0, 0, 0, 0.05);
-    color: var(--color-gold);
+    color: var(--color-primary);
 }
 
 body.light .location-option:not(:last-child) {
@@ -1212,7 +1240,7 @@ body.light .mobile-menu__nav a {
 }
 
 .mobile-menu__location-btn i {
-    color: var(--color-gold);
+    color: #DE4032;
     transition: transform 0.3s ease;
 }
 
@@ -1247,9 +1275,9 @@ body.light .mobile-menu__nav a {
 }
 
 .mobile-menu__city.active {
-    background: rgba(212, 175, 55, 0.1);
-    border-color: var(--color-gold);
-    color: var(--color-gold);
+    background: rgba(0, 12, 179, 0.1);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
 }
 
 .mobile-menu__city:hover {
@@ -1270,9 +1298,9 @@ body.light .mobile-menu__city {
 }
 
 body.light .mobile-menu__city.active {
-    background: rgba(212, 175, 55, 0.1);
-    border-color: var(--color-gold);
-    color: var(--color-gold);
+    background: rgba(0, 12, 179, 0.1);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
 }
 
 body.light .mobile-menu__city:hover {
@@ -1281,15 +1309,44 @@ body.light .mobile-menu__city:hover {
 
 /* Brands Section */
 .brands {
-    padding: 100px 0;
+    padding: 140px 0;
     background: var(--color-black);
+    min-height: calc(100vh - var(--header-height));
 }
 
 .brands__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
+    max-width: var(--container-width);
+    margin: 0 auto;
     padding: 0 var(--container-padding);
+}
+
+@media (max-width: 768px) {
+    .brands {
+        padding: 32px 0;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        min-height: fit-content;
+    }
+
+    .brands__grid {
+        padding: 0 16px;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .brands {
+        padding: 20px 0;
+    }
+
+    .brands__grid {
+        padding: 0 12px;
+        gap: 12px;
+    }
 }
 
 /* Brand Card */
@@ -1370,8 +1427,7 @@ body.light .mobile-menu__city:hover {
 }
 
 .brand-card__location i {
-    color: var(--color-gold);
-    font-size: 1.6rem;
+    color: #DE4032;
 }
 
 .brand-card a {
@@ -1383,11 +1439,11 @@ body.light .mobile-menu__city:hover {
 
 /* Light Theme */
 body.light .brands {
-    background: var(--light-bg);
+    background-color: var(--light-bg);
 }
 
 body.light .section-title {
-    color: var(--light-text);
+    color: #285AEB;
 }
 
 body.light .brand-card {
@@ -1457,7 +1513,7 @@ body.light .brand-title {
 
 .brand-subtitle {
     font-size: 24px;
-    color: var(--color-gold);
+    color: var(--color-primary);
     margin-bottom: 30px;
 }
 
@@ -1475,6 +1531,46 @@ body.light .brand-description {
     color: var(--light-text);
 }
 
+/* Добавляем медиа-запросы для мобильной версии */
+@media screen and (max-width: 768px) {
+    .brand-title,
+    .brand-subtitle,
+    .brand-description {
+        text-align: center;
+    }
+
+    .brand-title {
+        font-size: 36px;
+    }
+
+    .brand-subtitle {
+        font-size: 20px;
+    }
+
+    .brand-description {
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .brand-top-section {
+        margin-bottom: 40px;
+    }
+
+    .brand-info {
+        padding: 0 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .brand-title {
+        font-size: 28px;
+    }
+
+    .brand-subtitle {
+        font-size: 18px;
+    }
+}
+
 .brand-links {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1490,7 +1586,7 @@ body.light .brand-description {
 
 .brand-links i {
     font-size: 24px;
-    color: var(--color-gold);
+    color: var(--color-primary);
 }
 
 /* История бренда */
@@ -1536,7 +1632,7 @@ body.light .feature-item {
 .feature-item h3 {
     font-size: 24px;
     margin-bottom: 15px;
-    color: var(--color-gold);
+    color: var(--color-primary);
 }
 
 /* Специальные предложения */
@@ -1571,7 +1667,7 @@ body.light .offer-item {
 
 .offer-item h3 {
     font-size: 24px;
-    color: var(--color-gold);
+    color: var(--color-primary);
     margin-bottom: 10px;
 }
 
@@ -1603,16 +1699,46 @@ body.light .brand-info .brand-description {
 
 /* Brand Gallery */
 .brand-gallery {
-    max-width: var(--container-width);
     width: 100%;
-    margin: 4rem auto;
-    padding: 0 var(--container-padding);
+    margin-bottom: 30px;
 }
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+.gallery-swiper {
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--color-primary);
+}
+
+.swiper-pagination-bullet {
+    background: var(--color-primary);
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+    .gallery-swiper {
+        height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-swiper {
+        height: 250px;
+    }
 }
 
 /* Ticker для страницы бренда */
@@ -1650,7 +1776,7 @@ body.light .brand-info .brand-description {
     font-size: 1.4rem;
     font-weight: 500;
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--accent-color);
 }
 
 @keyframes tickerAnimation {
@@ -1715,7 +1841,7 @@ body.light .brand-info .brand-description {
     font-size: 1.4rem;
     font-weight: 500;
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--accent-color);
 }
 
 @keyframes marquee {
@@ -1825,7 +1951,7 @@ body.light .brand-info .brand-description {
     font-size: 1.4rem;
     font-weight: 500;
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--accent-color);
 }
 
 /* Recent Events Section */
@@ -1949,7 +2075,7 @@ body.light .recent-events {
     font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 8px;
-    color: var(--color-gold);
+    color: var(--color-white);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -2072,7 +2198,7 @@ body.light .recent-events {
 .announcement-card__title {
     font-size: 1.8rem;
     font-weight: 400;
-    color: var(--color-gold);
+    color: #DE4032;
     margin-bottom: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -2088,7 +2214,7 @@ body.light .recent-events {
 .announcement-card__description {
     font-size: 1.8rem;
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--color-black);
     text-transform: none;
     letter-spacing: 0.02em;
     font-weight: 400;
@@ -2134,18 +2260,11 @@ body.light .announcement-card:hover .announcement-card__icon img {
 }
 
 body.light .announcement-card__title {
-    color: var(--color-gold);
-    opacity: 1;
+    color: #DE4032;
 }
 
 body.light .announcement-card__description {
     color: var(--color-black);
-    opacity: 0.9;
-}
-
-body.light .announcement-card:hover .announcement-card__description {
-    color: var(--color-black);
-    opacity: 1;
 }
 
 /* About Section */
@@ -2191,7 +2310,7 @@ body.light .about {
     font-size: 4.2rem;
     font-weight: 700;
     margin-bottom: 3rem;
-    color: var(--color-gold);
+
     letter-spacing: 0.02em;
     line-height: 1.2;
     max-width: var(--container-width);
@@ -2208,7 +2327,7 @@ body.light .about {
 }
 
 .about__contacts {
-    border-top: 2px solid rgba(212, 175, 55, 0.2);
+    border-top: 2px solid rgba(0, 12, 179, 0.2);
     padding-top: 3rem;
 }
 
@@ -2229,7 +2348,7 @@ body.light .about {
 
 .about__contact-item i {
     font-size: 2.4rem;
-    color: var(--color-gold);
+    color: var(--accent-color);
 }
 
 .about__contact-item a {
@@ -2241,19 +2360,16 @@ body.light .about {
 }
 
 .about__contact-item a:hover {
-    color: var(--color-gold);
+    color: var(--accent-color);
 }
 
-body.light .about__title {
-    color: var(--color-gold);
-}
 
 body.light .about__description {
     color: rgba(0, 0, 0, 0.8);
 }
 
 body.light .about__contacts {
-    border-color: rgba(212, 175, 55, 0.2);
+    border-color: rgba(0, 12, 179, 0.2);
 }
 
 body.light .about__contacts h4 {
@@ -2327,7 +2443,7 @@ body.light .about__contact-item a {
 }
 
 .filter-select:hover {
-    border-color: var(--color-gold);
+    border-color: var(--accent-color);
 }
 
 .albums-grid {
@@ -2386,7 +2502,7 @@ body.light .about__contact-item a {
 }
 
 .album-brand {
-    color: var(--color-gold);
+    color: var(--accent-color);
     font-weight: 500;
 }
 
@@ -2531,4 +2647,86 @@ body.light .about__contact-item a {
 
 body:not(.light) .header.scrolled {
     background: #000000;
+}
+
+/* Footer Styles */
+.footer {
+    padding: 30px 0;
+    background: var(--color-black);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+}
+
+body.light .footer {
+    background: var(--light-bg);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.footer__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer__links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer__links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 14px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.footer__links a:hover {
+    opacity: 1;
+}
+
+.footer__copyright {
+    color: var(--text-color);
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 20px 0;
+        margin-top: 40px;
+    }
+
+    .footer__content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .footer__links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 15px 0;
+        margin-top: 30px;
+    }
+}
+
+/* Специальные стили для страниц с фиксированной высотой */
+.brand-detail .footer,
+.photo-gallery .footer,
+.album-detail .footer {
+    margin-top: auto;
+}
+
+/* Для страниц с динамическим контентом */
+.brands .footer,
+.home .footer {
+    margin-top: auto;
+    padding-top: 60px;
 }

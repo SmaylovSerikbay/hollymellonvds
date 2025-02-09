@@ -23,4 +23,25 @@ document.addEventListener('DOMContentLoaded', function() {
             mainImage.src = this.querySelector('img').src;
         });
     });
+
+    // Инициализация галереи бренда
+    const gallerySwiper = new Swiper('.gallery-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        speed: 600,
+        loop: true,
+        effect: 'slide',
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        }
+    });
 }); 

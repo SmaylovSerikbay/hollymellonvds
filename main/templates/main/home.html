@@ -190,19 +190,25 @@
                     <h4>Контакты</h4>
                     {% if site_settings.email %}
                     <div class="about__contact-item">
-                        <i class="fas fa-envelope"></i>
+                        <div class="icon">
+                            <img src="{% static 'icons/social/gmail.svg' %}" alt="Email">
+                        </div>
                         <a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a>
                     </div>
                     {% endif %}
                     {% if site_settings.instagram_link %}
                     <div class="about__contact-item">
-                        <i class="fab fa-instagram"></i>
+                        <div class="icon">
+                            <img src="{% static 'icons/social/instagram.svg' %}" alt="Instagram">
+                        </div>
                         <a href="{{ site_settings.instagram_link }}" target="_blank">Мы в INSTAGRAM</a>
                     </div>
                     {% endif %}
                     {% if site_settings.tiktok_link %}
                     <div class="about__contact-item">
-                        <i class="fab fa-tiktok"></i>
+                        <div class="icon">
+                            <img src="{% static 'icons/social/tiktok.svg' %}" alt="TikTok">
+                        </div>
                         <a href="{{ site_settings.tiktok_link }}" target="_blank">Мы в TIKTOK</a>
                     </div>
                     {% endif %}

@@ -4,6 +4,7 @@
 {% block title %}{{ brand.name }} - HollyMellon{% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
 <link rel="stylesheet" href="{% static 'css/brand-detail.css' %}">
 {% endblock %}
 
@@ -84,10 +85,11 @@
                     </div>
                     {% endif %}
 
+                    <!-- Контакты и время работы в одной строке -->
                     <div class="contact-row">
                         <!-- Время работы -->
                         {% if brand.work_hours_weekdays or brand.work_hours_weekends %}
-                        <div class="contact-item">
+                        <div class="contact-item work-hours-card">
                             <div class="contact-content">
                                 <div class="contact-header">
                                     <div class="contact-icon">
@@ -115,17 +117,16 @@
 
                         <!-- Контакты -->
                         {% if brand.phone or brand.whatsapp %}
-                        <div class="contact-item">
+                        <div class="contact-item contacts-card">
                             <div class="contact-content">
                                 <div class="contact-header">
                                     <div class="contact-icon">
                                         <i class="fas fa-phone"></i>
                                     </div>
-                                    <h3>КОНТАКТЫ</h3>
+                                    {% if brand.phone %}
+                                    <p class="phone-number">{{ brand.phone }}</p>
+                                    {% endif %}
                                 </div>
-                                {% if brand.phone %}
-                                <p>{{ brand.phone }}</p>
-                                {% endif %}
                                 {% if brand.whatsapp %}
                                 <div class="contact-links">
                                     <a href="https://wa.me/{{ brand.whatsapp }}" target="_blank" rel="noopener">
@@ -143,38 +144,22 @@
 
             <!-- Галерея -->
             <div class="gallery-column">
-                {% if top_gallery %}
-                <div class="main-slider">
-                    <div class="main-image">
-                        <img src="{{ top_gallery.0.image.url }}" alt="{{ brand.name }}" class="main-slide">
-                    </div>
-                    {% if top_gallery|length > 1 %}
-                    <div class="thumbnails">
-                        {% for image in top_gallery %}
-                        <div class="thumb {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}">
-                            <img src="{{ image.image.url }}" alt="{{ brand.name }}">
+                <div class="brand-gallery">
+                    <div class="swiper gallery-swiper">
+                        <div class="swiper-wrapper">
+                            {% for image in brand.gallery.all %}
+                            <div class="swiper-slide">
+                                <img src="{{ image.image.url }}" alt="{{ brand.name }}" class="gallery-image" loading="lazy">
+                            </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
                     </div>
-                    {% endif %}
-                </div>
-                {% endif %}
-            </div>
-        </div>
-
-        <!-- История бренда -->
-        {% if brand.brand_history %}
-        <div class="brand-history">
-            <div class="brand-history-inner">
-                <div class="brand-history-header">
-                    <h2>BRAND HISTORY</h2>
-                </div>
-                <div class="history-content">
-                    {{ brand.brand_history|linebreaks }}
                 </div>
             </div>
         </div>
-        {% endif %}
 
         <!-- Особенности -->
         {% if brand.features.exists %}
@@ -193,31 +178,45 @@
         </div>
         {% endif %}
 
+        <!-- История бренда -->
+        {% if brand.brand_history %}
+        <div class="brand-history">
+            <div class="brand-history-inner">
+                <div class="brand-history-header">
+                    <h2>BRAND HISTORY</h2>
+                </div>
+                <div class="history-content">
+                    {{ brand.brand_history|linebreaks }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
         <!-- Нижний блок -->
         <div class="bottom-section">
             <!-- Специальные предложения -->
             {% if brand.special_offers.exists %}
-            <div class="offers-column">
-                <h2>СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</h2>
-                <div class="offers-list">
+            <div class="special-offers">
+                <div class="special-offers-header">
+                    <h2>СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</h2>
+                    <div class="special-offers-subtitle">Актуальные акции и предложения</div>
+                </div>
+                <div class="offers-grid">
                     {% for offer in brand.special_offers.all %}
                     <div class="offer-item">
-                        <h3>{{ offer.title }}</h3>
-                        <p>{{ offer.description }}</p>
+                        <div class="offer-content">
+                            <div class="offer-icon">
+                                <img src="{% static 'icons/anonces/decor-light.svg' %}" alt="Special offer" class="light-theme-icon">
+                                <img src="{% static 'icons/anonces/decor-dark.svg' %}" alt="Special offer" class="dark-theme-icon">
+                            </div>
+                            <div class="offer-info">
+                                <h3>{{ offer.title }}</h3>
+                                <p>{{ offer.description }}</p>
+                            </div>
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
-            </div>
-            {% endif %}
-
-            <!-- Нижняя галерея -->
-            {% if bottom_gallery %}
-            <div class="bottom-gallery">
-                {% for image in bottom_gallery %}
-                <div class="gallery-item">
-                    <img src="{{ image.image.url }}" alt="{{ brand.name }}">
-                </div>
-                {% endfor %}
             </div>
             {% endif %}
         </div>
@@ -236,5 +235,6 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script src="{% static 'js/brand-detail.js' %}"></script>
 {% endblock %} 
