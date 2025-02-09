@@ -292,56 +292,62 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Обработка выбора города в мобильном меню
+    // Мобильное меню выбора города
     if (mobileLocationBtn && mobileCitiesList) {
-        mobileLocationBtn.addEventListener('click', function() {
+        // Открытие/закрытие списка городов
+        mobileLocationBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
             this.classList.toggle('active');
             mobileCitiesList.classList.toggle('active');
         });
-    }
 
-    mobileCities.forEach(city => {
-        city.addEventListener('click', function() {
-            const cityId = this.dataset.cityId;
-            const cityName = this.textContent.trim();
+        // Обработка выбора города
+        mobileCities.forEach(city => {
+            city.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const cityId = this.dataset.cityId;
+                const cityName = this.textContent.trim();
 
-            // Обновляем активный класс
-            mobileCities.forEach(c => c.classList.remove('active'));
-            this.classList.add('active');
+                // Обновляем активный класс
+                mobileCities.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
 
-            // Обновляем текст кнопки
-            const btnText = mobileLocationBtn.querySelector('span');
-            if (btnText) {
-                btnText.textContent = cityName;
-            }
-
-            // Закрываем меню
-            mobileLocationBtn.classList.remove('active');
-            mobileCitiesList.classList.remove('active');
-
-            // Отправляем запрос на сервер
-            fetch(`/set-city/${cityId}/`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': getCookie('csrftoken'),
-                    'Content-Type': 'application/json'
+                // Обновляем текст кнопки
+                const btnText = mobileLocationBtn.querySelector('span');
+                if (btnText) {
+                    btnText.textContent = cityName;
                 }
-            })
-            .then(response => {
-                if (response.ok) {
-                    location.reload();
-                }
+
+                // Закрываем меню
+                mobileLocationBtn.classList.remove('active');
+                mobileCitiesList.classList.remove('active');
+
+                // Отправляем запрос на сервер
+                fetch('/set-city/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify({ city_id: cityId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'ok') {
+                        window.location.reload();
+                    }
+                });
             });
         });
-    });
 
-    // Закрытие меню при клике вне
-    document.addEventListener('click', () => {
-        locationMenus.forEach(menu => menu.classList.remove('active'));
-        if (mobileCitiesList) {
-            mobileCitiesList.classList.remove('active');
-        }
-    });
+        // Закрытие меню при клике вне
+        document.addEventListener('click', function(e) {
+            if (!mobileLocationBtn.contains(e.target) && !mobileCitiesList.contains(e.target)) {
+                mobileLocationBtn.classList.remove('active');
+                mobileCitiesList.classList.remove('active');
+            }
+        });
+    }
 
     // Функция для получения CSRF токена
     function getCookie(name) {
