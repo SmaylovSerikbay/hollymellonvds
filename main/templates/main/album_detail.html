@@ -71,6 +71,7 @@
                 loading="lazy"
                 data-full-size="{{ photo.url }}"
             >
+            <!-- Десктопная версия кнопок -->
             <div class="photo-actions">
                 <button class="photo-action-btn select-photo" title="Выбрать">
                     <i class="fas fa-check"></i>
@@ -78,11 +79,19 @@
                 <button class="photo-action-btn download-photo" title="Скачать">
                     <i class="fas fa-download"></i>
                 </button>
-            </div>
-            <div class="photo-overlay">
-                <div class="overlay-content">
+                <button class="photo-action-btn zoom-photo" title="Увеличить">
                     <i class="fas fa-search-plus"></i>
-                </div>
+                </button>
+            </div>
+            <!-- Мобильная версия кнопок -->
+            <div class="select-indicator"></div>
+            <div class="photo-quick-actions">
+                <button class="quick-action-btn download-photo" title="Скачать">
+                    <i class="fas fa-download"></i>
+                </button>
+                <button class="quick-action-btn select-photo" title="Выбрать">
+                    <i class="fas fa-check"></i>
+                </button>
             </div>
         </div>
         {% empty %}

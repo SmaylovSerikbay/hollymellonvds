@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let lightbox = null;
+    const gallery = document.getElementById('gallery');
     const selectedUrls = new Set();
     const downloadSelectedBtn = document.getElementById('downloadSelectedBtn');
     const downloadAllBtn = document.getElementById('downloadAllBtn');
@@ -47,84 +47,133 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Инициализация PhotoSwipe
-    const initPhotoSwipe = () => {
-        const openPhotoSwipe = (index) => {
-            const pswpElement = document.querySelector('.pswp');
-            
-            // Собираем все фотографии
-            const items = Array.from(document.querySelectorAll('.photo-item img')).map(img => ({
-                src: img.dataset.fullSize || img.src,
-                w: 0,
-                h: 0,
-                msrc: img.src
-            }));
+    // Обработка клика по фотографии
+    function openPhotoSwipe(index) {
+        const items = Array.from(gallery.querySelectorAll('.photo-item')).map(item => ({
+            src: item.querySelector('img').dataset.fullSize,
+            w: 1200,
+            h: 800
+        }));
 
-            const options = {
-                index: index,
-                bgOpacity: 0.9,
-                showHideOpacity: true,
-                history: false,
-                shareEl: false,
-                zoomEl: true,
-                tapToClose: false,
-                clickToCloseNonZoomable: false,
-                showAnimationDuration: 333,
-                hideAnimationDuration: 333,
-                maxSpreadZoom: 2,
-                getThumbBoundsFn: (index) => {
-                    const thumbnail = document.querySelectorAll('.photo-item img')[index];
-                    const pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
-                    const rect = thumbnail.getBoundingClientRect();
-                    return {x: rect.left, y: rect.top + pageYScroll, w: rect.width};
-                }
-            };
-
-            // Создаем и инициализируем PhotoSwipe
-            const gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
-            
-            // Загружаем реальные размеры изображений
-            gallery.listen('gettingData', (index, item) => {
-                if (!item.w || !item.h) {
-                    const img = new Image();
-                    img.onload = function() {
-                        item.w = this.width;
-                        item.h = this.height;
-                        gallery.updateSize(true);
-                    };
-                    img.src = item.src;
-                }
-            });
-
-            gallery.init();
+        const options = {
+            index: index,
+            bgOpacity: 0.9,
+            showHideOpacity: true,
+            history: false,
+            shareEl: false,
+            getThumbBoundsFn: (index) => {
+                const thumbnail = gallery.querySelectorAll('.photo-item img')[index];
+                const pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
+                const rect = thumbnail.getBoundingClientRect();
+                return {x: rect.left, y: rect.top + pageYScroll, w: rect.width};
+            }
         };
 
-        // Добавляем обработчики для всех фотографий
-        document.querySelectorAll('.photo-item').forEach((photo, index) => {
-            // Обработчик для кнопки увеличения
-            const zoomBtn = photo.querySelector('.zoom-photo');
-            if (zoomBtn) {
-                zoomBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    openPhotoSwipe(index);
-                });
-            }
-
-            // Обработчик для клика по фото
-            const photoOverlay = photo.querySelector('.photo-overlay');
-            if (photoOverlay) {
-                photoOverlay.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    openPhotoSwipe(index);
-                });
-            }
+        const pswp = new PhotoSwipe(document.querySelector('.pswp'), PhotoSwipeUI_Default, items, options);
+        
+        pswp.listen('imageLoadComplete', function(index, item) {
+            const img = new Image();
+            img.onload = function() {
+                item.w = this.width;
+                item.h = this.height;
+                pswp.updateSize(true);
+            };
+            img.src = item.src;
         });
-    };
+
+        pswp.init();
+    }
+
+    // Обработка клика по фотографии или кнопке увеличения
+    gallery.addEventListener('click', function(e) {
+        const photoItem = e.target.closest('.photo-item');
+        if (!photoItem) return;
+
+        // Если клик был по кнопке скачивания или выбора, не открываем просмотрщик
+        if (e.target.closest('.download-photo') || e.target.closest('.select-photo')) return;
+
+        // Если клик был по кнопке увеличения или по самому фото
+        if (e.target.closest('.zoom-photo') || e.target.closest('img')) {
+            const index = Array.from(gallery.children).indexOf(photoItem);
+            openPhotoSwipe(index);
+        }
+    });
+
+    // Обработчики для кнопок действий с фотографиями
+    document.querySelectorAll('.photo-item').forEach(photo => {
+        const downloadBtns = photo.querySelectorAll('.download-photo');
+        const selectBtns = photo.querySelectorAll('.select-photo');
+        const img = photo.querySelector('img');
+        const url = img.getAttribute('data-full-size') || img.src;
+
+        downloadBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                downloadPhoto(url);
+            });
+        });
+
+        selectBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                if (selectedUrls.has(url)) {
+                    selectedUrls.delete(url);
+                    photo.classList.remove('selected');
+                } else {
+                    selectedUrls.add(url);
+                    photo.classList.add('selected');
+                }
+
+                // Обновляем счетчик выбранных фотографий
+                downloadSelectedBtn.querySelector('.counter').textContent = `(${selectedUrls.size})`;
+            });
+        });
+    });
+
+    // Функция скачивания фото
+    async function downloadPhoto(url) {
+        try {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const filename = url.split('/').pop();
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (error) {
+            console.error('Ошибка при скачивании:', error);
+        }
+    }
+
+    // Обработчик для скачивания выбранных фотографий
+    if (downloadSelectedBtn) {
+        downloadSelectedBtn.addEventListener('click', () => {
+            if (selectedUrls.size === 0) {
+                alert('Пожалуйста, выберите фотографии для скачивания');
+                return;
+            }
+            downloadMultipleFiles(selectedUrls);
+        });
+    }
+
+    // Обработчик для скачивания всех фотографий
+    if (downloadAllBtn) {
+        downloadAllBtn.addEventListener('click', downloadYandexArchive);
+    }
+
+    // Обработчик для кнопки "Поделиться"
+    if (shareBtn) {
+        shareBtn.addEventListener('click', shareAlbum);
+    }
 
     // Функция для скачивания архива с Яндекс.Диска
-    const downloadYandexArchive = async () => {
+    async function downloadYandexArchive() {
         loadingOverlay.style.display = 'flex';
         progressIndicator.style.display = 'block';
         progressIndicator.querySelector('.progress-fill').style.width = '50%';
@@ -151,15 +200,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 progressIndicator.querySelector('.progress-fill').style.width = '0%';
             }, 1000);
         }
-    };
-
-    // Функция скачивания отдельного файла
-    const downloadFile = (url) => {
-        window.open(url, '_blank');
-    };
+    }
 
     // Функция для скачивания нескольких файлов
-    const downloadMultipleFiles = (urls) => {
+    function downloadMultipleFiles(urls) {
         const urlsArray = Array.from(urls);
         let currentIndex = 0;
         let totalFiles = urlsArray.length;
@@ -167,9 +211,9 @@ document.addEventListener('DOMContentLoaded', function() {
         loadingOverlay.style.display = 'flex';
         progressIndicator.style.display = 'block';
 
-        const downloadNext = () => {
+        function downloadNext() {
             if (currentIndex < urlsArray.length) {
-                downloadFile(urlsArray[currentIndex]);
+                downloadPhoto(urlsArray[currentIndex]);
                 currentIndex++;
                 const percent = Math.round((currentIndex / totalFiles) * 100);
                 progressIndicator.querySelector('.progress-fill').style.width = `${percent}%`;
@@ -180,70 +224,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 loadingOverlay.style.display = 'none';
                 progressIndicator.style.display = 'none';
             }
-        };
+        }
 
         downloadNext();
-    };
-
-    // Обработчики для кнопок действий с фотографиями
-    document.querySelectorAll('.photo-item').forEach(photo => {
-        const downloadBtn = photo.querySelector('.download-photo');
-        const selectBtn = photo.querySelector('.select-photo');
-        const img = photo.querySelector('img');
-        const url = img.getAttribute('data-full-size') || img.src;
-
-        if (downloadBtn) {
-            downloadBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                downloadFile(url);
-            });
-        }
-
-        if (selectBtn) {
-            selectBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                if (selectedUrls.has(url)) {
-                    selectedUrls.delete(url);
-                    photo.classList.remove('selected');
-                    selectBtn.querySelector('i').classList.replace('fa-check-square', 'fa-square');
-                } else {
-                    selectedUrls.add(url);
-                    photo.classList.add('selected');
-                    selectBtn.querySelector('i').classList.replace('fa-square', 'fa-check-square');
-                }
-
-                // Обновляем счетчик выбранных фотографий
-                downloadSelectedBtn.querySelector('.counter').textContent = `(${selectedUrls.size})`;
-            });
-        }
-    });
-
-    // Обработчик для скачивания выбранных фотографий
-    if (downloadSelectedBtn) {
-        downloadSelectedBtn.addEventListener('click', () => {
-            if (selectedUrls.size === 0) {
-                alert('Пожалуйста, выберите фотографии для скачивания');
-                return;
-            }
-            downloadMultipleFiles(selectedUrls);
-        });
     }
-
-    // Обработчик для скачивания всех фотографий
-    if (downloadAllBtn) {
-        downloadAllBtn.addEventListener('click', () => {
-            downloadYandexArchive();
-        });
-    }
-
-    // Обработчик для кнопки "Поделиться"
-    if (shareBtn) {
-        shareBtn.addEventListener('click', shareAlbum);
-    }
-
-    // Инициализация PhotoSwipe
-    initPhotoSwipe();
 }); 

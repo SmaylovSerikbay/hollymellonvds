@@ -122,91 +122,218 @@
 
 /* Адаптивность */
 @media (max-width: 1200px) {
-    .album-info-container {
-        grid-template-columns: auto 1fr;
+    .header-info {
+        padding: 0 1rem;
     }
 
-    .info-group {
-        grid-column: 1 / -1;
-        overflow-x: auto;
-        padding-bottom: 2px;
-        margin: 0 -0.75rem;
-        padding: 0 0.75rem;
-        scrollbar-width: none;
-    }
-
-    .info-group::-webkit-scrollbar {
-        display: none;
+    .photos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 }
 
 @media (max-width: 768px) {
-    .album-detail {
-        padding: 0.5rem;
-    }
-
     .album-header {
-        padding: 0.75rem;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: var(--bg-color);
+        padding: 8px;
     }
 
     .header-info {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .actions-bar {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 0.75rem 1rem;
-    }
-
-    .download-actions {
-        width: 100%;
+        display: flex;
         flex-wrap: wrap;
+        gap: 6px;
     }
 
-    .action-button {
-        flex: 1;
+    .header-item {
+        font-size: 12px;
+        padding: 4px 8px;
+        background: var(--button-bg);
+        border-radius: 6px;
+    }
+
+    /* Галерея */
+    .photos-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        padding: 1px;
+        padding-bottom: 65px;
+        background: var(--border-color);
+    }
+
+    .photo-item {
+        position: relative;
+        aspect-ratio: 1;
+        touch-action: manipulation;
+    }
+
+    .photo-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Кнопки быстрых действий на фото */
+    .photo-quick-actions {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    }
+
+    .quick-action-btn {
+        width: 32px;
+        height: 32px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
+        display: flex;
+        align-items: center;
         justify-content: center;
     }
 
-    .action-button.share-btn {
-        width: 40px;
+    .quick-action-btn i {
+        font-size: 16px;
+    }
+
+    /* Индикатор выбора */
+    .select-indicator {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 24px;
+        height: 24px;
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    .photo-item.selected .select-indicator {
+        background: #4CAF50;
+        border-color: #4CAF50;
+    }
+
+    .select-indicator::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 12px;
+        height: 12px;
+        background: white;
+        border-radius: 50%;
+        opacity: 0;
+    }
+
+    .photo-item.selected .select-indicator::after {
+        opacity: 1;
+    }
+
+    /* Нижняя панель */
+    .actions-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: var(--bg-color);
+        padding: 8px;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .download-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr auto;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .action-button {
         height: 40px;
-        min-width: 40px;
-    }
-    
-    .action-button i {
-        font-size: 1rem;
+        padding: 0 12px;
+        font-size: 13px;
+        border-radius: 6px;
     }
 
-    .action-button.share-btn i {
-        font-size: 1rem;
+    .share-btn {
+        width: 40px;
     }
 
-    .meta-item {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.9rem;
-    }
-    
-    .meta-item i {
-        font-size: 0.9rem;
+    .total-photos {
+        display: none;
     }
 }
 
 @media (max-width: 480px) {
-    .album-title {
-        font-size: 1.25rem;
+    .header-item {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+
+    .action-button {
+        font-size: 12px;
+        height: 40px;
+    }
+
+    .action-button i {
+        font-size: 14px;
+    }
+
+    .share-btn {
+        width: 40px;
+    }
+
+    .photo-action-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .photo-action-btn i {
+        font-size: 14px;
     }
 }
 
-/* Сетка фотографий */
+/* Ориентация landscape */
+@media (max-width: 896px) and (orientation: landscape) {
+    .photos-grid {
+        grid-template-columns: repeat(3, 1fr);
+        padding-bottom: 55px;
+    }
+
+    .actions-bar {
+        padding: 6px 8px;
+    }
+
+    .action-button {
+        height: 36px;
+    }
+}
+
+/* Поддержка iPhone X и новее */
+@supports (padding: max(0px)) {
+    .actions-bar {
+        padding-bottom: max(8px, env(safe-area-inset-bottom));
+    }
+
+    .photos-grid {
+        padding-bottom: max(65px, env(safe-area-inset-bottom) + 55px);
+    }
+}
+
+/* Сетка фотографий для десктопа */
 .photos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 0.5rem;
-    padding: 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
     background: var(--bg-color);
 }
 
@@ -216,12 +343,19 @@
     overflow: hidden;
     background: var(--bg-color);
     cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .photo-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover img {
+    transform: scale(1.05);
 }
 
 /* Оверлей фотографии */
@@ -258,19 +392,23 @@
 /* Кнопки действий */
 .photo-actions {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
-    gap: 0.8rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(0, 0, 0, 0.5);
     opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 2;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(2px);
 }
 
 .photo-item:hover .photo-actions {
     opacity: 1;
-    transform: translateY(0);
 }
 
 .photo-action-btn {
@@ -293,15 +431,11 @@
 }
 
 .photo-action-btn:hover {
-    background: #fff;
     transform: scale(1.1);
+    background: #fff;
 }
 
 /* Состояние выбранного фото */
-.photo-item.selected {
-    position: relative;
-}
-
 .photo-item.selected::before {
     content: '';
     position: absolute;
@@ -312,14 +446,11 @@
     border: 3px solid #4CAF50;
     background: rgba(76, 175, 80, 0.1);
     z-index: 1;
+    pointer-events: none;
 }
 
 .photo-item.selected .photo-action-btn.select-photo {
     background: #4CAF50;
-    color: white;
-}
-
-.photo-item.selected .photo-action-btn.select-photo i {
     color: white;
 }
 
@@ -518,4 +649,70 @@ body:not(.light) .no-photos {
 [data-theme='dark'] .share-notification {
     background: rgba(255, 255, 255, 0.9);
     color: black;
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 360px) {
+    .photos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .action-button {
+        font-size: 12px;
+        padding: 0 8px;
+    }
+
+    .quick-action-btn {
+        width: 28px;
+        height: 28px;
+    }
+
+    .quick-action-btn i {
+        font-size: 14px;
+    }
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .photos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        padding: 1px;
+    }
+
+    .photo-item {
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .photo-actions {
+        display: none;
+    }
+
+    .photo-quick-actions {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    }
+
+    .quick-action-btn {
+        width: 32px;
+        height: 32px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .quick-action-btn i {
+        font-size: 16px;
+    }
 } 
