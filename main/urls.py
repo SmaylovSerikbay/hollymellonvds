@@ -10,4 +10,5 @@ urlpatterns = [
     path('photos/<int:pk>/', views.album_detail, name='album_detail'),
     path('photo-albums/', views.photo_albums, name='photo_albums'),
     path('api/yandex/download-folder/', views.download_yandex_folder, name='download_yandex_folder'),
+    path('proxy-photo/', views.proxy_yandex_photo, name='proxy_yandex_photo'),
 ] 

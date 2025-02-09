@@ -49,11 +49,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Обработка клика по фотографии
     function openPhotoSwipe(index) {
-        const items = Array.from(gallery.querySelectorAll('.photo-item')).map(item => ({
-            src: item.querySelector('img').dataset.fullSize,
-            w: 1200,
-            h: 800
-        }));
+        const items = Array.from(gallery.querySelectorAll('.photo-item')).map(item => {
+            const originalUrl = item.querySelector('img').dataset.fullSize;
+            return {
+                src: `/proxy-photo/?url=${encodeURIComponent(originalUrl)}`,
+                w: 1200,
+                h: 800
+            };
+        });
 
         const options = {
             index: index,
@@ -136,7 +139,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Функция скачивания фото
     async function downloadPhoto(url) {
         try {
-            const response = await fetch(url);
+            // Используем наш прокси для загрузки фотографий
+            const proxyUrl = `/proxy-photo/?url=${encodeURIComponent(url)}`;
+            const response = await fetch(proxyUrl);
+            if (!response.ok) throw new Error('Ошибка при загрузке фотографии');
+            
             const blob = await response.blob();
             const filename = url.split('/').pop();
             
@@ -148,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.removeChild(link);
         } catch (error) {
             console.error('Ошибка при скачивании:', error);
+            alert('Произошла ошибка при скачивании фотографии');
         }
     }
 

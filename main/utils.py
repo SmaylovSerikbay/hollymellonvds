@@ -42,7 +42,7 @@ def get_yandex_folders(token):
             headers={'Authorization': f'OAuth {token}'},
             params={
                 'path': '/',
-                'limit': 1000,  # Увеличиваем лимит
+                'limit': 10000,  # Увеличиваем лимит
                 'fields': '_embedded.items.name,_embedded.items.path,_embedded.items.type'  # Оптимизируем запрос
             }
         )
