@@ -1,0 +1,2136 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2025-02-06T13:50:28.442Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "Астана",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2025-02-06T13:50:33.062Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "Алматы",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2025-02-06T13:51:37.435Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "фывфывфывфыв",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0432\\u0435\\u0440\\u0445\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0421\\u043b\\u0430\\u0439\\u0434 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 \\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\"}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0432\\u0435\\u0440\\u0445\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0421\\u043b\\u0430\\u0439\\u0434 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 \\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\"}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0432\\u0435\\u0440\\u0445\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0421\\u043b\\u0430\\u0439\\u0434 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 \\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\"}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u043d\\u0438\\u0436\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 \\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\"}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u043d\\u0438\\u0436\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 \\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\"}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u043d\\u0438\\u0436\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 \\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\"}}, {\"added\": {\"name\": \"\\u041e\\u0441\\u043e\\u0431\\u0435\\u043d\\u043d\\u043e\\u0441\\u0442\\u044c\", \"object\": \"\\u042f\\u0420\\u041a\\u0418\\u0415 \\u0412\\u042b\\u0425\\u041e\\u0414\\u041d\\u042b\\u0415 \\u0421 SANDWAVE PARTIES\"}}, {\"added\": {\"name\": \"\\u0410\\u043a\\u0446\\u0438\\u044f\", \"object\": \"HOOKAH SPECIAL\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2025-02-06T14:21:49.551Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "фывфывфывфыв",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2025-02-06T14:48:54.355Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "фывфывфывфыв",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Hero \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 (\\u0432\\u0435\\u0440\\u0445\\u043d\\u0438\\u0439 \\u0431\\u0430\\u043d\\u043d\\u0435\\u0440)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2025-02-06T14:49:05.666Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "фывфывфывфыв",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Hero \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 (\\u0432\\u0435\\u0440\\u0445\\u043d\\u0438\\u0439 \\u0431\\u0430\\u043d\\u043d\\u0435\\u0440)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2025-02-06T15:09:51.995Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "РЕСТОРАН AHO",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041d\\u0430\\u0437\\u0432\\u0430\\u043d\\u0438\\u0435\", \"\\u041f\\u043e\\u0434\\u0437\\u0430\\u0433\\u043e\\u043b\\u043e\\u0432\\u043e\\u043a\", \"\\u041e\\u043f\\u0438\\u0441\\u0430\\u043d\\u0438\\u0435\", \"\\u0418\\u0441\\u0442\\u043e\\u0440\\u0438\\u044f \\u0431\\u0440\\u0435\\u043d\\u0434\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2025-02-06T15:10:33.845Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "РЕСТОРАН AHO",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2025-02-06T15:56:56.505Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "РЕСТОРАН AHO",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"\\u041e\\u0441\\u043e\\u0431\\u0435\\u043d\\u043d\\u043e\\u0441\\u0442\\u044c\", \"object\": \"VIP-\\u0417\\u041e\\u041d\\u0410 \\u0414\\u041b\\u042f \\u0423\\u0415\\u0414\\u0418\\u041d\\u0415\\u041d\\u041d\\u041e\\u0413\\u041e \\u041e\\u0422\\u0414\\u042b\\u0425\\u0410\"}}, {\"added\": {\"name\": \"\\u041e\\u0441\\u043e\\u0431\\u0435\\u043d\\u043d\\u043e\\u0441\\u0442\\u044c\", \"object\": \"\\u0420\\u0410\\u0417\\u041d\\u041e\\u041e\\u0411\\u0420\\u0410\\u0417\\u041d\\u041e\\u0415 \\u041c\\u0415\\u041d\\u042e\"}}, {\"changed\": {\"name\": \"\\u041e\\u0441\\u043e\\u0431\\u0435\\u043d\\u043d\\u043e\\u0441\\u0442\\u044c\", \"object\": \"\\u042f\\u0420\\u041a\\u0418\\u0415 \\u0412\\u042b\\u0425\\u041e\\u0414\\u041d\\u042b\\u0415 \\u0421 SANDWAVE PARTIES\", \"fields\": [\"\\u041e\\u043f\\u0438\\u0441\\u0430\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2025-02-06T16:10:53.134Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "РЕСТОРАН AHO",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"\\u0410\\u043a\\u0446\\u0438\\u044f\", \"object\": \"SPECIAL OFFER\"}}, {\"added\": {\"name\": \"\\u0410\\u043a\\u0446\\u0438\\u044f\", \"object\": \"CELEBRATE WITH ANO\"}}, {\"added\": {\"name\": \"\\u0410\\u043a\\u0446\\u0438\\u044f\", \"object\": \"\\u041c\\u0410\\u041b\\u042c\\u0427\\u0418\\u0428\\u041d\\u0418\\u041a \\u0418 \\u0414\\u0415\\u0412\\u0418\\u0427\\u041d\\u0418\\u041a\"}}, {\"changed\": {\"name\": \"\\u0410\\u043a\\u0446\\u0438\\u044f\", \"object\": \"HOOKAH SPECIAL\", \"fields\": [\"\\u041e\\u043f\\u0438\\u0441\\u0430\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2025-02-06T16:14:38.317Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "РЕСТОРАН AHO",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"\\u041e\\u0441\\u043e\\u0431\\u0435\\u043d\\u043d\\u043e\\u0441\\u0442\\u044c\", \"object\": \"asdas\"}}, {\"added\": {\"name\": \"\\u041e\\u0441\\u043e\\u0431\\u0435\\u043d\\u043d\\u043e\\u0441\\u0442\\u044c\", \"object\": \"asdsa\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2025-02-06T16:15:32.811Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "РЕСТОРАН AHO",
+    "action_flag": 2,
+    "change_message": "[{\"deleted\": {\"name\": \"\\u041e\\u0441\\u043e\\u0431\\u0435\\u043d\\u043d\\u043e\\u0441\\u0442\\u044c\", \"object\": \"asdas\"}}, {\"deleted\": {\"name\": \"\\u041e\\u0441\\u043e\\u0431\\u0435\\u043d\\u043d\\u043e\\u0441\\u0442\\u044c\", \"object\": \"asdsa\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2025-02-06T16:33:52.334Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "asdasdas",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0432\\u0435\\u0440\\u0445\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0421\\u043b\\u0430\\u0439\\u0434 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 asdasdas\"}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u043d\\u0438\\u0436\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 asdasdas\"}}, {\"added\": {\"name\": \"\\u041e\\u0441\\u043e\\u0431\\u0435\\u043d\\u043d\\u043e\\u0441\\u0442\\u044c\", \"object\": \"asdas\"}}, {\"added\": {\"name\": \"\\u0410\\u043a\\u0446\\u0438\\u044f\", \"object\": \"asd\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2025-02-07T08:38:44.589Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "Serikbay Meirzhan",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0432\\u0435\\u0440\\u0445\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0421\\u043b\\u0430\\u0439\\u0434 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 Serikbay Meirzhan\"}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u043d\\u0438\\u0436\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 Serikbay Meirzhan\"}}, {\"added\": {\"name\": \"\\u041e\\u0441\\u043e\\u0431\\u0435\\u043d\\u043d\\u043e\\u0441\\u0442\\u044c\", \"object\": \"\\u0444\\u044b\\u0432\"}}, {\"added\": {\"name\": \"\\u0410\\u043a\\u0446\\u0438\\u044f\", \"object\": \"\\u0444\\u044b\\u0432\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2025-02-07T08:39:46.772Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "4",
+    "object_repr": "фыв12312321312312",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0432\\u0435\\u0440\\u0445\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0421\\u043b\\u0430\\u0439\\u0434 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 \\u0444\\u044b\\u043212312321312312\"}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u043d\\u0438\\u0436\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 \\u0444\\u044b\\u043212312321312312\"}}, {\"added\": {\"name\": \"\\u041e\\u0441\\u043e\\u0431\\u0435\\u043d\\u043d\\u043e\\u0441\\u0442\\u044c\", \"object\": \"\\u0444\\u044b\\u0432\"}}, {\"added\": {\"name\": \"\\u0410\\u043a\\u0446\\u0438\\u044f\", \"object\": \"\\u0432\\u0444\\u044b\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2025-02-07T08:40:26.747Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "5",
+    "object_repr": "фывфывфы",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0432\\u0435\\u0440\\u0445\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0421\\u043b\\u0430\\u0439\\u0434 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 \\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\"}}, {\"added\": {\"name\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u043d\\u0438\\u0436\\u043d\\u0435\\u0439 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438\", \"object\": \"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0433\\u0430\\u043b\\u0435\\u0440\\u0435\\u0438 \\u0444\\u044b\\u0432\\u0444\\u044b\\u0432\\u0444\\u044b\"}}, {\"added\": {\"name\": \"\\u041e\\u0441\\u043e\\u0431\\u0435\\u043d\\u043d\\u043e\\u0441\\u0442\\u044c\", \"object\": \"\\u0439\\u0446\\u0443\"}}, {\"added\": {\"name\": \"\\u0410\\u043a\\u0446\\u0438\\u044f\", \"object\": \"\\u0439\\u0446\\u0443\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2025-02-07T08:40:37.641Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "РЕСТОРАН AHO",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0413\\u043e\\u0440\\u043e\\u0434\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2025-02-07T08:40:47.897Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "asdasdas",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0413\\u043e\\u0440\\u043e\\u0434\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2025-02-07T08:40:54.192Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "РЕСТОРАН AHO",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0413\\u043e\\u0440\\u043e\\u0434\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2025-02-07T08:48:32.178Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "5",
+    "object_repr": "фывфывфы",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0413\\u043e\\u0440\\u043e\\u0434\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2025-02-07T10:27:32.670Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "test",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2025-02-07T10:29:20.109Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "test",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2025-02-07T10:31:54.172Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "test,tst,sasdas",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0422\\u0435\\u043a\\u0441\\u0442 \\u0431\\u0435\\u0433\\u0443\\u0449\\u0435\\u0439 \\u0441\\u0442\\u0440\\u043e\\u043a\\u0438\", \"Hero \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2025-02-07T11:09:29.670Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "test,tst,sasdas",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0410\\u043a\\u0442\\u0438\\u0432\\u043d\\u043e\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2025-02-07T11:09:44.962Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "test,tst,sasdas",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0410\\u043a\\u0442\\u0438\\u0432\\u043d\\u043e\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2025-02-07T11:09:48.915Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "test,tst,sasdas",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0410\\u043a\\u0442\\u0438\\u0432\\u043d\\u043e\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2025-02-07T11:10:09.757Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "test,tst,sasdas",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0410\\u043a\\u0442\\u0438\\u0432\\u043d\\u043e\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2025-02-07T11:10:16.717Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "test,tst,sasdas",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0410\\u043a\\u0442\\u0438\\u0432\\u043d\\u043e\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2025-02-07T11:10:53.040Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "test,tst,sasdas",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0410\\u043a\\u0442\\u0438\\u0432\\u043d\\u043e\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2025-02-07T11:10:57.031Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "test,tst,sasdas",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0410\\u043a\\u0442\\u0438\\u0432\\u043d\\u043e\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2025-02-07T12:34:30.140Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "test,tst,sasdas",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0410\\u043a\\u0442\\u0438\\u0432\\u043d\\u043e\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2025-02-07T12:34:36.324Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "test,tst,sasdas",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0410\\u043a\\u0442\\u0438\\u0432\\u043d\\u043e\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2025-02-07T12:47:01.554Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2025-02-07T12:48:23.764Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u0430\\u043f\\u043a\\u0430 \\u043d\\u0430 \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2025-02-07T12:53:35.178Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u0430\\u043f\\u043a\\u0430 \\u043d\\u0430 \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2025-02-07T12:59:30.016Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2025-02-07T13:01:45.133Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u0430\\u043f\\u043a\\u0430 \\u043d\\u0430 \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2025-02-07T13:01:48.811Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2025-02-07T13:04:44.406Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2025-02-07T13:10:16.514Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0422\\u043e\\u043a\\u0435\\u043d \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2025-02-07T13:10:24.963Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0422\\u043e\\u043a\\u0435\\u043d \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2025-02-07T13:11:24.499Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0422\\u043e\\u043a\\u0435\\u043d \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2025-02-07T13:13:46.678Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "1",
+    "object_repr": "Настройки сайта",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2025-02-07T13:14:02.556Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2025-02-07T13:19:32.540Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u0430\\u043f\\u043a\\u0430 \\u043d\\u0430 \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2025-02-07T13:23:17.548Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2025-02-07T13:29:25.448Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u0430\\u043f\\u043a\\u0430 \\u043d\\u0430 \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2025-02-07T13:40:42.991Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u0430\\u043f\\u043a\\u0430 \\u043d\\u0430 \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2025-02-07T13:42:33.608Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u0430\\u043f\\u043a\\u0430 \\u043d\\u0430 \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2025-02-07T13:42:50.130Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u0430\\u043f\\u043a\\u0430 \\u043d\\u0430 \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2025-02-07T15:01:12.749Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u0430\\u043f\\u043a\\u0430 \\u043d\\u0430 \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2025-02-08T09:58:45.286Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "2",
+    "object_repr": "выафа",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2025-02-08T09:58:53.933Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "3",
+    "object_repr": "фывфы",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2025-02-08T09:59:02.408Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "4",
+    "object_repr": "фывфывфы",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2025-02-08T09:59:13.503Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "5",
+    "object_repr": "фывфывфы",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2025-02-08T09:59:29.285Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "6",
+    "object_repr": "ыфвфывф",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2025-02-08T09:59:44.129Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "7",
+    "object_repr": "ыфвфывфывфы",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2025-02-08T09:59:58.887Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "8",
+    "object_repr": "ыфвфы",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2025-02-08T10:43:10.041Z",
+    "user": 1,
+    "content_type": 17,
+    "object_id": "1",
+    "object_repr": "sdasdasdasd",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 60,
+  "fields": {
+    "action_time": "2025-02-08T10:44:09.067Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "1",
+    "object_repr": "Настройки страницы брендов",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u043e\\u043a\\u0430\\u0437\\u044b\\u0432\\u0430\\u0442\\u044c Hero \\u0441\\u0435\\u043a\\u0446\\u0438\\u044e\", \"\\u041f\\u043e\\u043a\\u0430\\u0437\\u044b\\u0432\\u0430\\u0442\\u044c \\u0431\\u0435\\u0433\\u0443\\u0449\\u0443\\u044e \\u0441\\u0442\\u0440\\u043e\\u043a\\u0443\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 61,
+  "fields": {
+    "action_time": "2025-02-08T10:44:18.407Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "1",
+    "object_repr": "Настройки страницы брендов",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u043e\\u043a\\u0430\\u0437\\u044b\\u0432\\u0430\\u0442\\u044c Hero \\u0441\\u0435\\u043a\\u0446\\u0438\\u044e\", \"\\u041f\\u043e\\u043a\\u0430\\u0437\\u044b\\u0432\\u0430\\u0442\\u044c \\u0431\\u0435\\u0433\\u0443\\u0449\\u0443\\u044e \\u0441\\u0442\\u0440\\u043e\\u043a\\u0443\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 62,
+  "fields": {
+    "action_time": "2025-02-08T10:44:24.006Z",
+    "user": 1,
+    "content_type": 13,
+    "object_id": "1",
+    "object_repr": "test,tst,sasdas",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0410\\u043a\\u0442\\u0438\\u0432\\u043d\\u043e\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 63,
+  "fields": {
+    "action_time": "2025-02-08T10:44:39.389Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "1",
+    "object_repr": "Настройки страницы брендов",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u043e\\u043a\\u0430\\u0437\\u044b\\u0432\\u0430\\u0442\\u044c Hero \\u0441\\u0435\\u043a\\u0446\\u0438\\u044e\", \"\\u041f\\u043e\\u043a\\u0430\\u0437\\u044b\\u0432\\u0430\\u0442\\u044c \\u0431\\u0435\\u0433\\u0443\\u0449\\u0443\\u044e \\u0441\\u0442\\u0440\\u043e\\u043a\\u0443\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 64,
+  "fields": {
+    "action_time": "2025-02-08T10:47:44.545Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "1",
+    "object_repr": "Настройки сайта",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041e \\u043d\\u0430\\u0441\", \"Email\", \"\\u0421\\u0441\\u044b\\u043b\\u043a\\u0430 \\u043d\\u0430 Instagram\", \"\\u0421\\u0441\\u044b\\u043b\\u043a\\u0430 \\u043d\\u0430 2GIS\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 65,
+  "fields": {
+    "action_time": "2025-02-08T10:49:31.746Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "1",
+    "object_repr": "Настройки сайта",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041e \\u043d\\u0430\\u0441\", \"Email\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 66,
+  "fields": {
+    "action_time": "2025-02-08T10:54:15.603Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "1",
+    "object_repr": "Настройки сайта",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0434\\u043b\\u044f \\u0441\\u0435\\u043a\\u0446\\u0438\\u0438 \\\"\\u041e \\u043d\\u0430\\u0441\\\"\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 67,
+  "fields": {
+    "action_time": "2025-02-08T11:01:39.746Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "1",
+    "object_repr": "Настройки сайта",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0421\\u0441\\u044b\\u043b\\u043a\\u0430 \\u043d\\u0430 TikTok\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 68,
+  "fields": {
+    "action_time": "2025-02-08T11:09:43.966Z",
+    "user": 1,
+    "content_type": 17,
+    "object_id": "1",
+    "object_repr": "sdasdasdasd",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0417\\u0430\\u0433\\u043e\\u043b\\u043e\\u0432\\u043e\\u043a \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 69,
+  "fields": {
+    "action_time": "2025-02-08T11:10:33.650Z",
+    "user": 1,
+    "content_type": 17,
+    "object_id": "2",
+    "object_repr": "фывфыв",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 70,
+  "fields": {
+    "action_time": "2025-02-08T11:17:35.565Z",
+    "user": 1,
+    "content_type": 17,
+    "object_id": "1",
+    "object_repr": "Анонс #1",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"\\u042d\\u043b\\u0435\\u043c\\u0435\\u043d\\u0442 \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\", \"object\": \"\\u044b\\u0444\\u0432\\u0444\\u044b\\u0432\"}}, {\"added\": {\"name\": \"\\u042d\\u043b\\u0435\\u043c\\u0435\\u043d\\u0442 \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\", \"object\": \"\\u044b\\u0444\\u0432\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 71,
+  "fields": {
+    "action_time": "2025-02-08T11:17:49.480Z",
+    "user": 1,
+    "content_type": 17,
+    "object_id": "2",
+    "object_repr": "Анонс #2",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"\\u042d\\u043b\\u0435\\u043c\\u0435\\u043d\\u0442 \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\", \"object\": \"123123\"}}, {\"added\": {\"name\": \"\\u042d\\u043b\\u0435\\u043c\\u0435\\u043d\\u0442 \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\", \"object\": \"1231\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 72,
+  "fields": {
+    "action_time": "2025-02-08T11:20:11.172Z",
+    "user": 1,
+    "content_type": 17,
+    "object_id": "2",
+    "object_repr": "Анонс #2",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0417\\u0430\\u0433\\u043e\\u043b\\u043e\\u0432\\u043e\\u043a \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 73,
+  "fields": {
+    "action_time": "2025-02-08T14:36:17.873Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041e\\u0431\\u043b\\u043e\\u0436\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 74,
+  "fields": {
+    "action_time": "2025-02-08T14:36:23.228Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041e\\u0431\\u043b\\u043e\\u0436\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 75,
+  "fields": {
+    "action_time": "2025-02-08T14:36:40.955Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "2",
+    "object_repr": "выафа",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041e\\u0431\\u043b\\u043e\\u0436\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 76,
+  "fields": {
+    "action_time": "2025-02-08T14:36:45.523Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "8",
+    "object_repr": "ыфвфы",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041e\\u0431\\u043b\\u043e\\u0436\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 77,
+  "fields": {
+    "action_time": "2025-02-08T14:36:52.094Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "7",
+    "object_repr": "ыфвфывфывфы",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041e\\u0431\\u043b\\u043e\\u0436\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 78,
+  "fields": {
+    "action_time": "2025-02-08T14:36:58.385Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "6",
+    "object_repr": "ыфвфывф",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041e\\u0431\\u043b\\u043e\\u0436\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 79,
+  "fields": {
+    "action_time": "2025-02-08T14:37:04.465Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "5",
+    "object_repr": "фывфывфы",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041e\\u0431\\u043b\\u043e\\u0436\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 80,
+  "fields": {
+    "action_time": "2025-02-08T14:37:10.071Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "4",
+    "object_repr": "фывфывфы",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041e\\u0431\\u043b\\u043e\\u0436\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 81,
+  "fields": {
+    "action_time": "2025-02-08T14:37:17.810Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "3",
+    "object_repr": "фывфы",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041e\\u0431\\u043b\\u043e\\u0436\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 82,
+  "fields": {
+    "action_time": "2025-02-08T14:39:44.036Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "5",
+    "object_repr": "фывфывфы",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0413\\u043b\\u0430\\u0432\\u043d\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 (\\u043a\\u0430\\u0440\\u0442\\u043e\\u0447\\u043a\\u0430)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 83,
+  "fields": {
+    "action_time": "2025-02-08T14:40:10.378Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "asdasdas",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0413\\u043b\\u0430\\u0432\\u043d\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 (\\u043a\\u0430\\u0440\\u0442\\u043e\\u0447\\u043a\\u0430)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 84,
+  "fields": {
+    "action_time": "2025-02-08T14:40:28.011Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "Serikbay Meirzhan",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0413\\u043b\\u0430\\u0432\\u043d\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 (\\u043a\\u0430\\u0440\\u0442\\u043e\\u0447\\u043a\\u0430)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 85,
+  "fields": {
+    "action_time": "2025-02-08T14:40:41.587Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "4",
+    "object_repr": "фыв12312321312312",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0413\\u043b\\u0430\\u0432\\u043d\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 (\\u043a\\u0430\\u0440\\u0442\\u043e\\u0447\\u043a\\u0430)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 86,
+  "fields": {
+    "action_time": "2025-02-08T14:40:59.250Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "5",
+    "object_repr": "фывфывфы",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0413\\u043b\\u0430\\u0432\\u043d\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 (\\u043a\\u0430\\u0440\\u0442\\u043e\\u0447\\u043a\\u0430)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 87,
+  "fields": {
+    "action_time": "2025-02-08T14:41:23.253Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "РЕСТОРАН AHO",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0413\\u043b\\u0430\\u0432\\u043d\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 (\\u043a\\u0430\\u0440\\u0442\\u043e\\u0447\\u043a\\u0430)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 88,
+  "fields": {
+    "action_time": "2025-02-08T14:41:44.680Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "Serikbay Meirzhan",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0413\\u043b\\u0430\\u0432\\u043d\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 (\\u043a\\u0430\\u0440\\u0442\\u043e\\u0447\\u043a\\u0430)\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 89,
+  "fields": {
+    "action_time": "2025-02-08T14:42:14.089Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "1",
+    "object_repr": "Настройки сайта",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0434\\u043b\\u044f \\u0441\\u0435\\u043a\\u0446\\u0438\\u0438 \\\"\\u041e \\u043d\\u0430\\u0441\\\"\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 90,
+  "fields": {
+    "action_time": "2025-02-08T14:52:56.353Z",
+    "user": 1,
+    "content_type": 17,
+    "object_id": "2",
+    "object_repr": "Анонс #2",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"\\u042d\\u043b\\u0435\\u043c\\u0435\\u043d\\u0442 \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\", \"object\": \"sad\"}}, {\"changed\": {\"name\": \"\\u042d\\u043b\\u0435\\u043c\\u0435\\u043d\\u0442 \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\", \"object\": \"123123\", \"fields\": [\"\\u0418\\u043a\\u043e\\u043d\\u043a\\u0430\"]}}, {\"changed\": {\"name\": \"\\u042d\\u043b\\u0435\\u043c\\u0435\\u043d\\u0442 \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\", \"object\": \"1231\", \"fields\": [\"\\u0418\\u043a\\u043e\\u043d\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 91,
+  "fields": {
+    "action_time": "2025-02-08T15:02:26.399Z",
+    "user": 1,
+    "content_type": 17,
+    "object_id": "2",
+    "object_repr": "Анонс #2",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 92,
+  "fields": {
+    "action_time": "2025-02-08T15:03:23.094Z",
+    "user": 1,
+    "content_type": 17,
+    "object_id": "1",
+    "object_repr": "Анонс #1",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"\\u042d\\u043b\\u0435\\u043c\\u0435\\u043d\\u0442 \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\", \"object\": \"\\u0434\\u0435\\u043d\\u044c \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f!\"}}, {\"added\": {\"name\": \"\\u042d\\u043b\\u0435\\u043c\\u0435\\u043d\\u0442 \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\", \"object\": \"\\u0434\\u0435\\u043d\\u044c \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f!\"}}, {\"changed\": {\"name\": \"\\u042d\\u043b\\u0435\\u043c\\u0435\\u043d\\u0442 \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\", \"object\": \"-20% \\u043d\\u0430 \\u043c\\u0435\\u043d\\u044e \\u043a\\u0443\\u0445\\u043d\\u0438\", \"fields\": [\"\\u041d\\u0430\\u0437\\u0432\\u0430\\u043d\\u0438\\u0435\", \"\\u041e\\u043f\\u0438\\u0441\\u0430\\u043d\\u0438\\u0435\"]}}, {\"changed\": {\"name\": \"\\u042d\\u043b\\u0435\\u043c\\u0435\\u043d\\u0442 \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\", \"object\": \"\\u0433\\u0435\\u043d\\u0434\\u0435\\u0440 \\u043f\\u0430\\u0442\\u0438 \\u0456 \\u0434\\u0435\\u0432\\u0438\\u0447\\u043d\\u0438\\u043a | \\u043c\\u0430\\u043b\\u044c\\u0447\\u0438\\u0448\\u043d\\u0438\\u043a\", \"fields\": [\"\\u041d\\u0430\\u0437\\u0432\\u0430\\u043d\\u0438\\u0435\", \"\\u041e\\u043f\\u0438\\u0441\\u0430\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 93,
+  "fields": {
+    "action_time": "2025-02-08T15:56:16.136Z",
+    "user": 1,
+    "content_type": 17,
+    "object_id": "1",
+    "object_repr": "Анонс #1",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0413\\u043e\\u0440\\u043e\\u0434\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 94,
+  "fields": {
+    "action_time": "2025-02-08T15:57:23.695Z",
+    "user": 1,
+    "content_type": 19,
+    "object_id": "1",
+    "object_repr": "ыва",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 95,
+  "fields": {
+    "action_time": "2025-02-08T15:58:37.102Z",
+    "user": 1,
+    "content_type": 19,
+    "object_id": "1",
+    "object_repr": "ыва",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0424\\u043e\\u043d\\u043e\\u0432\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 96,
+  "fields": {
+    "action_time": "2025-02-08T15:59:05.639Z",
+    "user": 1,
+    "content_type": 19,
+    "object_id": "1",
+    "object_repr": "Hero изображение #1",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 97,
+  "fields": {
+    "action_time": "2025-02-08T16:02:42.368Z",
+    "user": 1,
+    "content_type": 19,
+    "object_id": "2",
+    "object_repr": "Hero изображение #2",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 98,
+  "fields": {
+    "action_time": "2025-02-08T16:03:42.163Z",
+    "user": 1,
+    "content_type": 19,
+    "object_id": "2",
+    "object_repr": "Hero изображение #2",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u043e\\u0440\\u044f\\u0434\\u043e\\u043a\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 99,
+  "fields": {
+    "action_time": "2025-02-08T16:03:42.164Z",
+    "user": 1,
+    "content_type": 19,
+    "object_id": "1",
+    "object_repr": "Hero изображение #1",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u043e\\u0440\\u044f\\u0434\\u043e\\u043a\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 100,
+  "fields": {
+    "action_time": "2025-02-08T16:07:43.921Z",
+    "user": 1,
+    "content_type": 19,
+    "object_id": "1",
+    "object_repr": "Hero изображение #1",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0424\\u043e\\u043d\\u043e\\u0432\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 101,
+  "fields": {
+    "action_time": "2025-02-08T16:07:58.311Z",
+    "user": 1,
+    "content_type": 19,
+    "object_id": "2",
+    "object_repr": "Hero изображение #2",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0424\\u043e\\u043d\\u043e\\u0432\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 102,
+  "fields": {
+    "action_time": "2025-02-08T16:11:01.701Z",
+    "user": 1,
+    "content_type": 19,
+    "object_id": "1",
+    "object_repr": "Hero изображение #1",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0424\\u043e\\u043d\\u043e\\u0432\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 103,
+  "fields": {
+    "action_time": "2025-02-08T16:12:51.479Z",
+    "user": 1,
+    "content_type": 19,
+    "object_id": "2",
+    "object_repr": "Hero изображение #2",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0424\\u043e\\u043d\\u043e\\u0432\\u043e\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 104,
+  "fields": {
+    "action_time": "2025-02-08T16:17:40.531Z",
+    "user": 1,
+    "content_type": 17,
+    "object_id": "1",
+    "object_repr": "Анонс #1",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0417\\u0430\\u0433\\u043e\\u043b\\u043e\\u0432\\u043e\\u043a \\u0430\\u043d\\u043e\\u043d\\u0441\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 105,
+  "fields": {
+    "action_time": "2025-02-08T18:41:09.017Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "1",
+    "object_repr": "SiteLogo object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 106,
+  "fields": {
+    "action_time": "2025-02-08T18:44:22.510Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "1",
+    "object_repr": "SiteLogo object (1)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041b\\u043e\\u0433\\u043e\\u0442\\u0438\\u043f \\u0434\\u043b\\u044f \\u0442\\u0435\\u043c\\u043d\\u043e\\u0439 \\u0442\\u0435\\u043c\\u044b\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 107,
+  "fields": {
+    "action_time": "2025-02-08T18:46:02.767Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "1",
+    "object_repr": "SiteLogo object (1)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041b\\u043e\\u0433\\u043e\\u0442\\u0438\\u043f \\u0434\\u043b\\u044f \\u0442\\u0435\\u043c\\u043d\\u043e\\u0439 \\u0442\\u0435\\u043c\\u044b\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 108,
+  "fields": {
+    "action_time": "2025-02-08T18:47:00.733Z",
+    "user": 1,
+    "content_type": 21,
+    "object_id": "1",
+    "object_repr": "SiteLogo object (1)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041b\\u043e\\u0433\\u043e\\u0442\\u0438\\u043f \\u0434\\u043b\\u044f \\u0442\\u0435\\u043c\\u043d\\u043e\\u0439 \\u0442\\u0435\\u043c\\u044b\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 109,
+  "fields": {
+    "action_time": "2025-02-08T19:03:34.355Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "8",
+    "object_repr": "ыфвфы - Без бренда (2025-02-08)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 110,
+  "fields": {
+    "action_time": "2025-02-08T19:03:34.355Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "7",
+    "object_repr": "ыфвфывфывфы - Без бренда (2025-02-08)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 111,
+  "fields": {
+    "action_time": "2025-02-08T19:03:34.355Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "6",
+    "object_repr": "ыфвфывф - Без бренда (2025-02-08)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 112,
+  "fields": {
+    "action_time": "2025-02-08T19:03:34.355Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "5",
+    "object_repr": "фывфывфы - Без бренда (2025-02-08)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 113,
+  "fields": {
+    "action_time": "2025-02-08T19:03:34.355Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "4",
+    "object_repr": "фывфывфы - Без бренда (2025-02-08)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 114,
+  "fields": {
+    "action_time": "2025-02-08T19:03:34.355Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "3",
+    "object_repr": "фывфы - Без бренда (2025-02-08)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 115,
+  "fields": {
+    "action_time": "2025-02-08T19:03:34.355Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "2",
+    "object_repr": "выафа - Без бренда (2025-02-08)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 116,
+  "fields": {
+    "action_time": "2025-02-08T19:03:34.355Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "Berezka - Без бренда (2025-02-07)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 117,
+  "fields": {
+    "action_time": "2025-02-08T19:10:57.365Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "kmokmp, - РЕСТОРАН AHO",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 118,
+  "fields": {
+    "action_time": "2025-02-08T19:26:18.413Z",
+    "user": 1,
+    "content_type": 23,
+    "object_id": "1",
+    "object_repr": "Арсен",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 119,
+  "fields": {
+    "action_time": "2025-02-08T19:26:22.145Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "РЕСТОРАН AHO - 09.02.2025",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0424\\u043e\\u0442\\u043e\\u0433\\u0440\\u0430\\u0444\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 120,
+  "fields": {
+    "action_time": "2025-02-08T19:28:35.118Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "РЕСТОРАН AHO - 09.02.2025",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041e\\u0431\\u043b\\u043e\\u0436\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 121,
+  "fields": {
+    "action_time": "2025-02-08T20:32:47.752Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "1",
+    "object_repr": "Настройки сайта",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435 \\u0434\\u043b\\u044f \\u0441\\u0435\\u043a\\u0446\\u0438\\u0438 \\\"\\u041e \\u043d\\u0430\\u0441\\\"\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 122,
+  "fields": {
+    "action_time": "2025-02-08T20:54:23.761Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "РЕСТОРАН AHO - 09.02.2025",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u0430\\u043f\\u043a\\u0430 \\u043d\\u0430 \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 123,
+  "fields": {
+    "action_time": "2025-02-08T21:04:50.628Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "1",
+    "object_repr": "РЕСТОРАН AHO - 09.02.2025",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041f\\u0430\\u043f\\u043a\\u0430 \\u043d\\u0430 \\u042f\\u043d\\u0434\\u0435\\u043a\\u0441.\\u0414\\u0438\\u0441\\u043a\\u0435\"]}}]"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$Fft8yYuWeSPli7dELoQuy1$XToR5NgIAqR2a4H1USxr4Aj9baztMS0pEWB0L8d5ihI=",
+    "last_login": "2025-02-06T13:50:20.772Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-02-06T13:49:48.254Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "s34q81nmvupr6nhxwgcffnynbshj3iq3",
+  "fields": {
+    "session_data": ".eJxVjssOgjAURP-la9NcoFBw6Z5vaO4LQU1JSlkY478LCSa6nTNzMi8TcM1jWBdNYRJzNoU5_WaEfNe4A7lhvM6W55jTRHav2IMutp9FH5ej-ycYcRm3NYN3WLEvSscOCUAHYoQKcIAGqPKFI-WygboRkK5uXeexHIR8p20ttEl5TUljDjzl5_fr-wMPID94:1tgu2q:-Aj-yRGm3ifqGEaq8Y-FpIKwStLTHVcmgFUZ4l9p-9A",
+    "expire_date": "2025-02-22T23:15:28.819Z"
+  }
+},
+{
+  "model": "main.city",
+  "pk": 1,
+  "fields": {
+    "name": "Астана",
+    "is_active": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.city",
+  "pk": 2,
+  "fields": {
+    "name": "Алматы",
+    "is_active": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.brand",
+  "pk": 1,
+  "fields": {
+    "name": "РЕСТОРАН AHO",
+    "slug": "fyvfyvfyvfyv",
+    "subtitle": "ваш остров вдохновения и вкуса в центре города",
+    "description": "Добро пожаловать в АНО, место, где культурные мотивы, пряные ароматы и завораживающие ритмы афро-хауса сливаются воедино, создавая уникальную атмосферу отдыха и наслаждения.",
+    "brand_history": "Путники, отыскавшие оазис жизни – АНО, поведали нам, что в пустыне, когда ночь окутывает мир своим темным покрывалом, звезды начинают свой величественный танец, рассеяв свет по бескрайним пескам.\r\n\r\nЛишь те, кто смотрит на них с открытым сердцем, способны увидеть магическую связь звезд с человеческой душой. Эти небесные проводники помогают раскрыть наше истинное «я», превращая ночь в пустыне во вселенную бесконечных возможностей, которая открывается тем, кто осмелится войти в нее.\r\n\r\nNoor Al Sahara by АНО приглашает вас следовать за этими путеводными звездами и открыть свет, который скрыт в каждом из вас.\r\n\r\nЭта ночь развернется в двух главах – время поиска и время открытия. Каждый момент будет отражать ритм звезд в их космическом танце, а каждый гость почувствует себя частью бескрайнего космоса, который зовет открыть и познать себя.",
+    "rating": 5,
+    "ticker_text": "",
+    "location": 1,
+    "address": "УЛИЦА АКМЕШИТ 1А, АСТАНА, КАЗАХСТАН",
+    "phone": "87085446945",
+    "whatsapp": "+77085446945",
+    "two_gis": "https://avr-group.kz",
+    "work_hours_weekdays": "12:00-03:00",
+    "work_hours_weekends": "12:00-04:00",
+    "hero_image": "brands/hero/aho-bg_ChCtw7j_9OlI0SX_GYlQSmB_D8DAr7E_UDFeiiy_kqC09Np_ajzj0Vq_MKwO0KB_6rJHBe6.jpg",
+    "main_image": "brands/main/IMG_4439.JPG"
+  }
+},
+{
+  "model": "main.brand",
+  "pk": 2,
+  "fields": {
+    "name": "asdasdas",
+    "slug": "asdasdas",
+    "subtitle": "sadas",
+    "description": "dasdasd",
+    "brand_history": "asdasdas",
+    "rating": 5,
+    "ticker_text": "",
+    "location": 1,
+    "address": "asd",
+    "phone": "87085446945",
+    "whatsapp": "+77085446945",
+    "two_gis": "https://avr-group.kz",
+    "work_hours_weekdays": "12:00-03:00",
+    "work_hours_weekends": "12:00-04:00",
+    "hero_image": "brands/hero/hero-bg_ICAtOEi_YkGiSM1_xCjxCLw.jpg",
+    "main_image": "brands/main/IMG_3975.JPG"
+  }
+},
+{
+  "model": "main.brand",
+  "pk": 3,
+  "fields": {
+    "name": "Serikbay Meirzhan",
+    "slug": "serikbay-meirzhan",
+    "subtitle": "ваш остров вдохновения и вкуса в центре города",
+    "description": "фыв",
+    "brand_history": "фывф",
+    "rating": 5,
+    "ticker_text": "",
+    "location": 1,
+    "address": "УЛИЦА АКМЕШИТ 1А, АСТАНА, ццц",
+    "phone": "87085446945",
+    "whatsapp": "+77085446945",
+    "two_gis": "https://avr-group.kz",
+    "work_hours_weekdays": "12:00-03:00",
+    "work_hours_weekends": "12:00-04:00",
+    "hero_image": "brands/hero/aho-bg_aYThrpY_zlEu3nq.jpg",
+    "main_image": "brands/main/IMG_8632.JPG"
+  }
+},
+{
+  "model": "main.brand",
+  "pk": 4,
+  "fields": {
+    "name": "фыв12312321312312",
+    "slug": "fyv12312321312312",
+    "subtitle": "3123123",
+    "description": "21321",
+    "brand_history": "312312",
+    "rating": 5,
+    "ticker_text": "",
+    "location": 1,
+    "address": "фыв",
+    "phone": "87085446945",
+    "whatsapp": "+77085446945",
+    "two_gis": "https://avr-group.kz",
+    "work_hours_weekdays": "12:00-03:00",
+    "work_hours_weekends": "12:00-04:00",
+    "hero_image": "brands/hero/photo_2025-01-14_12-40-01_zAnlUaL.jpg",
+    "main_image": "brands/main/IMG_4477.JPG"
+  }
+},
+{
+  "model": "main.brand",
+  "pk": 5,
+  "fields": {
+    "name": "фывфывфы",
+    "slug": "fyvfyvfy",
+    "subtitle": "фывфы",
+    "description": "ыфвфыв",
+    "brand_history": "фывфывфы",
+    "rating": 5,
+    "ticker_text": "",
+    "location": 2,
+    "address": "УЛИЦА АКМЕШИТ 1А, АСТАНА, КАЗАХСТАН",
+    "phone": "87085446945",
+    "whatsapp": "+77085446945",
+    "two_gis": "https://avr-group.kz",
+    "work_hours_weekdays": "12:00-03:00",
+    "work_hours_weekends": "12:00-04:00",
+    "hero_image": "brands/hero/hero-bg_f4Xq5E7_jVVzBiT_tIYeD1f_gjhSFI5.jpg",
+    "main_image": "brands/main/IMG_3975_vElVz5l.JPG"
+  }
+},
+{
+  "model": "main.topgalleryimage",
+  "pk": 1,
+  "fields": {
+    "brand": 1,
+    "image": "brands/top_gallery/04.jpeg"
+  }
+},
+{
+  "model": "main.topgalleryimage",
+  "pk": 2,
+  "fields": {
+    "brand": 1,
+    "image": "brands/top_gallery/06_1.jpeg"
+  }
+},
+{
+  "model": "main.topgalleryimage",
+  "pk": 3,
+  "fields": {
+    "brand": 1,
+    "image": "brands/top_gallery/06.jpeg"
+  }
+},
+{
+  "model": "main.topgalleryimage",
+  "pk": 4,
+  "fields": {
+    "brand": 2,
+    "image": "brands/top_gallery/06_Mk3NB2X.jpeg"
+  }
+},
+{
+  "model": "main.topgalleryimage",
+  "pk": 5,
+  "fields": {
+    "brand": 3,
+    "image": "brands/top_gallery/04_hi1bOVi.jpeg"
+  }
+},
+{
+  "model": "main.topgalleryimage",
+  "pk": 6,
+  "fields": {
+    "brand": 4,
+    "image": "brands/top_gallery/hero-bg.jpg"
+  }
+},
+{
+  "model": "main.topgalleryimage",
+  "pk": 7,
+  "fields": {
+    "brand": 5,
+    "image": "brands/top_gallery/04_UCVGHOu.jpeg"
+  }
+},
+{
+  "model": "main.bottomgalleryimage",
+  "pk": 1,
+  "fields": {
+    "brand": 1,
+    "image": "brands/bottom_gallery/photo_2025-01-14_12-40-01.jpg"
+  }
+},
+{
+  "model": "main.bottomgalleryimage",
+  "pk": 2,
+  "fields": {
+    "brand": 1,
+    "image": "brands/bottom_gallery/photo_2025-01-14_12-40-06.jpg"
+  }
+},
+{
+  "model": "main.bottomgalleryimage",
+  "pk": 3,
+  "fields": {
+    "brand": 1,
+    "image": "brands/bottom_gallery/photo_2025-01-14_12-40-01_oP6rXKN.jpg"
+  }
+},
+{
+  "model": "main.bottomgalleryimage",
+  "pk": 4,
+  "fields": {
+    "brand": 2,
+    "image": "brands/bottom_gallery/logo.png"
+  }
+},
+{
+  "model": "main.bottomgalleryimage",
+  "pk": 5,
+  "fields": {
+    "brand": 3,
+    "image": "brands/bottom_gallery/photo_2025-01-14_12-40-01_nbG9Mz7.jpg"
+  }
+},
+{
+  "model": "main.bottomgalleryimage",
+  "pk": 6,
+  "fields": {
+    "brand": 4,
+    "image": "brands/bottom_gallery/285227929-333e9922-5262-4deb-894b-c849b2be346f.jpg"
+  }
+},
+{
+  "model": "main.bottomgalleryimage",
+  "pk": 7,
+  "fields": {
+    "brand": 5,
+    "image": "brands/bottom_gallery/06_1.jpeg"
+  }
+},
+{
+  "model": "main.feature",
+  "pk": 1,
+  "fields": {
+    "brand": 1,
+    "title": "ЯРКИЕ ВЫХОДНЫЕ С SANDWAVE PARTIES",
+    "description": "Каждую субботу и воскресенье наши шоу-программы переносят гостей в мир музыки и танцев."
+  }
+},
+{
+  "model": "main.feature",
+  "pk": 2,
+  "fields": {
+    "brand": 1,
+    "title": "VIP-ЗОНА ДЛЯ УЕДИНЕННОГО ОТДЫХА",
+    "description": "Уютная комната до 25 человек идеально подходит для особых встреч."
+  }
+},
+{
+  "model": "main.feature",
+  "pk": 3,
+  "fields": {
+    "brand": 1,
+    "title": "РАЗНООБРАЗНОЕ МЕНЮ",
+    "description": "Обширное барное и основное меню, дополненное специальными предложениями."
+  }
+},
+{
+  "model": "main.feature",
+  "pk": 6,
+  "fields": {
+    "brand": 2,
+    "title": "asdas",
+    "description": "das"
+  }
+},
+{
+  "model": "main.feature",
+  "pk": 7,
+  "fields": {
+    "brand": 3,
+    "title": "фыв",
+    "description": "фывф"
+  }
+},
+{
+  "model": "main.feature",
+  "pk": 8,
+  "fields": {
+    "brand": 4,
+    "title": "фыв",
+    "description": "фывфы"
+  }
+},
+{
+  "model": "main.feature",
+  "pk": 9,
+  "fields": {
+    "brand": 5,
+    "title": "йцу",
+    "description": "йцуйц"
+  }
+},
+{
+  "model": "main.specialoffer",
+  "pk": 1,
+  "fields": {
+    "brand": 1,
+    "title": "HOOKAH SPECIAL",
+    "description": "Дымная чаша + комплимент от кухни и бара всего за 6000 тенге."
+  }
+},
+{
+  "model": "main.specialoffer",
+  "pk": 2,
+  "fields": {
+    "brand": 1,
+    "title": "SPECIAL OFFER",
+    "description": "Скидка 20% на все блюда из меню."
+  }
+},
+{
+  "model": "main.specialoffer",
+  "pk": 3,
+  "fields": {
+    "brand": 1,
+    "title": "CELEBRATE WITH ANO",
+    "description": "В день рождения вас ждет скидка 15% и комплимент от кухни."
+  }
+},
+{
+  "model": "main.specialoffer",
+  "pk": 4,
+  "fields": {
+    "brand": 1,
+    "title": "МАЛЬЧИШНИК И ДЕВИЧНИК",
+    "description": "Скидка 10% на весь чек + поздравление от команды АНО."
+  }
+},
+{
+  "model": "main.specialoffer",
+  "pk": 5,
+  "fields": {
+    "brand": 2,
+    "title": "asd",
+    "description": "asdasdas"
+  }
+},
+{
+  "model": "main.specialoffer",
+  "pk": 6,
+  "fields": {
+    "brand": 3,
+    "title": "фыв",
+    "description": "фывфывф"
+  }
+},
+{
+  "model": "main.specialoffer",
+  "pk": 7,
+  "fields": {
+    "brand": 4,
+    "title": "вфы",
+    "description": "вфыывф"
+  }
+},
+{
+  "model": "main.specialoffer",
+  "pk": 8,
+  "fields": {
+    "brand": 5,
+    "title": "йцу",
+    "description": "йцуйцуйц"
+  }
+},
+{
+  "model": "main.brandticker",
+  "pk": 1,
+  "fields": {
+    "text": "test,tst,sasdas",
+    "is_active": true,
+    "order": 1,
+    "hero_image": "brands/hero/aho-bg_4t2zpxB.webp"
+  }
+},
+{
+  "model": "main.brandspagesettings",
+  "pk": 1,
+  "fields": {
+    "show_hero": false,
+    "show_ticker": false
+  }
+},
+{
+  "model": "main.sitesettings",
+  "pk": 1,
+  "fields": {
+    "yandex_token": "y0__xCFk4vXBxjblgMgrIrtmhJ2hzo0HcKUSKRzzqcgM9ywl4PW-Q",
+    "about_text": "Cтремление всей жизни запечатлеть необычное в обычном, заморозить мимолетные моменты времени и поделиться красотой мира, какой мы все видим. Вдохновление в каждом уголке в этой разнообразной истории.",
+    "about_image": "about/Holy_Mylon-08.jpg",
+    "email": "holymelonmanagementgroup@gmail.com",
+    "instagram_link": "https://avr-group.jz",
+    "tiktok_link": "https://avr-group.kz"
+  }
+},
+{
+  "model": "main.photographer",
+  "pk": 1,
+  "fields": {
+    "name": "Арсен",
+    "is_active": true,
+    "order": 0
+  }
+},
+{
+  "model": "main.photoalbum",
+  "pk": 1,
+  "fields": {
+    "brand": 1,
+    "photographer": 1,
+    "cover_image": "albums/covers/06_1.jpeg",
+    "yandex_folder": "disk:/Berezka/2024-07-20",
+    "date": "2025-02-09",
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-02-08T19:10:57.363Z",
+    "yandex_preview_url": ""
+  }
+},
+{
+  "model": "main.announcement",
+  "pk": 1,
+  "fields": {
+    "type": "promo",
+    "header": "Готовимся к захватывающему событию: уже 03.07.1994 мы ждем вас на AE. Вас ждут мастер-классы, выступления, сюрпризы!",
+    "city": 1,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-02-08T10:43:10.040Z",
+    "updated_at": "2025-02-08T16:17:40.529Z"
+  }
+},
+{
+  "model": "main.announcementitem",
+  "pk": 1,
+  "fields": {
+    "announcement": 1,
+    "title": "-20% на меню кухни",
+    "description": "Ежедневно до 18:00 на всё меню кухни -20% скидка",
+    "order": 0
+  }
+},
+{
+  "model": "main.announcementitem",
+  "pk": 2,
+  "fields": {
+    "announcement": 1,
+    "title": "гендер пати і девичник | мальчишник",
+    "description": "Скидка -10% на всё + фирменное поздравление и комплимент от кухни",
+    "order": 0
+  }
+},
+{
+  "model": "main.announcementitem",
+  "pk": 6,
+  "fields": {
+    "announcement": 1,
+    "title": "день рождения!",
+    "description": "Именниникам -15% скидка на всё! + фирменное поздравление и комплимент от кухни",
+    "order": 0
+  }
+},
+{
+  "model": "main.announcementitem",
+  "pk": 7,
+  "fields": {
+    "announcement": 1,
+    "title": "день рождения!",
+    "description": "Именниникам -15% скидка на всё! + фирменное поздравление и комплимент от кухни",
+    "order": 0
+  }
+},
+{
+  "model": "main.homehero",
+  "pk": 1,
+  "fields": {
+    "background_image": "hero/IMG_4442.JPG",
+    "is_active": true,
+    "order": 1
+  }
+},
+{
+  "model": "main.homehero",
+  "pk": 2,
+  "fields": {
+    "background_image": "hero/IMG_4005.JPG",
+    "is_active": true,
+    "order": 2
+  }
+},
+{
+  "model": "main.sitelogo",
+  "pk": 1,
+  "fields": {
+    "light_theme_logo": "logos/logo.png",
+    "dark_theme_logo": "logos/logo-dark_7sfLvhY.png",
+    "is_active": true
+  }
+}
+]
