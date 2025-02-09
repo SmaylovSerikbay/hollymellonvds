@@ -609,7 +609,7 @@ body:not(.light) .about__contact-item i.fa-tiktok {
 
 /* Для темной темы */
 body:not(.light) .announcement-card__description {
-    color: #FFFFFF!important;
+    color: #FFFFfF!important;
 }
 
 /* Для светлой темы */
