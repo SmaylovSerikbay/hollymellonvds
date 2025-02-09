@@ -38,7 +38,7 @@ def home(request):
     current_city_id = get_default_city(request)
     if current_city_id:
         latest_brands = Brand.objects.filter(location_id=current_city_id).order_by('-id')[:4]
-        latest_albums = PhotoAlbum.objects.filter(brand__location_id=current_city_id).order_by('-date')[:10]
+        latest_albums = PhotoAlbum.objects.filter(brand__location_id=current_city_id).order_by('-date')[:6]
         announcements = Announcement.objects.filter(
             is_active=True,
             city_id=current_city_id
@@ -46,7 +46,7 @@ def home(request):
         current_city = City.objects.get(id=current_city_id).name
     else:
         latest_brands = Brand.objects.all().order_by('-id')[:4]
-        latest_albums = PhotoAlbum.objects.all().order_by('-date')[:10]
+        latest_albums = PhotoAlbum.objects.all().order_by('-date')[:6]
         announcements = Announcement.objects.filter(is_active=True).order_by('order', '-created_at')
         current_city = None
     
