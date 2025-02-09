@@ -6,6 +6,7 @@ from django.views.decorators.cache import cache_page
 import requests
 from django.templatetags.static import static
 from django.views.decorators.csrf import csrf_exempt
+import time
 
 def get_yandex_token():
     """Получает токен Яндекс.Диска из настроек"""
@@ -379,15 +380,13 @@ def download_yandex_folder(request):
 @csrf_exempt
 def proxy_yandex_photo(request):
     """Проксирует запросы к фотографиям на Яндекс.Диске"""
-    # Добавляем CORS заголовки
     cors_headers = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, OPTIONS',
         'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization',
-        'Access-Control-Max-Age': '86400',  # 24 часа
+        'Access-Control-Max-Age': '86400',
     }
     
-    # Обработка OPTIONS запросов
     if request.method == 'OPTIONS':
         response = HttpResponse()
         for key, value in cors_headers.items():
@@ -398,76 +397,70 @@ def proxy_yandex_photo(request):
     if not url:
         return JsonResponse({'error': 'URL не указан'}, status=400)
     
-    # Проверяем, не является ли URL уже прокси-URL
     if '/proxy-photo/' in url:
         return JsonResponse({'error': 'Некорректный URL'}, status=400)
     
-    # Получаем токен Яндекс.Диска
     yandex_token = get_yandex_token()
     if not yandex_token:
         return JsonResponse({'error': 'Не настроен токен Яндекс.Диска'}, status=401)
     
-    try:
-        print(f"Trying to proxy URL: {url}")  # Добавляем логирование
-        
-        # Добавляем токен авторизации и необходимые заголовки в запрос
-        headers = {
-            'Authorization': f'OAuth {yandex_token}',
-            'Accept': 'image/*',
-            'User-Agent': 'Mozilla/5.0'
-        }
-        
-        # Сначала получаем ссылку на скачивание
-        response = requests.get(url, headers=headers, allow_redirects=False)
-        print(f"Initial response status: {response.status_code}")  # Добавляем логирование
-        
-        # Если получили редирект, следуем по нему
-        if response.status_code in (301, 302):
-            download_url = response.headers.get('Location')
-            print(f"Redirect URL: {download_url}")  # Добавляем логирование
+    session = requests.Session()
+    session.headers.update({
+        'Authorization': f'OAuth {yandex_token}',
+        'Accept': 'image/*',
+        'User-Agent': 'Mozilla/5.0'
+    })
+    
+    max_retries = 3
+    retry_count = 0
+    last_error = None
+    
+    while retry_count < max_retries:
+        try:
+            # Получаем ссылку на скачивание
+            response = session.get(url, allow_redirects=False, timeout=5)
+            response.raise_for_status()
             
-            if not download_url:
-                return JsonResponse({'error': 'Не удалось получить ссылку на скачивание'}, status=500)
+            # Если получили редирект, следуем по нему
+            if response.status_code in (301, 302):
+                download_url = response.headers.get('Location')
+                if not download_url:
+                    return JsonResponse({'error': 'Не удалось получить ссылку на скачивание'}, status=500)
+                
+                # Делаем запрос к финальному URL без авторизации
+                response = requests.get(download_url, stream=True, timeout=5)
+                response.raise_for_status()
             
-            # Делаем запрос к финальному URL уже без токена
-            response = requests.get(download_url, stream=True)
-            print(f"Final response status: {response.status_code}")  # Добавляем логирование
-        
-        response.raise_for_status()
-        
-        # Получаем content-type
-        content_type = response.headers.get('content-type', 'application/octet-stream')
-        print(f"Content-Type: {content_type}")  # Добавляем логирование
-        
-        # Копируем заголовки ответа
-        proxy_response = HttpResponse(
-            response.content,
-            content_type=content_type
-        )
-        
-        # Добавляем CORS заголовки к ответу
-        for key, value in cors_headers.items():
-            proxy_response[key] = value
-        
-        # Добавляем заголовки для скачивания
-        filename = url.split('/')[-1].split('?')[0]
-        proxy_response['Content-Disposition'] = f'attachment; filename="{filename}"'
-        
-        # Добавляем заголовки кэширования
-        proxy_response['Cache-Control'] = 'public, max-age=31536000'  # 1 год
-        
-        return proxy_response
-        
-    except requests.RequestException as e:
-        error_message = str(e)
-        if hasattr(e.response, 'status_code'):
-            status_code = e.response.status_code
-            print(f"Request error: {error_message}, Status: {status_code}")  # Добавляем логирование
-            print(f"Response content: {e.response.content}")  # Добавляем логирование содержимого ответа
-        else:
-            status_code = 500
-            print(f"Request error without status: {error_message}")  # Добавляем логирование
-        return JsonResponse({'error': error_message}, status=status_code)
-    except Exception as e:
-        print(f"Unexpected error: {str(e)}")  # Добавляем логирование
-        return JsonResponse({'error': str(e)}, status=500)
+            # Создаем ответ
+            proxy_response = HttpResponse(
+                response.content,
+                content_type=response.headers.get('content-type', 'image/jpeg')
+            )
+            
+            # Добавляем заголовки
+            for key, value in cors_headers.items():
+                proxy_response[key] = value
+            
+            proxy_response['Cache-Control'] = 'public, max-age=31536000'
+            proxy_response['ETag'] = response.headers.get('ETag', '')
+            proxy_response['Last-Modified'] = response.headers.get('Last-Modified', '')
+            
+            return proxy_response
+            
+        except requests.RequestException as e:
+            last_error = e
+            retry_count += 1
+            if retry_count < max_retries:
+                time.sleep(1)  # Ждем секунду перед повторной попыткой
+            continue
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    
+    # Если все попытки неудачны
+    error_message = str(last_error)
+    status_code = last_error.response.status_code if hasattr(last_error, 'response') else 503
+    
+    return JsonResponse({
+        'error': error_message,
+        'retry_after': '5'
+    }, status=status_code, headers={'Retry-After': '5'})
