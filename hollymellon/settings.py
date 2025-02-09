@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-v_p3=4obw-0#!l)@r0(4%#3_wrcs3u8rczdgy)aq^%xsk@92m&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['holley.hello-olzhas.kz', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -132,7 +132,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_AGE = 1209600  # 2 недели в секундах
 
 # Добавим настройку для безопасности
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
+CSRF_TRUSTED_ORIGINS = ['https://holley.hello-olzhas.kz', 'http://127.0.0.1:8000']
 
 # Настройки кэширования
 CACHES = {
