@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from .models import Brand, City, BrandTicker, BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement, HomeHero, SiteLogo, Photographer
 import json
 from django.views.decorators.cache import cache_page
 import requests
 from django.templatetags.static import static
+from django.views.decorators.csrf import csrf_exempt
 
 def get_yandex_token():
     """Получает токен Яндекс.Диска из настроек"""
@@ -354,3 +355,65 @@ def download_yandex_folder(request):
     except requests.RequestException as e:
         print(f"Error getting download link: {e}")
         return JsonResponse({'error': 'Ошибка при получении ссылки на скачивание'}, status=500)
+
+@csrf_exempt
+def proxy_yandex_photo(request):
+    """Проксирует запросы к фотографиям на Яндекс.Диске"""
+    # Добавляем CORS заголовки
+    cors_headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization',
+        'Access-Control-Max-Age': '86400',  # 24 часа
+    }
+    
+    # Обработка OPTIONS запросов
+    if request.method == 'OPTIONS':
+        response = HttpResponse()
+        for key, value in cors_headers.items():
+            response[key] = value
+        return response
+    
+    url = request.GET.get('url')
+    if not url:
+        return JsonResponse({'error': 'URL не указан'}, status=400)
+    
+    # Получаем токен Яндекс.Диска
+    yandex_token = get_yandex_token()
+    if not yandex_token:
+        return JsonResponse({'error': 'Не настроен токен Яндекс.Диска'}, status=401)
+    
+    try:
+        # Добавляем токен авторизации в заголовки запроса
+        headers = {'Authorization': f'OAuth {yandex_token}'}
+        
+        # Добавляем обработку редиректов
+        response = requests.get(url, stream=True, allow_redirects=True, headers=headers)
+        response.raise_for_status()
+        
+        # Копируем заголовки ответа
+        proxy_response = HttpResponse(
+            response.raw,
+            content_type=response.headers.get('content-type', 'application/octet-stream')
+        )
+        
+        # Добавляем CORS заголовки к ответу
+        for key, value in cors_headers.items():
+            proxy_response[key] = value
+        
+        # Добавляем заголовки кэширования
+        proxy_response['Cache-Control'] = 'public, max-age=31536000'  # 1 год
+        
+        return proxy_response
+        
+    except requests.RequestException as e:
+        error_message = str(e)
+        if hasattr(e.response, 'status_code'):
+            status_code = e.response.status_code
+        else:
+            status_code = 500
+        print(f"Proxy error: {error_message}")  # Добавляем логирование ошибки
+        return JsonResponse({'error': error_message}, status=status_code)
+    except Exception as e:
+        print(f"Unexpected proxy error: {str(e)}")  # Добавляем логирование неожиданных ошибок
+        return JsonResponse({'error': str(e)}, status=500)

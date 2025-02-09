@@ -66,10 +66,10 @@
         {% for photo in photos %}
         <div class="photo-item">
             <img 
-                src="{{ photo.thumbnail.url }}"
+                src="/proxy-photo/?url={{ photo.thumbnail|urlencode }}"
                 alt="{{ photo.name }}"
                 loading="lazy"
-                data-full-size="{{ photo.url }}"
+                data-full-size="/proxy-photo/?url={{ photo.url|urlencode }}"
             >
             <!-- Десктопная версия кнопок -->
             <div class="photo-actions">
