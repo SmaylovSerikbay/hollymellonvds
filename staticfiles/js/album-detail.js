@@ -80,12 +80,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const previewUrl = item.querySelector('img').dataset.preview;
             // Всегда используем прокси для превью
             const proxyPreviewUrl = `/proxy-photo/?url=${encodeURIComponent(previewUrl)}`;
+            
+            // Создаем временное изображение для получения реальных размеров
+            const img = new Image();
+            img.src = proxyPreviewUrl;
+            
             return {
                 src: proxyPreviewUrl,
-                w: 1200,
-                h: 800,
+                w: 0, // Изначально устанавливаем 0
+                h: 0, // Изначально устанавливаем 0
                 originalUrl: url,
-                msrc: item.querySelector('img').src
+                msrc: item.querySelector('img').src,
+                img: img // Сохраняем ссылку на изображение
             };
         });
 
@@ -96,8 +102,8 @@ document.addEventListener('DOMContentLoaded', function() {
             history: false,
             shareEl: false,
             loadingIndicatorDelay: 0,
-            showAnimationDuration: 0,
-            hideAnimationDuration: 0,
+            showAnimationDuration: 333,
+            hideAnimationDuration: 333,
             maxSpreadZoom: 2,
             getThumbBoundsFn: (index) => {
                 const thumbnail = gallery.querySelectorAll('.photo-item img')[index];
@@ -109,66 +115,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const pswp = new PhotoSwipe(document.querySelector('.pswp'), PhotoSwipeUI_Default, items, options);
         
-        // Предзагрузка текущего и соседних изображений
-        let loadQueue = [];
-        let loadedImages = new Set();
-
-        function preloadImage(index) {
-            if (index < 0 || index >= items.length || loadedImages.has(index)) return;
-            
-            const item = items[index];
-            loadQueue.push(index);
-            loadedImages.add(index);
-
-            const img = new Image();
-            
-            img.onload = function() {
-                const loadIndex = loadQueue.indexOf(index);
-                if (loadIndex !== -1) {
-                    loadQueue.splice(loadIndex, 1);
-                }
-                
-                item.w = this.width;
-                item.h = this.height;
-                
-                if (pswp.currItem === item) {
+        // Обработчик для обновления размеров при загрузке каждого изображения
+        pswp.listen('gettingData', function(index, item) {
+            if (item.w < 1 || item.h < 1) {
+                const img = new Image();
+                img.onload = function() {
+                    item.w = this.width;
+                    item.h = this.height;
                     pswp.updateSize(true);
-                }
-            };
-
-            img.onerror = function() {
-                const loadIndex = loadQueue.indexOf(index);
-                if (loadIndex !== -1) {
-                    loadQueue.splice(loadIndex, 1);
-                }
-                
-                console.error('Ошибка загрузки изображения:', item.src);
-                
-                // Пробуем повторить загрузку через 1 секунду
-                setTimeout(() => {
-                    if (!loadedImages.has(index)) {
-                        loadedImages.delete(index);
-                        preloadImage(index);
-                    }
-                }, 1000);
-            };
-
-            img.src = item.src;
-        }
-
-        // Загружаем только текущее изображение при открытии
-        pswp.listen('beforeChange', function() {
-            const index = pswp.getCurrentIndex();
-            loadQueue = [];
-            preloadImage(index);
+                };
+                img.src = item.src;
+            }
         });
 
-        // После успешной загрузки текущего, загружаем соседние
-        pswp.listen('imageLoadComplete', function(index) {
-            setTimeout(() => {
-                preloadImage(index - 1);
-                preloadImage(index + 1);
-            }, 100);
+        // Предзагрузка соседних изображений
+        pswp.listen('beforeChange', function() {
+            const index = pswp.getCurrentIndex();
+            [-1, 0, 1].forEach(offset => {
+                const idx = index + offset;
+                if (idx >= 0 && idx < items.length) {
+                    const item = items[idx];
+                    if (item.w < 1 || item.h < 1) {
+                        const img = new Image();
+                        img.onload = function() {
+                            item.w = this.width;
+                            item.h = this.height;
+                            pswp.updateSize(true);
+                        };
+                        img.src = item.src;
+                    }
+                }
+            });
         });
 
         pswp.init();
