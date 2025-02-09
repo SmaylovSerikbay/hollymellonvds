@@ -86,13 +86,11 @@ body {
 /* Header */
 .header {
     position: fixed;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    inset-inline-end: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
     block-size: var(--header-height);
-    background: var(--header-dark);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: #000000;
     z-index: 100;
     transition: all 0.3s ease;
     padding: 20px 0;
@@ -100,7 +98,7 @@ body {
 
 .logo {
     display: block;
-    height: 60px;
+    height: 50px;
     position: relative;
     z-index: 2;
 }
@@ -108,7 +106,7 @@ body {
 .logo img {
     height: 100%;
     width: auto;
-    max-height: 50px;
+    max-height: 44px;
     object-fit: contain;
     opacity: 1;
     filter: none;
@@ -118,67 +116,32 @@ body {
 
 /* Медиа-запросы для мобильной версии */
 @media screen and (max-width: 768px) {
-    :root {
-        --header-height: 80px;
-        --container-padding: 20px;
-    }
-
-    .logo {
-        height: 40px;
-    }
-    
-    .logo img {
-        max-height: 35px;
-    }
-    
     .header {
-        padding: 10px 0;
+        height: 70px;
+        background: #000000;
     }
 
-    .header__nav {
-        gap: 20px;
+    .header__logo {
+        height: 50px;
     }
 
-    .header__menu {
-        display: none;
-    }
-
-    .mobile-toggle {
-        display: flex;
+    .header__logo img {
+        height: 100%;
     }
 }
 
 @media screen and (max-width: 480px) {
-    :root {
-        --header-height: 70px;
-        --container-padding: 15px;
-    }
-
-    .logo {
-        height: 35px;
-    }
-    
-    .logo img {
-        max-height: 30px;
-    }
-    
     .header {
-        padding: 8px 0;
+        height: 70px;
+        background: #000000;
     }
 
-    .header__nav {
-        gap: 15px;
+    .header__logo {
+        height: 44px;
     }
 
-    .location-btn {
-        padding: 8px 12px;
-        font-size: 1.2rem;
-    }
-
-    .action-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 1.6rem;
+    .header__logo img {
+        height: 100%;
     }
 }
 
@@ -411,7 +374,7 @@ body {
     inset-inline-start: 0;
     inset-inline-end: 0;
     inset-block-end: 0;
-    background: var(--header-dark);
+    background: #000000;
     z-index: 99;
     padding: 40px 20px;
     opacity: 0;
@@ -445,10 +408,10 @@ body {
 .mobile-menu__nav a:hover {
     color: var(--color-gold);
 }
+
 /* Light Theme */
 body.light .header {
-    background: var(--header-light);
-    border-block-end: 1px solid rgba(0, 0, 0, 0.1);
+    background: #ffffff;
 }
 
 body.light .mobile-toggle span {
@@ -456,7 +419,7 @@ body.light .mobile-toggle span {
 }
 
 body.light .mobile-menu {
-    background: var(--header-light);
+    background: #ffffff;
 }
 
 body.light .mobile-menu__nav a {
@@ -761,8 +724,7 @@ body.light {
 }
 
 body.light .header {
-    background: var(--header-light);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: #ffffff;
 }
 
 body.light .header__menu a {
@@ -901,7 +863,7 @@ body.light .search-modal__close {
     top: calc(100% + 12px);
     left: 50%;
     transform: translateX(-50%) translateY(-10px);
-    background: var(--header-dark);
+    background: #000000;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     min-width: 180px;
@@ -910,8 +872,6 @@ body.light .search-modal__close {
     transition: all 0.3s ease;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
 }
 
 .location-menu.active {
@@ -1197,7 +1157,7 @@ body.light .section-title {
 
 /* Light Theme Location Menu */
 body.light .location-menu {
-    background: var(--header-light);
+    background: #ffffff;
     border-color: rgba(0, 0, 0, 0.1);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
@@ -1221,7 +1181,7 @@ body.light .mobile-toggle span {
 }
 
 body.light .mobile-menu {
-    background: var(--header-light);
+    background: #ffffff;
 }
 
 body.light .mobile-menu__nav a {
@@ -2567,4 +2527,8 @@ body.light .about__contact-item a {
         padding-left: max(var(--container-padding-mobile), env(safe-area-inset-left));
         padding-right: max(var(--container-padding-mobile), env(safe-area-inset-right));
     }
+}
+
+body:not(.light) .header.scrolled {
+    background: #000000;
 }
