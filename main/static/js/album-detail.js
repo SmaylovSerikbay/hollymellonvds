@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
         shareBtn.addEventListener('click', shareAlbum);
     }
 
-    // Функция для скачивания архива с Яндекс.Диска
+    // Функция для скачивания архива с Яндекс.Дискав
     async function downloadYandexArchive() {
         loadingOverlay.style.display = 'flex';
         progressIndicator.style.display = 'block';
