@@ -715,4 +715,88 @@ body:not(.light) .no-photos {
     .quick-action-btn i {
         font-size: 16px;
     }
+}
+
+.quality-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.quality-dialog-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+}
+
+.quality-dialog h3 {
+    margin: 0 0 20px;
+    text-align: center;
+    color: #333;
+}
+
+.quality-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.quality-option {
+    border: none;
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.quality-option:hover {
+    background: #e5e5e5;
+    transform: translateY(-2px);
+}
+
+.quality-option i {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.quality-option span {
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.quality-option small {
+    color: #666;
+    font-size: 12px;
+}
+
+.quality-dialog-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    padding: 5px;
+}
+
+.quality-dialog-close:hover {
+    color: #333;
 } 
