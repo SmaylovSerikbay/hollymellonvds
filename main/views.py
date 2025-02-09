@@ -14,8 +14,27 @@ def get_yandex_token():
 
 # Create your views here.
 
-def home(request):
+def get_default_city(request):
+    """Получает город по умолчанию или устанавливает его, если не установлен"""
     current_city_id = request.session.get('current_city_id')
+    
+    if not current_city_id:
+        try:
+            # Пробуем установить город с id=1
+            default_city = City.objects.get(id=1, is_active=True)
+            current_city_id = default_city.id
+            request.session['current_city_id'] = current_city_id
+        except City.DoesNotExist:
+            # Если город с id=1 не найден или неактивен, берем первый активный город
+            first_city = City.objects.filter(is_active=True).first()
+            if first_city:
+                current_city_id = first_city.id
+                request.session['current_city_id'] = current_city_id
+    
+    return current_city_id
+
+def home(request):
+    current_city_id = get_default_city(request)
     if current_city_id:
         latest_brands = Brand.objects.filter(location_id=current_city_id).order_by('-id')[:4]
         latest_albums = PhotoAlbum.objects.filter(brand__location_id=current_city_id).order_by('-date')[:10]
@@ -45,6 +64,7 @@ def home(request):
 def get_cities(request):
     return City.objects.filter(is_active=True).order_by('order', 'name')
 
+@csrf_exempt
 def set_city(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -55,7 +75,7 @@ def set_city(request):
     return JsonResponse({'status': 'error'})
 
 def brands(request):
-    current_city_id = request.session.get('current_city_id')
+    current_city_id = get_default_city(request)
     if current_city_id:
         brands = Brand.objects.filter(location_id=current_city_id)
         current_city = City.objects.get(id=current_city_id).name
@@ -78,7 +98,7 @@ def brands(request):
 
 def brand_detail(request, slug):
     brand = get_object_or_404(Brand, slug=slug)
-    current_city_id = request.session.get('current_city_id')
+    current_city_id = get_default_city(request)
     current_city = City.objects.get(id=current_city_id).name if current_city_id else None
     
     context = get_base_context(request)
@@ -92,7 +112,7 @@ def brand_detail(request, slug):
     return render(request, 'main/brand_detail.html', context)
 
 def photo_gallery(request):
-    current_city_id = request.session.get('current_city_id')
+    current_city_id = get_default_city(request)
     
     # Начинаем с базового QuerySet
     albums = PhotoAlbum.objects.filter(is_active=True)
@@ -151,7 +171,7 @@ def album_detail(request, pk):
     yandex_token = get_yandex_token()
     
     # Получаем текущий город
-    current_city_id = request.session.get('current_city_id')
+    current_city_id = get_default_city(request)
     current_city = City.objects.get(id=current_city_id).name if current_city_id else None
     
     # Проверяем наличие токена
