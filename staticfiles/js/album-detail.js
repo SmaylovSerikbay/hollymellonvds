@@ -9,6 +9,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const loadingSpinner = document.querySelector('.loading-spinner');
     const albumPath = document.querySelector('.photos-grid').dataset.folderPath;
 
+    // Функции для управления оверлеем загрузки
+    function showLoadingOverlay() {
+        if (loadingOverlay) {
+            loadingOverlay.style.display = 'flex';
+            if (progressIndicator) {
+                progressIndicator.style.display = 'block';
+                progressIndicator.querySelector('.progress-text').textContent = 'Подготовка к скачиванию...';
+                progressIndicator.querySelector('.progress-fill').style.width = '50%';
+            }
+        }
+    }
+
+    function hideLoadingOverlay() {
+        if (loadingOverlay) {
+            loadingOverlay.style.display = 'none';
+            if (progressIndicator) {
+                progressIndicator.style.display = 'none';
+                progressIndicator.querySelector('.progress-fill').style.width = '0%';
+            }
+        }
+    }
+
+    function showError(message) {
+        alert(message);
+    }
+
     // Создаем индикатор прогресса
     const progressIndicator = document.createElement('div');
     progressIndicator.className = 'progress-indicator';
@@ -200,31 +226,47 @@ document.addEventListener('DOMContentLoaded', function() {
     // Функция скачивания фото
     async function downloadPhoto(url) {
         try {
-            loadingOverlay.style.display = 'flex';
-            progressIndicator.style.display = 'block';
-            progressIndicator.querySelector('.progress-text').textContent = 'Подготовка к скачиванию...';
-            progressIndicator.querySelector('.progress-fill').style.width = '50%';
-
+            showLoadingOverlay();
+            
+            const proxyUrl = `/proxy-photo/?url=${encodeURIComponent(url)}`;
+            const response = await fetch(proxyUrl);
+            
+            if (!response.ok) {
+                throw new Error(`Ошибка HTTP: ${response.status}`);
+            }
+            
+            // Получаем имя файла из заголовка Content-Disposition
+            const contentDisposition = response.headers.get('content-disposition');
+            let filename = 'photo.jpg';
+            if (contentDisposition) {
+                const matches = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/.exec(contentDisposition);
+                if (matches != null && matches[1]) {
+                    filename = matches[1].replace(/['"]/g, '');
+                }
+            }
+            
+            // Создаем blob из ответа
+            const blob = await response.blob();
+            
             // Создаем ссылку для скачивания
-            const link = document.createElement('a');
-            link.href = url;
-            link.target = '_blank'; // Открываем в новой вкладке
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            const downloadUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = downloadUrl;
+            a.download = filename;
             
-            progressIndicator.querySelector('.progress-fill').style.width = '100%';
-            progressIndicator.querySelector('.progress-text').textContent = 'Скачивание начато';
+            // Добавляем ссылку в DOM и эмулируем клик
+            document.body.appendChild(a);
+            a.click();
             
+            // Очищаем
+            window.URL.revokeObjectURL(downloadUrl);
+            document.body.removeChild(a);
+            
+            hideLoadingOverlay();
         } catch (error) {
             console.error('Ошибка при скачивании:', error);
-            alert(`Ошибка при скачивании фотографии: ${error.message}`);
-        } finally {
-            setTimeout(() => {
-                loadingOverlay.style.display = 'none';
-                progressIndicator.style.display = 'none';
-                progressIndicator.querySelector('.progress-fill').style.width = '0%';
-            }, 1000);
+            hideLoadingOverlay();
+            showError('Не удалось скачать фото. Пожалуйста, попробуйте позже.');
         }
     }
 

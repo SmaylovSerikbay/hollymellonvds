@@ -427,23 +427,41 @@ def proxy_yandex_photo(request):
                 if not download_url:
                     return JsonResponse({'error': 'Не удалось получить ссылку на скачивание'}, status=500)
                 
+                # Получаем оригинальное имя файла из URL
+                filename = download_url.split('/')[-1].split('?')[0]
+                
                 # Делаем запрос к финальному URL без авторизации
                 response = requests.get(download_url, stream=True, timeout=5)
                 response.raise_for_status()
             
-            # Создаем ответ
+                # Создаем ответ
+                proxy_response = HttpResponse(
+                    response.content,
+                    content_type=response.headers.get('content-type', 'image/jpeg')
+                )
+                
+                # Добавляем заголовки для скачивания
+                proxy_response['Content-Disposition'] = f'attachment; filename="{filename}"'
+                proxy_response['Content-Length'] = response.headers.get('content-length', '')
+                
+                # Добавляем CORS заголовки
+                for key, value in cors_headers.items():
+                    proxy_response[key] = value
+                
+                proxy_response['Cache-Control'] = 'public, max-age=31536000'
+                
+                return proxy_response
+            
+            # Если нет редиректа, возвращаем контент напрямую
             proxy_response = HttpResponse(
                 response.content,
                 content_type=response.headers.get('content-type', 'image/jpeg')
             )
             
-            # Добавляем заголовки
             for key, value in cors_headers.items():
                 proxy_response[key] = value
             
             proxy_response['Cache-Control'] = 'public, max-age=31536000'
-            proxy_response['ETag'] = response.headers.get('ETag', '')
-            proxy_response['Last-Modified'] = response.headers.get('Last-Modified', '')
             
             return proxy_response
             
@@ -451,7 +469,7 @@ def proxy_yandex_photo(request):
             last_error = e
             retry_count += 1
             if retry_count < max_retries:
-                time.sleep(1)  # Ждем секунду перед повторной попыткой
+                time.sleep(1)
             continue
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
