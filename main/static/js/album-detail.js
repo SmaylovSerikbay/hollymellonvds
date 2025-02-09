@@ -50,11 +50,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Обработка клика по фотографии
     function openPhotoSwipe(index) {
         const items = Array.from(gallery.querySelectorAll('.photo-item')).map(item => {
-            const originalUrl = item.querySelector('img').dataset.fullSize;
+            const url = item.querySelector('img').dataset.fullSize;
+            const previewUrl = item.querySelector('img').dataset.preview;
+            // Используем прокси для превью
+            const proxyPreviewUrl = `/proxy-photo/?url=${encodeURIComponent(previewUrl)}`;
             return {
-                src: `/proxy-photo/?url=${encodeURIComponent(originalUrl)}`,
+                src: proxyPreviewUrl,
                 w: 1200,
-                h: 800
+                h: 800,
+                originalUrl: url,
+                msrc: item.querySelector('img').src // Добавляем маленькое изображение для мгновенного показа
             };
         });
 
@@ -64,6 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
             showHideOpacity: true,
             history: false,
             shareEl: false,
+            loadingIndicatorDelay: 0,
+            showAnimationDuration: 0, // Убираем анимацию для мгновенного показа
+            hideAnimationDuration: 0,
             getThumbBoundsFn: (index) => {
                 const thumbnail = gallery.querySelectorAll('.photo-item img')[index];
                 const pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
@@ -74,6 +82,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const pswp = new PhotoSwipe(document.querySelector('.pswp'), PhotoSwipeUI_Default, items, options);
         
+        // Предзагрузка соседних изображений
+        pswp.listen('beforeChange', function() {
+            const index = pswp.getCurrentIndex();
+            // Предзагружаем следующее и предыдущее изображение
+            [-1, 1].forEach(offset => {
+                const idx = index + offset;
+                if (idx >= 0 && idx < items.length) {
+                    const img = new Image();
+                    img.src = items[idx].src;
+                }
+            });
+        });
+
         pswp.listen('imageLoadComplete', function(index, item) {
             const img = new Image();
             img.onload = function() {
@@ -139,23 +160,31 @@ document.addEventListener('DOMContentLoaded', function() {
     // Функция скачивания фото
     async function downloadPhoto(url) {
         try {
-            // Используем наш прокси для загрузки фотографий
-            const proxyUrl = `/proxy-photo/?url=${encodeURIComponent(url)}`;
-            const response = await fetch(proxyUrl);
-            if (!response.ok) throw new Error('Ошибка при загрузке фотографии');
-            
-            const blob = await response.blob();
-            const filename = url.split('/').pop();
-            
+            loadingOverlay.style.display = 'flex';
+            progressIndicator.style.display = 'block';
+            progressIndicator.querySelector('.progress-text').textContent = 'Подготовка к скачиванию...';
+            progressIndicator.querySelector('.progress-fill').style.width = '50%';
+
+            // Создаем ссылку для скачивания
             const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = filename;
+            link.href = url;
+            link.target = '_blank'; // Открываем в новой вкладке
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            
+            progressIndicator.querySelector('.progress-fill').style.width = '100%';
+            progressIndicator.querySelector('.progress-text').textContent = 'Скачивание начато';
+            
         } catch (error) {
             console.error('Ошибка при скачивании:', error);
-            alert('Произошла ошибка при скачивании фотографии');
+            alert(`Ошибка при скачивании фотографии: ${error.message}`);
+        } finally {
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+                progressIndicator.style.display = 'none';
+                progressIndicator.querySelector('.progress-fill').style.width = '0%';
+            }, 1000);
         }
     }
 
