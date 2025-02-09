@@ -5,7 +5,7 @@ from .utils import get_yandex_folders
 
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
-    list_display = ('name', 'is_active', 'order')
+    list_display = ('id', 'name', 'is_active', 'order')
     list_editable = ('is_active', 'order')
     search_fields = ('name',)
     ordering = ['order', 'name']
