@@ -16,6 +16,17 @@
     --line-height-mobile: 1.5;
 }
 
+/* Добавляем стили для светлой темы */
+body.light {
+    background: var(--light-bg);
+    color: #ffffff;
+}
+
+body.light .brand-card__location,
+body.light .brand-card:first-child .brand-card__location {
+    color: #ffffff;
+}
+
 /* ============================
    Медиа-запросы для брейкпоинтов
    ============================ */
@@ -491,7 +502,7 @@
         border-radius: 16px;
         padding: 24px;
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 20px;
         transition: all 0.3s ease;
     }
@@ -502,9 +513,9 @@
     }
 
     .announcement-card__icon {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
         background: rgba(255, 255, 255, 0.06);
         border-radius: 50%;
         display: flex;
@@ -513,7 +524,7 @@
     }
 
     .announcement-card__icon i {
-        font-size: 18px;
+        font-size: 24px;
         color: var(--color-gold);
     }
 
@@ -686,8 +697,8 @@
 
     .brand-card__title,
     .brand-card:first-child .brand-card__title {
-        font-size: 1.4rem;
-        font-weight: 400;
+        font-size: 1.8rem;
+        font-weight: 600;
         color: var(--color-white);
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -697,8 +708,8 @@
 
     .brand-card__location,
     .brand-card:first-child .brand-card__location {
-        font-size: 1.6rem;
-        font-weight: 600;
+        font-size: 1.2rem;
+        font-weight: 500;
         color: var(--color-gold);
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -1105,6 +1116,95 @@
     .brand-card:active,
     .mobile-menu__nav a:active {
         opacity: 0.7;
+    }
+}
+
+/* Стили для футера */
+.footer__links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer__links a:hover {
+    color: #ffffff;
+}
+
+.footer__copyright {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Стили для светлой темы */
+body.light .footer__links a {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+body.light .footer__links a:hover {
+    color: #000000;
+}
+
+body.light .footer__copyright {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* Стили для фильтров в фотогалерее */
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-group {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .filter-dropdown {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: auto;
+        margin: 0;
+        border-radius: 20px 20px 0 0;
+        max-height: 60vh;
+        background: var(--background-color);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .filter-dropdown.active {
+        max-height: 60vh;
+    }
+
+    .filter-option {
+        padding: 15px 20px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .filter-option:last-child {
+        border-bottom: none;
+    }
+
+    .filter-actions {
+        margin-left: 0;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .apply-filters,
+    .reset-filters {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Стили для светлой темы */
+    body.light .filter-dropdown {
+        background: white;
+    }
+
+    body.light .filter-option {
+        border-bottom-color: rgba(0, 0, 0, 0.1);
     }
 } 
     

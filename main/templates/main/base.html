@@ -9,6 +9,7 @@
     <title>{% block title %}HollyMellon{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
@@ -104,82 +105,10 @@
         </nav>
     </div>
 
+    {% block extra_js %}{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/gallery-slider.js' %}"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        function createTicker(selector) {
-            const ticker = document.querySelector(selector);
-            if (!ticker) return;
-
-            const originalContent = ticker.innerHTML;
-            
-            // Создаем трек для анимации
-            const track = document.createElement('div');
-            track.className = 'ticker__track';
-            
-            // Создаем элементы бегущей строки
-            function createTickerItem(text) {
-                const item = document.createElement('div');
-                item.className = 'ticker__item';
-                item.innerHTML = text;
-                return item;
-            }
-            
-            // Функция для обновления контента
-            function updateContent() {
-                // Очищаем трек
-                track.innerHTML = '';
-                
-                // Создаем временный элемент для измерения ширины
-                const tempItem = createTickerItem(originalContent);
-                track.appendChild(tempItem);
-                const itemWidth = tempItem.offsetWidth;
-                
-                // Вычисляем количество повторений для заполнения экрана
-                const screenWidth = window.innerWidth;
-                const repeatCount = Math.ceil((screenWidth * 2) / itemWidth) + 1;
-                
-                // Очищаем трек снова
-                track.innerHTML = '';
-                
-                // Добавляем элементы с отрицательным смещением для мгновенного заполнения
-                track.style.transform = 'translateX(-50%)';
-                
-                // Добавляем нужное количество элементов
-                for (let i = 0; i < repeatCount; i++) {
-                    track.appendChild(createTickerItem(originalContent));
-                }
-                
-                // Запускаем анимацию
-                requestAnimationFrame(() => {
-                    track.style.animation = 'none';
-                    track.offsetHeight; // Trigger reflow
-                    track.style.animation = 'marquee 240s linear infinite';
-                });
-            }
-            
-            // Очищаем тикер и добавляем трек
-            ticker.innerHTML = '';
-            ticker.appendChild(track);
-            
-            // Начальное обновление
-            updateContent();
-            
-            // Обновляем при изменении размера окна
-            window.addEventListener('resize', updateContent);
-            
-            // Перезапускаем анимацию при необходимости
-            track.addEventListener('animationend', updateContent);
-        }
-
-        // Инициализируем все бегущие строки
-        createTicker('.ticker');
-        createTicker('.brand-ticker');
-    });
-    </script>
-
-    {% block extra_js %}{% endblock %}
 
     <!-- Footer -->
     <footer class="footer">

@@ -154,9 +154,9 @@
                             <div class="announcement-card">
                                 <div class="announcement-card__icon" style="background: none;">
                                     {% if request.theme == 'light' %}
-                                        <img src="{% static 'icons/anonces/decor-light.svg' %}" alt="Иконка">
-                                    {% else %}
                                         <img src="{% static 'icons/anonces/decor-dark.svg' %}" alt="Иконка">
+                                    {% else %}
+                                        <img src="{% static 'icons/anonces/decor-light.svg' %}" alt="Иконка">
                                     {% endif %}
                                 </div>
                                 <div class="announcement-card__content">

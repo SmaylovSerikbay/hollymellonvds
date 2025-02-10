@@ -383,4 +383,74 @@ document.addEventListener('DOMContentLoaded', function() {
             disableOnInteraction: false,
         },
     });
+
+    // Функция для создания бегущей строки
+    function createTicker(selector) {
+        const ticker = document.querySelector(selector);
+        if (!ticker) return;
+
+        const originalContent = ticker.innerHTML;
+        
+        // Создаем трек для анимации
+        const track = document.createElement('div');
+        track.className = 'ticker__track';
+        
+        // Создаем элементы бегущей строки
+        function createTickerItem(text) {
+            const item = document.createElement('div');
+            item.className = 'ticker__item';
+            item.innerHTML = text;
+            return item;
+        }
+        
+        // Функция для обновления контента
+        function updateContent() {
+            // Очищаем трек
+            track.innerHTML = '';
+            
+            // Создаем временный элемент для измерения ширины
+            const tempItem = createTickerItem(originalContent);
+            track.appendChild(tempItem);
+            const itemWidth = tempItem.offsetWidth;
+            
+            // Вычисляем количество повторений для заполнения экрана
+            const screenWidth = window.innerWidth;
+            const repeatCount = Math.ceil((screenWidth * 2) / itemWidth) + 1;
+            
+            // Очищаем трек снова
+            track.innerHTML = '';
+            
+            // Добавляем элементы с отрицательным смещением для мгновенного заполнения
+            track.style.transform = 'translateX(-50%)';
+            
+            // Добавляем нужное количество элементов
+            for (let i = 0; i < repeatCount; i++) {
+                track.appendChild(createTickerItem(originalContent));
+            }
+            
+            // Запускаем анимацию
+            requestAnimationFrame(() => {
+                track.style.animation = 'none';
+                track.offsetHeight; // Trigger reflow
+                track.style.animation = 'marquee 240s linear infinite';
+            });
+        }
+        
+        // Очищаем тикер и добавляем трек
+        ticker.innerHTML = '';
+        ticker.appendChild(track);
+        
+        // Начальное обновление
+        updateContent();
+        
+        // Обновляем при изменении размера окна
+        window.addEventListener('resize', updateContent);
+        
+        // Перезапускаем анимацию при необходимости
+        track.addEventListener('animationend', updateContent);
+    }
+
+    // Инициализация тикеров при загрузке документа
+    createTicker('.ticker');
+    createTicker('.brand-ticker');
 }); 
