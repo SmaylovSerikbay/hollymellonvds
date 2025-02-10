@@ -609,7 +609,7 @@ body:not(.light) .about__contact-item i.fa-tiktok {
 
 /* Для темной темы */
 body:not(.light) .announcement-card__description {
-    color: #FFFFFF!important;
+    color: #ffffff !important;
 }
 
 /* Для светлой темы */
@@ -617,7 +617,7 @@ body.light .announcement-card__description {
     color: #000000 !important;
 }
 
-/* Убираем все стили при наведенsии */
+/* Убираем все стили при наведении */
 .announcement-card:hover .announcement-card__description,
 body.light .announcement-card:hover .announcement-card__description,
 body:not(.light) .announcement-card:hover .announcement-card__description {

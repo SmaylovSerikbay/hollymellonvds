@@ -603,7 +603,7 @@
 
     /* Стили для секции брендов */
     .brands {
-        
+        padding: 102px 0;
         width: 100%;
         overflow: hidden;
         position: relative;
