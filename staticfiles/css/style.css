@@ -489,7 +489,7 @@ body.light .mobile-menu__nav a:hover {
 
 /* Main Content Layout */
 .main {
- 
+    margin-top: var(--header-height);
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -505,7 +505,7 @@ body.light .mobile-menu__nav a:hover {
     position: relative;
     inline-size: 100%;
     block-size: calc(100vh - var(--header-height));
-    margin-top: var(--header-height);
+    margin-top: 0; /* Убираем дублирующий отступ */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;

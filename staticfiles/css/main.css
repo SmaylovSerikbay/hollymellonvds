@@ -601,7 +601,7 @@ body:not(.light) .about__contact-item i.fa-tiktok {
 
 /* Стили для анонсов */
 .announcement-card__description {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.6;
     margin-top: 10px;
     transition: none; /* Отключаем анимацию перехода */
