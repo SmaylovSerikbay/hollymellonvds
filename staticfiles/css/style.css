@@ -2749,3 +2749,7 @@ body:not(.light) .announcement-card__icon img {
 body:not(.light) .announcement-card:hover .announcement-card__icon img {
     opacity: 1;
 }
+
+body.light .announcements__header-text {
+    color: rgba(0, 0, 0, 0.8);
+}

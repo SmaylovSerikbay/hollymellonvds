@@ -289,7 +289,7 @@
             right: 0;
             bottom: 0;
             background: white;
-            padding: 20px;
+            padding: 20px 20px 0 20px;
             border-radius: 16px 16px 0 0;
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
             z-index: 1000;
@@ -297,6 +297,7 @@
             overflow-y: auto;
             flex-direction: column;
             gap: 10px;
+            margin: 0;
         }
 
         .filters.active {
@@ -325,14 +326,13 @@
             position: sticky;
             bottom: 0;
             background: white;
-            padding-top: 16px;
-            margin-top: 16px;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            width: 100%;
+            margin: 16px -20px 0 -20px;
+            width: calc(100% + 40px);
             min-width: 0;
             flex-direction: column;
             gap: 8px;
-            padding: 16px;
+            padding: 16px 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .apply-filters {
@@ -624,6 +624,16 @@ document.addEventListener('DOMContentLoaded', function() {
         disableMobile: true,
         static: true,
         position: "auto",
+        onOpen: function() {
+            // Закрываем все активные дропдауны перед открытием календаря
+            document.querySelectorAll('.filter-dropdown.active').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+            
+            if (window.innerWidth <= 768) {
+                document.body.style.overflow = 'hidden';
+            }
+        },
         onChange: function(selectedDates, dateStr) {
             if (selectedDates[0]) {
                 const formattedDate = selectedDates[0].toLocaleDateString('ru-RU', {
@@ -638,11 +648,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (window.innerWidth <= 768) {
                     fp.close();
                 }
-            }
-        },
-        onOpen: function() {
-            if (window.innerWidth <= 768) {
-                document.body.style.overflow = 'hidden';
             }
         },
         onClose: function() {
