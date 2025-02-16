@@ -32,7 +32,7 @@
 
         <!-- Статистика -->
         <div class="statistics-section">
-            <h2 class="section-subtitle text-center">Статистика, которая говорит за себя</h2>
+            <h2 class="section-subtitle">Статистика, которая говорит за себя</h2>
             <div class="statistics-grid">
                 {% for stat in statistics %}
                     <div class="statistic-card">
@@ -125,176 +125,246 @@
 </section>
 
 <style>
+/* Основные цвета и переменные */
+:root {
+    --primary-color: #1a1a1a;
+    --secondary-color: #333333;
+    --accent-color: #d4b254;
+    --text-color: #4a4a4a;
+    --light-bg: #ffffff;
+    --dark-bg: #1a1a1a;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --border-radius: 12px;
+    --container-width: 1200px;
+    --section-spacing: 100px;
+}
+
+/* Общие стили секции */
 .team-section {
-    padding: 80px 0;
-    background-color: var(--bg-color);
+    padding: var(--section-spacing) 0;
+    background-color: var(--light-bg);
     color: var(--text-color);
 }
 
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Заголовки */
 .section-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
 }
 
 .section-title {
     font-size: 48px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: var(--title-color);
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 24px;
+    line-height: 1.2;
 }
 
 .section-subtitle {
     font-size: 24px;
-    margin-bottom: 40px;
-    color: var(--subtitle-color);
+    color: var(--secondary-color);
+    margin-bottom: 60px;
+    line-height: 1.4;
 }
 
+/* Основной контент */
 .main-content {
     max-width: 800px;
-    margin: 0 auto 60px;
+    margin: 0 auto 80px;
 }
 
 .content-paragraph {
-    margin-bottom: 20px;
-    line-height: 1.6;
     font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+    color: var(--text-color);
 }
 
 .brand-name {
-    font-weight: bold;
     color: var(--accent-color);
+    font-weight: 700;
 }
 
+/* Статистика */
 .statistics-section {
-    margin-bottom: 80px;
+    margin-bottom: var(--section-spacing);
 }
 
 .statistics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    margin-top: 40px;
+    margin-top: 60px;
 }
 
 .statistic-card {
-    background-color: var(--card-bg);
-    border-radius: 20px;
-    padding: 30px;
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius);
+    padding: 40px 30px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .statistic-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
+.statistic-card p {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--primary-color);
+}
+
+/* Секция найма */
 .recruitment-section {
-    background-color: var(--card-bg);
-    border-radius: 30px;
-    padding: 40px;
-    margin-bottom: 80px;
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius);
+    padding: 60px 40px;
+    margin-bottom: var(--section-spacing);
+    color: var(--light-bg);
     text-align: center;
 }
 
 .recruitment-content {
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
 .recruitment-highlight {
-    font-weight: bold;
+    font-size: 24px;
+    font-weight: 700;
     color: var(--accent-color);
-    margin: 20px 0;
+    margin: 30px 0;
 }
 
 .contact-info {
-    margin-top: 30px;
+    margin-top: 40px;
+    font-size: 18px;
 }
 
 .email-link {
-    color: var(--link-color);
+    color: var(--accent-color);
     text-decoration: none;
     margin-left: 10px;
+    transition: var(--transition);
 }
 
 .email-link:hover {
-    text-decoration: underline;
+    opacity: 0.8;
 }
 
-.about-section {
-    margin-bottom: 80px;
-}
-
+/* О нас и Кто мы */
+.about-section,
 .who-we-are-section {
-    margin-bottom: 80px;
+    margin-bottom: var(--section-spacing);
 }
 
 .who-we-are-content {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
-    gap: 40px;
+    gap: 60px;
+    align-items: start;
 }
 
 .feature-list {
     list-style: none;
     padding: 0;
-    margin: 30px 0;
+    margin: 40px 0;
 }
 
 .feature-list li {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    line-height: 1.6;
 }
 
 .bullet {
     color: var(--accent-color);
     margin-right: 15px;
-    font-size: 20px;
+    font-size: 24px;
+    line-height: 1;
 }
 
 .conclusion-text {
-    font-weight: bold;
-    margin: 30px 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 40px 0;
+    line-height: 1.6;
 }
 
-.image-container, .side-image {
-    border-radius: 20px;
+/* Изображения */
+.image-container,
+.side-image {
+    border-radius: var(--border-radius);
     overflow: hidden;
+    box-shadow: var(--card-shadow);
 }
 
 .team-image {
     width: 100%;
     height: auto;
     object-fit: cover;
+    transition: var(--transition);
 }
 
+.team-image:hover {
+    transform: scale(1.02);
+}
+
+/* Заведения */
 .establishments-section {
-    margin-bottom: 60px;
+    margin-bottom: var(--section-spacing);
 }
 
 .establishments-intro {
-    font-size: 20px;
-    margin-bottom: 40px;
+    font-size: 24px;
     text-align: center;
+    margin-bottom: 60px;
+    color: var(--primary-color);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .establishments-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
+    gap: 60px;
 }
 
 .city-block {
-    margin-bottom: 30px;
+    background-color: var(--light-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+.city-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .city-name {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 20px;
-    color: var(--title-color);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--accent-color);
 }
 
 .establishment-list {
@@ -305,15 +375,31 @@
 .establishment-list li {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-    text-transform: uppercase;
+    margin-bottom: 15px;
 }
 
 .establishment-name {
     font-size: 16px;
+    text-transform: uppercase;
+    color: var(--text-color);
 }
 
-@media (max-width: 1024px) {
+/* Адаптивность */
+@media (max-width: 1200px) {
+    :root {
+        --section-spacing: 80px;
+    }
+    
+    .section-title {
+        font-size: 40px;
+    }
+    
+    .who-we-are-content {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 992px) {
     .who-we-are-content {
         grid-template-columns: 1fr;
     }
@@ -328,41 +414,58 @@
 }
 
 @media (max-width: 768px) {
+    :root {
+        --section-spacing: 60px;
+    }
+    
     .team-section {
-        padding: 40px 0;
+        padding: 60px 0;
     }
     
     .statistics-grid {
         grid-template-columns: 1fr;
     }
     
+    .content-paragraph {
+        font-size: 16px;
+    }
+    
+    .recruitment-section {
+        padding: 40px 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-title {
+        font-size: 32px;
+    }
+    
     .establishments-grid {
         grid-template-columns: 1fr;
     }
     
-    .content-paragraph {
-        font-size: 16px;
+    .city-name {
+        font-size: 20px;
     }
 }
 
-:root {
-    --bg-color: #ffffff;
-    --text-color: #333333;
-    --title-color: #000000;
-    --subtitle-color: #666666;
-    --accent-color: #3182ce;
-    --card-bg: #f7fafc;
-    --link-color: #2b6cb0;
+/* Темная тема */
+[data-theme="dark"] {
+    --primary-color: #ffffff;
+    --secondary-color: #e0e0e0;
+    --text-color: #cccccc;
+    --light-bg: #1a1a1a;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-[data-theme="dark"] {
-    --bg-color: #1a202c;
-    --text-color: #e2e8f0;
-    --title-color: #ffffff;
-    --subtitle-color: #a0aec0;
-    --accent-color: #4299e1;
-    --card-bg: #2d3748;
-    --link-color: #63b3ed;
+[data-theme="dark"] .statistic-card,
+[data-theme="dark"] .city-block {
+    background-color: #262626;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .recruitment-section {
+    background-color: #262626;
 }
 </style>
 {% endblock %} 

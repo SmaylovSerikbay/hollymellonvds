@@ -538,10 +538,15 @@ def team_view(request):
             TeamEstablishment.objects.create(team=team_page, **est)
 
     context = get_base_context(request)
+    current_city_id = get_default_city(request)
+    current_city = City.objects.get(id=current_city_id).name if current_city_id else None
+    
     context.update({
         'team': team_page,
         'statistics': team_page.statistics.all().order_by('order'),
         'who_we_are_items': team_page.who_we_are_items.all().order_by('order'),
-        'establishments': team_page.establishments.all().order_by('city', 'order')
+        'establishments': team_page.establishments.all().order_by('city', 'order'),
+        'cities': City.objects.filter(is_active=True).order_by('order', 'name'),
+        'current_city': current_city
     })
     return render(request, 'main/team.html', context)
