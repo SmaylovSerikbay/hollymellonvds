@@ -11,7 +11,19 @@
         </div>
         <div class="mb-10 space-y-7 text-lg sm:text-xl md:mb-16 md:text-2xl lg:mb-28">
             {% for paragraph in team.main_text|split:'\n\n' %}
-                <p>{{ paragraph|safe }}</p>
+                <p>
+                    {% if 'Holy Melon Management' in paragraph %}
+                        {% with parts=paragraph|split:'Holy Melon Management' %}
+                            {{ parts.0 }}<span class="font-bold">Holy Melon Management</span>{{ parts.1 }}
+                        {% endwith %}
+                    {% elif 'Holy Melon' in paragraph %}
+                        {% with parts=paragraph|split:'Holy Melon' %}
+                            {{ parts.0 }}<span class="font-bold">Holy Melon</span>{{ parts.1 }}
+                        {% endwith %}
+                    {% else %}
+                        {{ paragraph|safe }}
+                    {% endif %}
+                </p>
             {% endfor %}
         </div>
         <h2 class="mb-10 text-center text-2xl font-bold md:mb-16 md:text-[2rem]">
@@ -42,7 +54,15 @@
         <div class="mb-10 space-y-7 md:mb-16 lg:mb-24">
             <h3 class="font-bold">{{ team.about_title }}</h3>
             {% for paragraph in team.about_text|split:'\n\n' %}
-                <p>{{ paragraph|safe }}</p>
+                <p>
+                    {% if 'Holy Melon Management' in paragraph %}
+                        {% with parts=paragraph|split:'Holy Melon Management' %}
+                            {{ parts.0 }}<span class="font-bold">Holy Melon Management</span>{{ parts.1 }}
+                        {% endwith %}
+                    {% else %}
+                        {{ paragraph|safe }}
+                    {% endif %}
+                </p>
             {% endfor %}
         </div>
         <div class="mb-10 grid grid-cols-1 gap-7 text-lg md:mb-20 lg:mb-28 lg:text-xl xl:grid-cols-[1fr,36.6875rem] xl:gap-[53px] xl:text-[29px]">
@@ -64,6 +84,26 @@
             </div>
             <div class="">
                 <img src="{{ team.image2.url }}" alt="команда" class="aspect-[587/992] size-full object-cover">
+            </div>
+        </div>
+        <div class="mb-10 md:mb-16 lg:mb-20 xl:mb-32">
+            <p class="mb-16">
+                Каждое наше заведение — это пространство, где рождаются воспоминания и начинается история.
+            </p>
+            <div class="grid grid-cols-1 justify-between gap-6 text-base min-[560px]:grid-cols-2 md:text-lg min-[992px]:grid-cols-3">
+                {% regroup establishments by city as city_list %}
+                {% for city in city_list %}
+                <div class="space-y-7">
+                    <p>{{ city.grouper }}:</p>
+                    <ul class="space-y-1 uppercase">
+                        {% for est in city.list %}
+                        <li class="before:pr-1 before:content-['•']">
+                            {{ est.name }} — {{ est.year }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

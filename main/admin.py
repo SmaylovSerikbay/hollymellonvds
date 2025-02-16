@@ -4,7 +4,7 @@ from .models import (
     Brand, TopGalleryImage, Feature, SpecialOffer, City, BrandTicker,
     BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement,
     AnnouncementItem, AnnouncementMedia, HomeHero, SiteLogo, Photographer,
-    TeamPage, TeamStatistic, TeamWhoWeAreItem
+    TeamPage, TeamStatistic, TeamWhoWeAreItem, TeamEstablishment
 )
 from .utils import get_yandex_folders
 
@@ -232,9 +232,15 @@ class TeamWhoWeAreItemInline(admin.TabularInline):
     verbose_name = 'Пункт "Кто мы"'
     verbose_name_plural = 'Пункты "Кто мы"'
 
+class TeamEstablishmentInline(admin.TabularInline):
+    model = TeamEstablishment
+    extra = 1
+    verbose_name = 'Заведение'
+    verbose_name_plural = 'Заведения'
+
 @admin.register(TeamPage)
 class TeamPageAdmin(admin.ModelAdmin):
-    inlines = [TeamStatisticInline, TeamWhoWeAreItemInline]
+    inlines = [TeamStatisticInline, TeamWhoWeAreItemInline, TeamEstablishmentInline]
     fieldsets = (
         ('Основная информация', {
             'fields': ('title', 'subtitle', 'main_text'),

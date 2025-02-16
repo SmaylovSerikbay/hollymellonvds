@@ -357,3 +357,18 @@ class TeamPage(models.Model):
         if not self.pk and TeamPage.objects.exists():
             return  # Предотвращаем создание более одной записи
         return super(TeamPage, self).save(*args, **kwargs)
+
+class TeamEstablishment(models.Model):
+    team = models.ForeignKey('TeamPage', on_delete=models.CASCADE, related_name='establishments', verbose_name='Страница команды')
+    city = models.CharField('Город', max_length=100)
+    name = models.CharField('Название', max_length=200)
+    year = models.CharField('Год', max_length=20)
+    order = models.IntegerField('Порядок', default=0)
+
+    class Meta:
+        verbose_name = 'Заведение'
+        verbose_name_plural = 'Заведения'
+        ordering = ['city', 'order']
+
+    def __str__(self):
+        return f"{self.name} — {self.year}"

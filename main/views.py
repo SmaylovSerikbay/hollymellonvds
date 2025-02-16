@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse, HttpResponse
-from .models import Brand, City, BrandTicker, BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement, HomeHero, SiteLogo, Photographer, TeamPage, TeamStatistic, TeamWhoWeAreItem
+from .models import Brand, City, BrandTicker, BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement, HomeHero, SiteLogo, Photographer, TeamPage, TeamStatistic, TeamWhoWeAreItem, TeamEstablishment
 import json
 from django.views.decorators.cache import cache_page
 import requests
@@ -517,10 +517,31 @@ def team_view(request):
         for i, item in enumerate(who_we_are_items):
             TeamWhoWeAreItem.objects.create(team=team_page, text=item, order=i)
 
+        # Создаем заведения
+        establishments = [
+            # Астана
+            {'city': 'г. Астана', 'name': 'SHISHKA HIGHVILL', 'year': '2019 г.', 'order': 1},
+            {'city': 'г. Астана', 'name': 'SHISHKA REPUBLIC', 'year': '2020 г.', 'order': 2},
+            {'city': 'г. Астана', 'name': 'SHISHKA EDITION', 'year': '2021 г.', 'order': 3},
+            {'city': 'г. Астана', 'name': 'BERËZKA', 'year': '2022 г.', 'order': 4},
+            {'city': 'г. Астана', 'name': 'SHISHKA PREMIUM', 'year': '2022 г.', 'order': 5},
+            {'city': 'г. Астана', 'name': 'SHISHKA BOTANIC', 'year': '2023 г.', 'order': 6},
+            {'city': 'г. Астана', 'name': 'AHÓ', 'year': '2024 г.', 'order': 7},
+            {'city': 'г. Астана', 'name': 'SHISHKA ALPHA', 'year': '2024 г.', 'order': 8},
+            # Алматы
+            {'city': 'г. Алматы', 'name': 'SHISHKA GAGARINA', 'year': '2021 г.', 'order': 1},
+            {'city': 'г. Алматы', 'name': 'SHISHKA PREMIUM', 'year': '2022 г.', 'order': 2},
+            # Атырау
+            {'city': 'г. Атырау', 'name': 'SHISHKA PREMIUM', 'year': '2022 г', 'order': 1},
+        ]
+        for est in establishments:
+            TeamEstablishment.objects.create(team=team_page, **est)
+
     context = get_base_context(request)
     context.update({
         'team': team_page,
         'statistics': team_page.statistics.all().order_by('order'),
-        'who_we_are_items': team_page.who_we_are_items.all().order_by('order')
+        'who_we_are_items': team_page.who_we_are_items.all().order_by('order'),
+        'establishments': team_page.establishments.all().order_by('city', 'order')
     })
     return render(request, 'main/team.html', context)
