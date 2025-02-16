@@ -506,7 +506,7 @@ def team_view(request):
             'В Академии гостеприимства прошли обучение более (кол-во) специалистов'
         ]
         for i, stat in enumerate(statistics):
-            TeamStatistic.objects.create(text=stat, order=i)
+            TeamStatistic.objects.create(team=team_page, text=stat, order=i)
 
         # Создаем пункты "Кто мы"
         who_we_are_items = [
@@ -515,12 +515,12 @@ def team_view(request):
             'Лидеры в области гостеприимства, стремящиеся к постоянному росту и развитию.'
         ]
         for i, item in enumerate(who_we_are_items):
-            TeamWhoWeAreItem.objects.create(text=item, order=i)
+            TeamWhoWeAreItem.objects.create(team=team_page, text=item, order=i)
 
     context = get_base_context(request)
     context.update({
         'team': team_page,
-        'statistics': TeamStatistic.objects.all().order_by('order'),
-        'who_we_are_items': TeamWhoWeAreItem.objects.all().order_by('order')
+        'statistics': team_page.statistics.all().order_by('order'),
+        'who_we_are_items': team_page.who_we_are_items.all().order_by('order')
     })
     return render(request, 'main/team.html', context)

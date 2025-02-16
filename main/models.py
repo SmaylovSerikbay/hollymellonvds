@@ -308,6 +308,7 @@ class SiteLogo(models.Model):
         super().save(*args, **kwargs)
 
 class TeamStatistic(models.Model):
+    team = models.ForeignKey('TeamPage', on_delete=models.CASCADE, related_name='statistics', verbose_name='Страница команды')
     text = models.CharField('Текст', max_length=255)
     order = models.IntegerField('Порядок', default=0)
 
@@ -320,6 +321,7 @@ class TeamStatistic(models.Model):
         return self.text
 
 class TeamWhoWeAreItem(models.Model):
+    team = models.ForeignKey('TeamPage', on_delete=models.CASCADE, related_name='who_we_are_items', verbose_name='Страница команды')
     text = models.CharField('Текст', max_length=255)
     order = models.IntegerField('Порядок', default=0)
 
