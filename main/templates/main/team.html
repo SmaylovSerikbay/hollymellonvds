@@ -37,8 +37,9 @@
                     <div class="stat-card">
                         {% with parts=stat.text|split:'—' %}
                             <div class="stat-content">
-                                <div class="stat-number">{{ parts.0 }}</div>
-                                <div class="stat-description">{{ parts.1 }}</div>
+                                <div class="stat-number">{{ parts.0|striptags }}</div>
+                                <div class="stat-divider"></div>
+                                <div class="stat-description">{{ parts.1|striptags }}</div>
                             </div>
                         {% endwith %}
                     </div>
@@ -204,78 +205,67 @@
 
 /* Статистика */
 .statistics-section {
-    padding: 80px 0;
-    background: linear-gradient(180deg, var(--light-bg) 0%, rgba(212, 178, 84, 0.05) 100%);
-    position: relative;
-    overflow: hidden;
+    padding: 60px 0;
+    background: linear-gradient(to bottom, var(--light-bg), rgba(212, 178, 84, 0.05));
+    margin: 40px 0;
 }
 
 .statistics-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
     max-width: var(--container-width);
     margin: 0 auto;
     padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 20px;
-    flex-wrap: nowrap;
 }
 
 .stat-card {
-    flex: 1;
-    min-width: 200px;
-    padding: 40px 20px;
     background: var(--light-bg);
     border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    padding: 32px 24px;
+    text-align: center;
     position: relative;
-    overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent-color) 0%, rgba(212, 178, 84, 0.3) 100%);
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 180px;
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.stat-card:hover::before {
-    opacity: 1;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 }
 
 .stat-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    height: 100%;
+    gap: 12px;
 }
 
 .stat-number {
-    font-size: 36px;
+    font-size: 42px;
     font-weight: 700;
     color: var(--accent-color);
-    margin-bottom: 16px;
     line-height: 1;
-    font-feature-settings: "tnum" on, "lnum" on;
+    letter-spacing: -0.02em;
+}
+
+.stat-divider {
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), rgba(212, 178, 84, 0.3));
+    border-radius: 2px;
 }
 
 .stat-description {
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.4;
     color: var(--text-color);
-    max-width: 200px;
+    font-weight: 500;
+    max-width: 140px;
     margin: 0 auto;
 }
 
@@ -441,42 +431,35 @@
 /* Адаптивность */
 @media (max-width: 1200px) {
     .statistics-container {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .stat-card {
-        flex: 0 1 calc(33.333% - 20px);
-        min-width: 280px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
     }
 }
 
-@media (max-width: 992px) {
-    .stat-card {
-        flex: 0 1 calc(50% - 20px);
-    }
-}
-
-@media (max-width: 576px) {
-    .statistics-section {
-        padding: 40px 0;
-    }
-
+@media (max-width: 768px) {
     .statistics-container {
-        flex-direction: column;
+        grid-template-columns: repeat(2, 1fr);
         gap: 16px;
     }
-
+    
     .stat-card {
-        flex: 1 1 100%;
+        padding: 24px 16px;
+        min-height: 160px;
     }
-
+    
     .stat-number {
-        font-size: 32px;
+        font-size: 36px;
     }
+}
 
-    .stat-description {
-        font-size: 14px;
+@media (max-width: 480px) {
+    .statistics-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-card {
+        min-height: auto;
+        padding: 20px;
     }
 }
 
@@ -490,12 +473,12 @@
 }
 
 [data-theme="dark"] .statistics-section {
-    background: linear-gradient(180deg, var(--dark-bg) 0%, rgba(212, 178, 84, 0.05) 100%);
+    background: linear-gradient(to bottom, var(--dark-bg), rgba(212, 178, 84, 0.05));
 }
 
 [data-theme="dark"] .stat-card {
     background: rgba(255, 255, 255, 0.03);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] .stat-description {
