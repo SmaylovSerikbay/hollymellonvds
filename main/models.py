@@ -307,17 +307,39 @@ class SiteLogo(models.Model):
             SiteLogo.objects.exclude(id=self.id).update(is_active=False)
         super().save(*args, **kwargs)
 
+class TeamStatistic(models.Model):
+    text = models.CharField('Текст', max_length=255)
+    order = models.IntegerField('Порядок', default=0)
+
+    class Meta:
+        verbose_name = 'Статистика команды'
+        verbose_name_plural = 'Статистика команды'
+        ordering = ['order']
+
+    def __str__(self):
+        return self.text
+
+class TeamWhoWeAreItem(models.Model):
+    text = models.CharField('Текст', max_length=255)
+    order = models.IntegerField('Порядок', default=0)
+
+    class Meta:
+        verbose_name = 'Пункт "Кто мы"'
+        verbose_name_plural = 'Пункты "Кто мы"'
+        ordering = ['order']
+
+    def __str__(self):
+        return self.text
+
 class TeamPage(models.Model):
     title = models.CharField('Заголовок', max_length=200)
     subtitle = models.CharField('Подзаголовок', max_length=200)
     main_text = models.TextField('Основной текст')
-    statistics = models.JSONField('Статистика', default=list, help_text='Список статистических данных')
     recruitment_text = models.TextField('Текст о наборе сотрудников')
     email = models.EmailField('Email для связи')
     about_title = models.CharField('Заголовок "О нас"', max_length=200)
     about_text = models.TextField('Текст "О нас"')
     who_we_are_title = models.CharField('Заголовок "Кто мы"', max_length=200)
-    who_we_are_items = models.JSONField('Пункты "Кто мы"', default=list)
     who_we_are_conclusion = models.TextField('Заключение "Кто мы"')
     image1 = models.ImageField('Изображение 1', upload_to='team/')
     image2 = models.ImageField('Изображение 2', upload_to='team/')

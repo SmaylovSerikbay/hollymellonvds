@@ -18,9 +18,9 @@
             Статистика, которая говорит за себя
         </h2>
         <div class="mb-7 grid auto-rows-[12.5rem] grid-cols-1 gap-5 min-[520px]:grid-cols-2 sm:mb-12 sm:auto-rows-[17.125rem] md:mb-20 md:grid-cols-3 md:gap-[2.625rem] lg:mb-28 lg:grid-cols-4 xl:grid-cols-5">
-            {% for stat in team.statistics %}
+            {% for stat in statistics %}
                 <div class="flex flex-col items-center justify-center rounded-[20px] border border-black px-[.9375rem] text-center">
-                    {{ stat|safe }}
+                    {{ stat.text|safe }}
                 </div>
             {% endfor %}
         </div>
@@ -49,9 +49,9 @@
             <div class="flex flex-col">
                 <h3 class="mb-11 font-bold">{{ team.who_we_are_title }}</h3>
                 <ul class="mb-5 space-y-3 md:mb-7 lg:mb-11">
-                    {% for item in team.who_we_are_items %}
+                    {% for item in who_we_are_items %}
                         <li class="before:pr-1 before:content-['•']">
-                            {{ item|safe }}
+                            {{ item.text|safe }}
                         </li>
                     {% endfor %}
                 </ul>

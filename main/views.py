@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse, HttpResponse
-from .models import Brand, City, BrandTicker, BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement, HomeHero, SiteLogo, Photographer, TeamPage
+from .models import Brand, City, BrandTicker, BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement, HomeHero, SiteLogo, Photographer, TeamPage, TeamStatistic, TeamWhoWeAreItem
 import json
 from django.views.decorators.cache import cache_page
 import requests
@@ -490,23 +490,37 @@ def team_view(request):
             title='В центре Holy Melon — люди!',
             subtitle='Команда — наша душа, наш успех.',
             main_text='В каждом проекте, в каждой детали и в каждом достижении есть одна важная составляющая — люди. В Holy Melon Management мы уверены, что настоящая сила компании заключается в её команде. Мы гордимся тем, что наши сотрудники не просто профессионалы, а те, кто вдохновляет и вкладывает свою энергию в создание уникальных впечатлений. Мы понимаем, что успех — это результат не только труда, но и страсти, с которой мы работаем.\n\nРабота в Holy Melon — это путь, который мы проходим вместе, поддерживая и вдохновляя друг друга. Каждый день мы растём и развиваемся, двигаясь к общей цели.\n\nHoly Melon Management — это еще и эмоции, которые мы создаем для наших гостей, а также амбиции, которые мы реализуем вместе.',
-            statistics=[
-                'Средний стаж работы в компании — от 4-х лет',
-                '11 проектов по всему Казахстану',
-                'Более + 450 сотрудников',
-                'Ежегодно обслуживаем свыше (кол-во) гостей',
-                'В Академии гостеприимства прошли обучение более (кол-во) специалистов'
-            ],
             recruitment_text='Ключ к нашему успеху — в единстве и взаимной поддержке. Каждый день мы вдохновляем друг друга на новые достижения, а вместе достигаем высоких результатов и стремимся к новым вершинам.\n\nХотите стать частью нашей команды?',
             email='holymelon.mgmt@gmail.com',
             about_title='Что такое Holy Melon Management?',
             about_text='Представьте себе место, где каждый день превращается в праздник. Мы — это мощная команда, объединенная общей страстью к кулинарии и гостеприимству, создающая уникальные впечатления для каждого посетителя.\n\nHoly Melon Management — это семья, в которой работают лучшие из лучших, чтобы дарить нашим гостям незабываемые впечатления.',
             who_we_are_title='Кто мы?',
-            who_we_are_items=[
-                'Сеть из 11 брендов в сфере HoReCa, которые знают и любят.',
-                'Команда из более чем 450 профессионалов, каждый из которых — неотъемлемая часть нашей истории.',
-                'Лидеры в области гостеприимства, стремящиеся к постоянному росту и развитию.'
-            ],
             who_we_are_conclusion='Добро пожаловать в команду, где каждый день — это новый вызов и новая победа. Вместе мы пишем историю, которой можем гордиться.'
         )
-    return render(request, 'main/team.html', {'team': team_page})
+        # Создаем статистику
+        statistics = [
+            'Средний стаж работы в компании — от 4-х лет',
+            '11 проектов по всему Казахстану',
+            'Более + 450 сотрудников',
+            'Ежегодно обслуживаем свыше (кол-во) гостей',
+            'В Академии гостеприимства прошли обучение более (кол-во) специалистов'
+        ]
+        for i, stat in enumerate(statistics):
+            TeamStatistic.objects.create(text=stat, order=i)
+
+        # Создаем пункты "Кто мы"
+        who_we_are_items = [
+            'Сеть из 11 брендов в сфере HoReCa, которые знают и любят.',
+            'Команда из более чем 450 профессионалов, каждый из которых — неотъемлемая часть нашей истории.',
+            'Лидеры в области гостеприимства, стремящиеся к постоянному росту и развитию.'
+        ]
+        for i, item in enumerate(who_we_are_items):
+            TeamWhoWeAreItem.objects.create(text=item, order=i)
+
+    context = get_base_context(request)
+    context.update({
+        'team': team_page,
+        'statistics': TeamStatistic.objects.all().order_by('order'),
+        'who_we_are_items': TeamWhoWeAreItem.objects.all().order_by('order')
+    })
+    return render(request, 'main/team.html', context)

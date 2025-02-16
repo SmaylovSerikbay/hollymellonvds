@@ -4,7 +4,7 @@ from .models import (
     Brand, TopGalleryImage, Feature, SpecialOffer, City, BrandTicker,
     BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement,
     AnnouncementItem, AnnouncementMedia, HomeHero, SiteLogo, Photographer,
-    TeamPage
+    TeamPage, TeamStatistic, TeamWhoWeAreItem
 )
 from .utils import get_yandex_folders
 
@@ -220,15 +220,24 @@ class SiteLogoAdmin(admin.ModelAdmin):
     list_display = ['id', 'is_active']
     list_editable = ['is_active']
 
+class TeamStatisticInline(admin.TabularInline):
+    model = TeamStatistic
+    extra = 1
+    verbose_name = 'Статистика'
+    verbose_name_plural = 'Статистика'
+
+class TeamWhoWeAreItemInline(admin.TabularInline):
+    model = TeamWhoWeAreItem
+    extra = 1
+    verbose_name = 'Пункт "Кто мы"'
+    verbose_name_plural = 'Пункты "Кто мы"'
+
 @admin.register(TeamPage)
 class TeamPageAdmin(admin.ModelAdmin):
+    inlines = [TeamStatisticInline, TeamWhoWeAreItemInline]
     fieldsets = (
         ('Основная информация', {
             'fields': ('title', 'subtitle', 'main_text'),
-        }),
-        ('Статистика', {
-            'fields': ('statistics',),
-            'description': 'Введите статистические данные в формате JSON списка. Например: ["Средний стаж работы в компании — от 4-х лет", "11 проектов по всему Казахстану"]'
         }),
         ('Набор сотрудников', {
             'fields': ('recruitment_text', 'email'),
@@ -237,8 +246,7 @@ class TeamPageAdmin(admin.ModelAdmin):
             'fields': ('about_title', 'about_text'),
         }),
         ('Кто мы', {
-            'fields': ('who_we_are_title', 'who_we_are_items', 'who_we_are_conclusion'),
-            'description': 'Введите пункты "Кто мы" в формате JSON списка. Например: ["Сеть из 11 брендов в сфере HoReCa, которые знают и любят", "Команда из более чем 450 профессионалов"]'
+            'fields': ('who_we_are_title', 'who_we_are_conclusion'),
         }),
         ('Изображения', {
             'fields': ('image1', 'image2'),
