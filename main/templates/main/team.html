@@ -32,11 +32,22 @@
 
         <!-- Статистика -->
         <div class="statistics-section">
-            <h2 class="section-subtitle">Статистика, которая говорит за себя</h2>
+            <div class="section-header">
+                <h2 class="section-subtitle">Статистика, которая говорит за себя</h2>
+            </div>
             <div class="statistics-grid">
                 {% for stat in statistics %}
                     <div class="statistic-card">
-                        <p>{{ stat.text|safe }}</p>
+                        {% with parts=stat.text|split:'—' %}
+                            <p>
+                                {% if '—' in stat.text %}
+                                    <strong>{{ parts.0 }}</strong>
+                                    {{ parts.1 }}
+                                {% else %}
+                                    {{ stat.text|safe }}
+                                {% endif %}
+                            </p>
+                        {% endwith %}
                     </div>
                 {% endfor %}
             </div>
@@ -140,6 +151,12 @@
     --section-spacing: 100px;
 }
 
+/* Переопределение стилей хедера для страницы команды */
+.header__menu a {
+    white-space: nowrap;
+    display: inline-block;
+}
+
 /* Общие стили секции */
 .team-section {
     padding: var(--section-spacing) 0;
@@ -194,35 +211,84 @@
 
 /* Статистика */
 .statistics-section {
-    margin-bottom: var(--section-spacing);
+    margin: 120px 0;
+    padding: 60px 0;
+    background-color: var(--light-bg);
+    position: relative;
+}
+
+.statistics-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+}
+
+.statistics-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
 }
 
 .statistics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 30px;
-    margin-top: 60px;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .statistic-card {
+    position: relative;
     background-color: var(--light-bg);
-    border-radius: var(--border-radius);
-    padding: 40px 30px;
+    padding: 40px 20px;
     text-align: center;
-    box-shadow: var(--card-shadow);
     transition: var(--transition);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: none;
+    box-shadow: none;
 }
 
-.statistic-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+.statistic-card::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    opacity: 0.2;
+    transition: var(--transition);
+}
+
+.statistic-card:hover::before {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.2);
 }
 
 .statistic-card p {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.6;
     color: var(--primary-color);
+    margin: 0;
+    position: relative;
+}
+
+.statistic-card p strong {
+    display: block;
+    font-size: 32px;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    font-weight: 700;
 }
 
 /* Секция найма */
@@ -397,6 +463,11 @@
     .who-we-are-content {
         gap: 40px;
     }
+    
+    .statistics-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
 }
 
 @media (max-width: 992px) {
@@ -423,7 +494,8 @@
     }
     
     .statistics-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
     
     .content-paragraph {
@@ -432,6 +504,14 @@
     
     .recruitment-section {
         padding: 40px 20px;
+    }
+    
+    .statistic-card p {
+        font-size: 16px;
+    }
+    
+    .statistic-card p strong {
+        font-size: 28px;
     }
 }
 
@@ -447,6 +527,10 @@
     .city-name {
         font-size: 20px;
     }
+    
+    .statistics-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Темная тема */
@@ -458,7 +542,14 @@
     --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-[data-theme="dark"] .statistic-card,
+[data-theme="dark"] .statistic-card {
+    background-color: transparent;
+}
+
+[data-theme="dark"] .statistic-card p {
+    color: var(--light-bg);
+}
+
 [data-theme="dark"] .city-block {
     background-color: #262626;
     border-color: rgba(255, 255, 255, 0.1);
