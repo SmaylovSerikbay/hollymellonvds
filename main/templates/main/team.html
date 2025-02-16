@@ -40,16 +40,26 @@
                     <div class="statistic-card">
                         {% with parts=stat.text|split:'—' %}
                             <p>
-                                {% if '—' in stat.text %}
-                                    <strong>{{ parts.0 }}</strong>
-                                    {{ parts.1 }}
-                                {% else %}
-                                    {{ stat.text|safe }}
-                                {% endif %}
+                                <strong>{{ parts.0|safe }}</strong>
+                                <span>{{ parts.1|safe }}</span>
                             </p>
                         {% endwith %}
                     </div>
                 {% endfor %}
+            </div>
+        </div>
+
+        <!-- Фотографии -->
+        <div class="photos-section">
+            <div class="photo-main">
+                <div class="photo-item">
+                    <img src="{{ team.image1.url }}" alt="Наша команда" loading="lazy">
+                </div>
+            </div>
+            <div class="photo-side">
+                <div class="photo-item">
+                    <img src="{{ team.image2.url }}" alt="Наша команда" loading="lazy">
+                </div>
             </div>
         </div>
 
@@ -140,7 +150,7 @@
 :root {
     --primary-color: #1a1a1a;
     --secondary-color: #333333;
-    --accent-color: #d4b254;
+    --accent-color: #404040;
     --text-color: #4a4a4a;
     --light-bg: #ffffff;
     --dark-bg: #1a1a1a;
@@ -212,35 +222,16 @@
 /* Статистика */
 .statistics-section {
     margin: 120px 0;
-    padding: 60px 0;
-    background-color: var(--light-bg);
+    padding: 80px 0;
+    background-color: var(--primary-color);
+    color: var(--light-bg);
     position: relative;
-}
-
-.statistics-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-}
-
-.statistics-section::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
 }
 
 .statistics-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 30px;
+    gap: 40px;
     max-width: var(--container-width);
     margin: 0 auto;
     padding: 0 20px;
@@ -248,47 +239,78 @@
 
 .statistic-card {
     position: relative;
-    background-color: var(--light-bg);
-    padding: 40px 20px;
     text-align: center;
-    transition: var(--transition);
-    border: none;
-    box-shadow: none;
+    padding: 30px 20px;
+    background: transparent;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.statistic-card::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 20px;
-    background-color: var(--accent-color);
-    border-radius: 50%;
-    opacity: 0.2;
-    transition: var(--transition);
-}
-
-.statistic-card:hover::before {
-    opacity: 1;
-    transform: translateX(-50%) scale(1.2);
+.statistic-card:last-child {
+    border-right: none;
 }
 
 .statistic-card p {
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--primary-color);
     margin: 0;
     position: relative;
+    color: var(--light-bg);
 }
 
 .statistic-card p strong {
     display: block;
-    font-size: 32px;
-    color: var(--accent-color);
-    margin-bottom: 10px;
-    font-weight: 700;
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+
+.statistic-card p span {
+    font-size: 16px;
+    opacity: 0.8;
+    display: block;
+    line-height: 1.4;
+}
+
+/* Фотографии */
+.photos-section {
+    margin: 120px 0;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 30px;
+    height: 600px;
+}
+
+.photo-main {
+    grid-column: span 8;
+    height: 100%;
+}
+
+.photo-side {
+    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.photo-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    height: 100%;
+    background-color: var(--secondary-color);
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.photo-item:hover img {
+    transform: scale(1.05);
 }
 
 /* Секция найма */
@@ -466,7 +488,35 @@
     
     .statistics-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+    
+    .statistic-card {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 30px 15px;
+    }
+    
+    .statistic-card:nth-child(3n) {
+        border-right: none;
+    }
+    
+    .photos-section {
+        grid-template-columns: 1fr;
+        height: auto;
         gap: 20px;
+    }
+    
+    .photo-main, .photo-side {
+        grid-column: span 12;
+    }
+    
+    .photo-side {
+        flex-direction: row;
+    }
+    
+    .photo-item {
+        height: 300px;
     }
 }
 
@@ -495,7 +545,7 @@
     
     .statistics-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        gap: 20px;
     }
     
     .content-paragraph {
@@ -506,12 +556,12 @@
         padding: 40px 20px;
     }
     
-    .statistic-card p {
-        font-size: 16px;
+    .statistic-card p strong {
+        font-size: 36px;
     }
     
-    .statistic-card p strong {
-        font-size: 28px;
+    .photo-side {
+        flex-direction: column;
     }
 }
 
@@ -531,6 +581,14 @@
     .statistics-grid {
         grid-template-columns: 1fr;
     }
+    
+    .statistic-card {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .statistic-card:last-child {
+        border-bottom: none;
+    }
 }
 
 /* Темная тема */
@@ -539,24 +597,15 @@
     --secondary-color: #e0e0e0;
     --text-color: #cccccc;
     --light-bg: #1a1a1a;
-    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-[data-theme="dark"] .statistic-card {
-    background-color: transparent;
+[data-theme="dark"] .statistics-section {
+    background-color: var(--light-bg);
 }
 
-[data-theme="dark"] .statistic-card p {
-    color: var(--light-bg);
-}
-
-[data-theme="dark"] .city-block {
-    background-color: #262626;
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .recruitment-section {
-    background-color: #262626;
+[data-theme="dark"] .statistic-card p strong {
+    background: linear-gradient(135deg, #333 0%, #666 100%);
+    -webkit-background-clip: text;
 }
 </style>
 {% endblock %} 
