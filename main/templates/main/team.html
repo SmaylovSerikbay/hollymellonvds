@@ -207,33 +207,28 @@
 
 /* Статистика */
 .statistics-section {
-    margin: 80px 0;
+    margin: 60px 0;
     padding: 40px 0;
-    background: linear-gradient(to right, rgba(212, 178, 84, 0.05), rgba(212, 178, 84, 0.1), rgba(212, 178, 84, 0.05));
+    background: linear-gradient(180deg, rgba(212, 178, 84, 0.03) 0%, rgba(212, 178, 84, 0) 100%);
 }
 
 .statistics-grid {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
 .statistic-card {
-    flex: 1;
-    min-width: 180px;
-    max-width: 220px;
     background: var(--light-bg);
-    border-radius: 16px;
-    padding: 24px 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border-radius: 8px;
+    padding: 20px 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
-    border: 1px solid rgba(212, 178, 84, 0.1);
+    border: 1px solid rgba(212, 178, 84, 0.08);
     position: relative;
-    overflow: hidden;
 }
 
 .statistic-card::before {
@@ -242,16 +237,15 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 4px;
-    background: linear-gradient(to right, var(--accent-color), transparent);
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color) 0%, transparent 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .statistic-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-    border-color: rgba(212, 178, 84, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 .statistic-card:hover::before {
@@ -261,25 +255,23 @@
 .stat-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
+    gap: 4px;
 }
 
 .stat-number {
-    font-size: 28px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 600;
     color: var(--accent-color);
     line-height: 1.2;
-    margin-bottom: 4px;
 }
 
 .stat-label {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     color: var(--text-color);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+    opacity: 0.9;
 }
 
 /* Секция найма */
@@ -444,49 +436,36 @@
 /* Адаптивность */
 @media (max-width: 1200px) {
     .statistics-grid {
-        max-width: 960px;
-    }
-    
-    .statistic-card {
-        min-width: 160px;
-    }
-}
-
-@media (max-width: 992px) {
-    .statistics-grid {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .statistic-card {
-        min-width: 200px;
-        flex: 0 0 calc(33.333% - 20px);
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
     }
 }
 
 @media (max-width: 768px) {
-    .statistics-section {
-        margin: 60px 0;
-        padding: 30px 0;
+    .statistics-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
     
     .statistic-card {
-        flex: 0 0 calc(50% - 20px);
+        padding: 16px;
     }
     
     .stat-number {
-        font-size: 24px;
+        font-size: 18px;
+    }
+    
+    .stat-label {
+        font-size: 11px;
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 480px) {
     .statistics-grid {
-        flex-direction: column;
-        align-items: stretch;
+        grid-template-columns: 1fr;
     }
     
     .statistic-card {
-        max-width: none;
+        text-align: center;
     }
 }
 
@@ -500,12 +479,12 @@
 }
 
 [data-theme="dark"] .statistics-section {
-    background: linear-gradient(to right, rgba(212, 178, 84, 0.02), rgba(212, 178, 84, 0.04), rgba(212, 178, 84, 0.02));
+    background: linear-gradient(180deg, rgba(212, 178, 84, 0.02) 0%, rgba(212, 178, 84, 0) 100%);
 }
 
 [data-theme="dark"] .statistic-card {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(212, 178, 84, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(212, 178, 84, 0.05);
 }
 
 [data-theme="dark"] .stat-label {

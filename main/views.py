@@ -499,11 +499,11 @@ def team_view(request):
         )
         # Создаем статистику
         statistics = [
-            '4+ лет — Стаж',
-            '11 — Проектов',
-            '450+ — Сотрудников',
-            '500К+ — Гостей в год',
-            '1000+ — Выпускников'
+            '4+ лет',
+            '11 проектов',
+            '450+ команда',
+            '500К+ гостей',
+            '1000+ выпускников'
         ]
         for i, stat in enumerate(statistics):
             TeamStatistic.objects.create(team=team_page, text=stat, order=i)
