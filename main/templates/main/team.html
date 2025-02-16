@@ -1,0 +1,71 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<section class="pt-7 sm:pt-14">
+    <div class="container">
+        <div class="mb-10 space-y-5 text-center text-2xl font-bold sm:mb-16 sm:space-y-10 md:text-3xl lg:text-4xl">
+            <h1>{{ team.title }}</h1>
+            <p>{{ team.subtitle }}</p>
+        </div>
+        <div class="mb-10 space-y-7 text-lg sm:text-xl md:mb-16 md:text-2xl lg:mb-28">
+            {% for paragraph in team.main_text|split:'\n\n' %}
+                <p>{{ paragraph|safe }}</p>
+            {% endfor %}
+        </div>
+        <h2 class="mb-10 text-center text-2xl font-bold md:mb-16 md:text-[2rem]">
+            Статистика, которая говорит за себя
+        </h2>
+        <div class="mb-7 grid auto-rows-[12.5rem] grid-cols-1 gap-5 min-[520px]:grid-cols-2 sm:mb-12 sm:auto-rows-[17.125rem] md:mb-20 md:grid-cols-3 md:gap-[2.625rem] lg:mb-28 lg:grid-cols-4 xl:grid-cols-5">
+            {% for stat in team.statistics %}
+                <div class="flex flex-col items-center justify-center rounded-[20px] border border-black px-[.9375rem] text-center">
+                    {{ stat|safe }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="mb-9 rounded-[20px] border border-black/35 px-4 py-6 text-center text-sm sm:mb-12 md:mb-16 md:py-[2.6875rem] md:text-base lg:mb-28 lg:text-lg">
+            <div class="mx-auto max-w-[70.1875rem]">
+                {% for paragraph in team.recruitment_text|split:'\n\n' %}
+                    <p class="{% if not forloop.last %}mb-8{% endif %} {% if forloop.last %}font-bold{% endif %}">
+                        {{ paragraph|safe }}
+                    </p>
+                {% endfor %}
+                <p>
+                    Пишите нам на почту:
+                    <a href="mailto:{{ team.email }}" class="hover:underline">
+                        {{ team.email }}
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="mb-10 space-y-7 md:mb-16 lg:mb-24">
+            <h3 class="font-bold">{{ team.about_title }}</h3>
+            {% for paragraph in team.about_text|split:'\n\n' %}
+                <p>{{ paragraph|safe }}</p>
+            {% endfor %}
+        </div>
+        <div class="mb-10 grid grid-cols-1 gap-7 text-lg md:mb-20 lg:mb-28 lg:text-xl xl:grid-cols-[1fr,36.6875rem] xl:gap-[53px] xl:text-[29px]">
+            <div class="flex flex-col">
+                <h3 class="mb-11 font-bold">{{ team.who_we_are_title }}</h3>
+                <ul class="mb-5 space-y-3 md:mb-7 lg:mb-11">
+                    {% for item in team.who_we_are_items %}
+                        <li class="before:pr-1 before:content-['•']">
+                            {{ item|safe }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <p class="mb-5 font-bold md:mb-7 lg:mb-11 xl:flex-auto">
+                    {{ team.who_we_are_conclusion }}
+                </p>
+                <div>
+                    <img src="{{ team.image1.url }}" alt="команда" class="aspect-[1100/538] size-full object-cover">
+                </div>
+            </div>
+            <div class="">
+                <img src="{{ team.image2.url }}" alt="команда" class="aspect-[587/992] size-full object-cover">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

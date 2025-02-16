@@ -306,3 +306,30 @@ class SiteLogo(models.Model):
             # Деактивируем все другие логотипы
             SiteLogo.objects.exclude(id=self.id).update(is_active=False)
         super().save(*args, **kwargs)
+
+class TeamPage(models.Model):
+    title = models.CharField('Заголовок', max_length=200)
+    subtitle = models.CharField('Подзаголовок', max_length=200)
+    main_text = models.TextField('Основной текст')
+    statistics = models.JSONField('Статистика', default=list, help_text='Список статистических данных')
+    recruitment_text = models.TextField('Текст о наборе сотрудников')
+    email = models.EmailField('Email для связи')
+    about_title = models.CharField('Заголовок "О нас"', max_length=200)
+    about_text = models.TextField('Текст "О нас"')
+    who_we_are_title = models.CharField('Заголовок "Кто мы"', max_length=200)
+    who_we_are_items = models.JSONField('Пункты "Кто мы"', default=list)
+    who_we_are_conclusion = models.TextField('Заключение "Кто мы"')
+    image1 = models.ImageField('Изображение 1', upload_to='team/')
+    image2 = models.ImageField('Изображение 2', upload_to='team/')
+
+    class Meta:
+        verbose_name = 'Страница команды'
+        verbose_name_plural = 'Страница команды'
+
+    def __str__(self):
+        return 'Настройки страницы команды'
+
+    def save(self, *args, **kwargs):
+        if not self.pk and TeamPage.objects.exists():
+            return  # Предотвращаем создание более одной записи
+        return super(TeamPage, self).save(*args, **kwargs)

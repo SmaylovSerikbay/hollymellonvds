@@ -3,7 +3,8 @@ from django import forms
 from .models import (
     Brand, TopGalleryImage, Feature, SpecialOffer, City, BrandTicker,
     BrandsPageSettings, PhotoAlbum, SiteSettings, Announcement,
-    AnnouncementItem, AnnouncementMedia, HomeHero, SiteLogo, Photographer
+    AnnouncementItem, AnnouncementMedia, HomeHero, SiteLogo, Photographer,
+    TeamPage
 )
 from .utils import get_yandex_folders
 
@@ -218,3 +219,34 @@ class HomeHeroAdmin(admin.ModelAdmin):
 class SiteLogoAdmin(admin.ModelAdmin):
     list_display = ['id', 'is_active']
     list_editable = ['is_active']
+
+@admin.register(TeamPage)
+class TeamPageAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Основная информация', {
+            'fields': ('title', 'subtitle', 'main_text'),
+        }),
+        ('Статистика', {
+            'fields': ('statistics',),
+            'description': 'Введите статистические данные в формате JSON списка. Например: ["Средний стаж работы в компании — от 4-х лет", "11 проектов по всему Казахстану"]'
+        }),
+        ('Набор сотрудников', {
+            'fields': ('recruitment_text', 'email'),
+        }),
+        ('О нас', {
+            'fields': ('about_title', 'about_text'),
+        }),
+        ('Кто мы', {
+            'fields': ('who_we_are_title', 'who_we_are_items', 'who_we_are_conclusion'),
+            'description': 'Введите пункты "Кто мы" в формате JSON списка. Например: ["Сеть из 11 брендов в сфере HoReCa, которые знают и любят", "Команда из более чем 450 профессионалов"]'
+        }),
+        ('Изображения', {
+            'fields': ('image1', 'image2'),
+        }),
+    )
+
+    def has_add_permission(self, request):
+        return not TeamPage.objects.exists()
+
+    def has_delete_permission(self, request, obj=None):
+        return False
