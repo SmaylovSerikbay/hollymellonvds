@@ -32,20 +32,22 @@
 
         <!-- Статистика -->
         <div class="statistics-section">
-            <div class="section-header">
-                <h2 class="section-subtitle">Статистика, которая говорит за себя</h2>
-            </div>
-            <div class="statistics-grid">
-                {% for stat in statistics %}
-                    <div class="statistic-card">
-                        {% with parts=stat.text|split:'—' %}
-                            <p>
-                                <strong>{{ parts.0 }}</strong>
-                                <span>{{ parts.1 }}</span>
-                            </p>
-                        {% endwith %}
-                    </div>
-                {% endfor %}
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-subtitle">Статистика, которая говорит за себя</h2>
+                </div>
+                <div class="statistics-wrapper">
+                    {% for stat in statistics %}
+                        <div class="statistic-card">
+                            {% with parts=stat.text|split:'—' %}
+                                <div class="statistic-content">
+                                    <div class="statistic-number">{{ parts.0 }}</div>
+                                    <div class="statistic-description">{{ parts.1 }}</div>
+                                </div>
+                            {% endwith %}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
 
@@ -207,66 +209,84 @@
 
 /* Статистика */
 .statistics-section {
-    margin: 120px 0;
+    margin: 80px 0;
     padding: 60px 0;
-    background-color: var(--primary-color);
+    background: linear-gradient(145deg, var(--primary-color) 0%, var(--accent-color) 100%);
     position: relative;
     color: var(--light-bg);
 }
 
-.statistics-section .section-subtitle {
-    color: var(--light-bg);
-    opacity: 0.9;
-    font-size: 28px;
-    margin-bottom: 50px;
+.statistics-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    pointer-events: none;
 }
 
-.statistics-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    max-width: var(--container-width);
+.statistics-section .section-subtitle {
+    color: var(--light-bg);
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.statistics-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
 .statistic-card {
-    position: relative;
-    text-align: center;
-    padding: 20px 15px;
+    flex: 1;
+    min-width: 200px;
+    max-width: 280px;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
-    border-radius: 15px;
-    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .statistic-card:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.statistic-card p {
-    margin: 0;
-    position: relative;
-    color: var(--light-bg);
+.statistic-content {
+    padding: 30px 20px;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.statistic-card p strong {
-    display: block;
-    font-size: 32px;
+.statistic-number {
+    font-size: 36px;
     font-weight: 700;
-    margin-bottom: 10px;
-    background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.8) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    line-height: 1.1;
+    line-height: 1.2;
 }
 
-.statistic-card p span {
-    font-size: 14px;
-    opacity: 0.8;
-    display: block;
-    line-height: 1.3;
+.statistic-description {
+    font-size: 16px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
 }
 
 /* Секция найма */
@@ -424,14 +444,17 @@
 
 /* Адаптивность */
 @media (max-width: 1200px) {
-    .statistics-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-        max-width: 900px;
+    .statistics-wrapper {
+        gap: 20px;
     }
     
-    .statistic-card p strong {
-        font-size: 28px;
+    .statistic-card {
+        min-width: 180px;
+        max-width: 250px;
+    }
+    
+    .statistic-number {
+        font-size: 32px;
     }
 }
 
@@ -447,36 +470,39 @@
     .section-subtitle {
         font-size: 20px;
     }
+    
+    .statistics-section .section-subtitle {
+        font-size: 28px;
+        margin-bottom: 40px;
+    }
 }
 
 @media (max-width: 768px) {
-    .statistics-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        max-width: 500px;
-    }
-    
     .statistics-section {
-        padding: 40px 0;
-        margin: 80px 0;
+        padding: 50px 0;
+        margin: 60px 0;
     }
     
-    .statistics-section .section-subtitle {
-        font-size: 24px;
-        margin-bottom: 30px;
+    .statistics-wrapper {
+        gap: 15px;
     }
     
     .statistic-card {
-        padding: 15px 10px;
+        min-width: 160px;
+        max-width: 220px;
     }
     
-    .statistic-card p strong {
-        font-size: 24px;
-        margin-bottom: 8px;
+    .statistic-content {
+        padding: 25px 15px;
     }
     
-    .statistic-card p span {
-        font-size: 13px;
+    .statistic-number {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+    
+    .statistic-description {
+        font-size: 14px;
     }
     
     .content-paragraph {
@@ -488,22 +514,27 @@
     }
 }
 
-@media (max-width: 480px) {
-    .statistics-grid {
-        grid-template-columns: 1fr;
-        max-width: 280px;
+@media (max-width: 576px) {
+    .statistics-wrapper {
+        flex-direction: column;
+        align-items: center;
     }
     
     .statistic-card {
-        padding: 20px 15px;
+        width: 100%;
+        max-width: 300px;
     }
     
-    .statistic-card p strong {
-        font-size: 28px;
+    .statistic-content {
+        padding: 20px;
     }
     
-    .statistic-card p span {
-        font-size: 14px;
+    .statistic-number {
+        font-size: 32px;
+    }
+    
+    .statistic-description {
+        font-size: 15px;
     }
 }
 
