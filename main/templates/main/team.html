@@ -4,14 +4,17 @@
 
 {% block content %}
 <section class="team-section">
-    <div class="container">
-        <!-- Заголовок и подзаголовок -->
-        <div class="section-header">
-            <h1 class="section-title">{{ team.title }}</h1>
-            <p class="section-subtitle">{{ team.subtitle }}</p>
+    <!-- Hero секция -->
+    <div class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">{{ team.title }}</h1>
+            <p class="hero-subtitle">{{ team.subtitle }}</p>
         </div>
+        <div class="hero-background"></div>
+    </div>
 
-        <!-- Основной текст -->
+    <!-- Основной контент -->
+    <div class="container">
         <div class="main-content">
             {% for paragraph in team.main_text|split:'\n\n' %}
                 <p class="content-paragraph">
@@ -32,140 +35,109 @@
 
         <!-- Статистика -->
         <div class="statistics-section">
-            <div class="section-header">
-                <h2 class="section-subtitle">Статистика, которая говорит за себя</h2>
-            </div>
             <div class="statistics-grid">
                 {% for stat in statistics %}
                     <div class="statistic-card">
                         {% with parts=stat.text|split:'—' %}
-                            <p>
-                                <strong>{{ parts.0|safe }}</strong>
-                                <span>{{ parts.1|safe }}</span>
-                            </p>
+                            <div class="statistic-content">
+                                <div class="statistic-number">{{ parts.0|safe }}</div>
+                                <div class="statistic-text">{{ parts.1|safe }}</div>
+                            </div>
                         {% endwith %}
                     </div>
                 {% endfor %}
             </div>
         </div>
 
-        <!-- Фотографии -->
-        <div class="photos-section">
-            <div class="photo-main">
-                <div class="photo-item">
+        <!-- Галерея -->
+        <div class="gallery-section">
+            <div class="gallery-grid">
+                <div class="gallery-main">
                     <img src="{{ team.image1.url }}" alt="Наша команда" loading="lazy">
                 </div>
-            </div>
-            <div class="photo-side">
-                <div class="photo-item">
+                <div class="gallery-side">
                     <img src="{{ team.image2.url }}" alt="Наша команда" loading="lazy">
-                </div>
-            </div>
-        </div>
-
-        <!-- Секция найма -->
-        <div class="recruitment-section">
-            <div class="recruitment-content">
-                {% for paragraph in team.recruitment_text|split:'\n\n' %}
-                    <p class="{% if forloop.last %}recruitment-highlight{% endif %}">
-                        {{ paragraph|safe }}
-                    </p>
-                {% endfor %}
-                <div class="contact-info">
-                    <span>Пишите нам на почту:</span>
-                    <a href="mailto:{{ team.email }}" class="email-link">{{ team.email }}</a>
                 </div>
             </div>
         </div>
 
         <!-- О нас -->
         <div class="about-section">
-            <h3 class="section-subtitle">{{ team.about_title }}</h3>
-            {% for paragraph in team.about_text|split:'\n\n' %}
-                <p class="content-paragraph">
-                    {% if 'Holy Melon Management' in paragraph %}
-                        {% with parts=paragraph|split:'Holy Melon Management' %}
-                            {{ parts.0 }}<span class="brand-name">Holy Melon Management</span>{{ parts.1 }}
-                        {% endwith %}
-                    {% else %}
-                        {{ paragraph|safe }}
-                    {% endif %}
-                </p>
-            {% endfor %}
-        </div>
-
-        <!-- Кто мы -->
-        <div class="who-we-are-section">
-            <div class="who-we-are-content">
-                <div class="text-content">
-                    <h3 class="section-subtitle">{{ team.who_we_are_title }}</h3>
-                    <ul class="feature-list">
-                        {% for item in who_we_are_items %}
-                            <li>
-                                <span class="bullet">•</span>
-                                {{ item.text|safe }}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    <p class="conclusion-text">
-                        {{ team.who_we_are_conclusion }}
-                    </p>
+            <div class="about-content">
+                <h2 class="section-title">{{ team.about_title }}</h2>
+                <div class="about-text">
+                    {% for paragraph in team.about_text|split:'\n\n' %}
+                        <p>{{ paragraph|safe }}</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
 
+        <!-- Кто мы -->
+        <div class="who-we-are-section">
+            <h2 class="section-title">{{ team.who_we_are_title }}</h2>
+            <div class="features-grid">
+                {% for item in who_we_are_items %}
+                    <div class="feature-card">
+                        <div class="feature-icon">•</div>
+                        <div class="feature-text">{{ item.text|safe }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+            <p class="conclusion-text">{{ team.who_we_are_conclusion }}</p>
+        </div>
+
         <!-- Заведения -->
-        <div class="establishments-section">
-            <p class="establishments-intro">
-                Каждое наше заведение — это пространство, где рождаются воспоминания и начинается история.
-            </p>
-            <div class="establishments-grid">
+        <div class="venues-section">
+            <h2 class="section-title">Наши заведения</h2>
+            <div class="venues-grid">
                 {% regroup establishments by city as city_list %}
                 {% for city in city_list %}
-                <div class="city-block">
-                    <p class="city-name">{{ city.grouper }}:</p>
-                    <ul class="establishment-list">
-                        {% for est in city.list %}
-                        <li>
-                            <span class="bullet">•</span>
-                            <span class="establishment-name">{{ est.name }} — {{ est.year }}</span>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+                    <div class="city-card">
+                        <h3 class="city-name">{{ city.grouper }}</h3>
+                        <div class="venues-list">
+                            {% for est in city.list %}
+                                <div class="venue-item">
+                                    <span class="venue-name">{{ est.name }}</span>
+                                    <span class="venue-year">{{ est.year }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 {% endfor %}
+            </div>
+        </div>
+
+        <!-- Набор сотрудников -->
+        <div class="recruitment-section">
+            <div class="recruitment-content">
+                {% for paragraph in team.recruitment_text|split:'\n\n' %}
+                    <p class="recruitment-text">{{ paragraph|safe }}</p>
+                {% endfor %}
+                <div class="contact-block">
+                    <p class="contact-text">Пишите нам на почту:</p>
+                    <a href="mailto:{{ team.email }}" class="contact-email">{{ team.email }}</a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <style>
-/* Основные цвета и переменные */
 :root {
     --primary-color: #1a1a1a;
-    --secondary-color: #333333;
+    --secondary-color: #2d2d2d;
     --accent-color: #404040;
     --text-color: #4a4a4a;
-    --light-bg: #ffffff;
-    --dark-bg: #1a1a1a;
-    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --light-text: #ffffff;
+    --background: #ffffff;
+    --card-bg: #f8f8f8;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    --border-radius: 16px;
     --transition: all 0.3s ease;
-    --border-radius: 12px;
     --container-width: 1200px;
-    --section-spacing: 100px;
-}
-
-/* Переопределение стилей хедера для страницы команды */
-.header__menu a {
-    white-space: nowrap;
-    display: inline-block;
-}
-
-/* Общие стили секции */
-.team-section {
-    padding: var(--section-spacing) 0;
-    background-color: var(--light-bg);
-    color: var(--text-color);
+    --spacing: 120px;
 }
 
 .container {
@@ -174,38 +146,56 @@
     padding: 0 20px;
 }
 
-/* Заголовки */
-.section-header {
+/* Hero секция */
+.hero-section {
+    position: relative;
+    height: 60vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    margin-bottom: 80px;
+    color: var(--light-text);
+    overflow: hidden;
+    margin-bottom: var(--spacing);
 }
 
-.section-title {
-    font-size: 48px;
-    font-weight: 700;
-    color: var(--primary-color);
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    z-index: -1;
+}
+
+.hero-title {
+    font-size: 64px;
+    font-weight: 800;
     margin-bottom: 24px;
     line-height: 1.2;
 }
 
-.section-subtitle {
+.hero-subtitle {
     font-size: 24px;
-    color: var(--secondary-color);
-    margin-bottom: 60px;
-    line-height: 1.4;
+    font-weight: 400;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 /* Основной контент */
 .main-content {
     max-width: 800px;
-    margin: 0 auto 80px;
+    margin: 0 auto var(--spacing);
 }
 
 .content-paragraph {
     font-size: 18px;
     line-height: 1.8;
-    margin-bottom: 24px;
     color: var(--text-color);
+    margin-bottom: 24px;
 }
 
 .brand-name {
@@ -215,27 +205,19 @@
 
 /* Статистика */
 .statistics-section {
-    margin: 80px auto;
-    padding: 60px 0;
-    background-color: var(--primary-color);
-    color: var(--light-bg);
-    position: relative;
-    overflow: hidden;
+    margin-bottom: var(--spacing);
+    padding: 80px 0;
+    background: var(--primary-color);
+    color: var(--light-text);
 }
 
 .statistics-grid {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
 }
 
 .statistic-card {
-    flex: 1;
-    min-width: 200px;
     text-align: center;
     padding: 20px;
     position: relative;
@@ -251,78 +233,175 @@
     background: rgba(255, 255, 255, 0.1);
 }
 
-.statistic-card p {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.statistic-card p strong {
-    font-size: 42px;
-    font-weight: 700;
+.statistic-number {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 16px;
     background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    line-height: 1.2;
 }
 
-.statistic-card p span {
+.statistic-text {
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.9);
     line-height: 1.4;
-    max-width: 160px;
-    margin: 0 auto;
+    opacity: 0.9;
 }
 
-/* Фотографии */
-.photos-section {
-    margin: 80px 0;
+/* Галерея */
+.gallery-section {
+    margin-bottom: var(--spacing);
+}
+
+.gallery-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: 2fr 1fr;
     gap: 30px;
-    height: auto;
-    max-width: var(--container-width);
-    margin: 0 auto;
+    height: 600px;
 }
 
-.photo-main {
-    grid-column: span 8;
-    aspect-ratio: 16/9;
-}
-
-.photo-side {
-    grid-column: span 4;
-    aspect-ratio: 9/16;
-}
-
-.photo-item {
-    height: 100%;
+.gallery-main, .gallery-side {
+    position: relative;
     border-radius: var(--border-radius);
     overflow: hidden;
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--shadow);
 }
 
-.photo-item img {
+.gallery-main img, .gallery-side img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    transition: var(--transition);
 }
 
-.photo-item:hover img {
+.gallery-main:hover img, .gallery-side:hover img {
     transform: scale(1.05);
 }
 
-/* Секция найма */
-.recruitment-section {
-    background-color: var(--primary-color);
-    border-radius: var(--border-radius);
-    padding: 60px 40px;
-    margin-bottom: var(--section-spacing);
-    color: var(--light-bg);
+/* О нас */
+.about-section {
+    margin-bottom: var(--spacing);
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 40px;
     text-align: center;
+}
+
+.about-text p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-bottom: 24px;
+}
+
+/* Кто мы */
+.who-we-are-section {
+    margin-bottom: var(--spacing);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.feature-icon {
+    font-size: 24px;
+    color: var(--accent-color);
+    margin-bottom: 16px;
+}
+
+.feature-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.conclusion-text {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--text-color);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Заведения */
+.venues-section {
+    margin-bottom: var(--spacing);
+}
+
+.venues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.city-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.city-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.city-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.venue-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.venue-name {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.venue-year {
+    color: var(--accent-color);
+}
+
+/* Набор сотрудников */
+.recruitment-section {
+    background: var(--primary-color);
+    color: var(--light-text);
+    padding: 80px 0;
+    text-align: center;
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing);
 }
 
 .recruitment-content {
@@ -330,211 +409,98 @@
     margin: 0 auto;
 }
 
-.recruitment-highlight {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--accent-color);
-    margin: 30px 0;
-}
-
-.contact-info {
-    margin-top: 40px;
-    font-size: 18px;
-}
-
-.email-link {
-    color: var(--accent-color);
-    text-decoration: none;
-    margin-left: 10px;
-    transition: var(--transition);
-}
-
-.email-link:hover {
-    opacity: 0.8;
-}
-
-/* О нас и Кто мы */
-.about-section,
-.who-we-are-section {
-    margin-bottom: var(--section-spacing);
-}
-
-.who-we-are-content {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 60px;
-    align-items: start;
-}
-
-.feature-list {
-    list-style: none;
-    padding: 0;
-    margin: 40px 0;
-}
-
-.feature-list li {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    font-size: 18px;
-    line-height: 1.6;
-}
-
-.bullet {
-    color: var(--accent-color);
-    margin-right: 15px;
-    font-size: 24px;
-    line-height: 1;
-}
-
-.conclusion-text {
+.recruitment-text {
     font-size: 20px;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin: 40px 0;
     line-height: 1.6;
+    margin-bottom: 24px;
 }
 
-/* Изображения */
-.image-container,
-.side-image {
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: var(--card-shadow);
+.contact-block {
+    margin-top: 40px;
 }
 
-.team-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+.contact-text {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.contact-email {
+    display: inline-block;
+    color: var(--light-text);
+    font-size: 20px;
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
     transition: var(--transition);
 }
 
-.team-image:hover {
-    transform: scale(1.02);
-}
-
-/* Заведения */
-.establishments-section {
-    margin-bottom: var(--section-spacing);
-}
-
-.establishments-intro {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 60px;
-    color: var(--primary-color);
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.establishments-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 60px;
-}
-
-.city-block {
-    background-color: var(--light-bg);
-    padding: 30px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--card-shadow);
-    transition: var(--transition);
-}
-
-.city-block:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-}
-
-.city-name {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid var(--accent-color);
-}
-
-.establishment-list {
-    list-style: none;
-    padding: 0;
-}
-
-.establishment-list li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.establishment-name {
-    font-size: 16px;
-    text-transform: uppercase;
-    color: var(--text-color);
+.contact-email:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* Адаптивность */
 @media (max-width: 1200px) {
+    :root {
+        --spacing: 80px;
+    }
+
+    .hero-title {
+        font-size: 48px;
+    }
+
     .statistics-grid {
-        justify-content: center;
-        gap: 30px;
-    }
-    
-    .statistic-card {
-        flex: 0 1 calc(33.333% - 20px);
-        min-width: 180px;
-    }
-    
-    .statistic-card:not(:last-child)::after {
-        display: none;
-    }
-    
-    .statistic-card p strong {
-        font-size: 36px;
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (max-width: 992px) {
-    .photos-section {
+    .gallery-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        height: auto;
     }
-    
-    .photo-main,
-    .photo-side {
-        grid-column: 1 / -1;
-        aspect-ratio: 16/9;
+
+    .gallery-main, .gallery-side {
+        height: 400px;
+    }
+
+    .statistics-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 768px) {
-    .statistics-section {
-        padding: 40px 0;
-        margin: 60px auto;
+    :root {
+        --spacing: 60px;
     }
-    
-    .statistic-card {
-        flex: 0 1 calc(50% - 15px);
+
+    .hero-title {
+        font-size: 36px;
     }
-    
-    .statistic-card p strong {
-        font-size: 32px;
+
+    .hero-subtitle {
+        font-size: 18px;
     }
-    
-    .statistic-card p span {
-        font-size: 14px;
+
+    .statistic-number {
+        font-size: 36px;
     }
 }
 
-@media (max-width: 480px) {
-    .statistic-card {
-        flex: 0 1 100%;
+@media (max-width: 576px) {
+    .statistics-grid {
+        grid-template-columns: 1fr;
     }
-    
-    .statistics-section {
-        padding: 30px 0;
-        margin: 40px auto;
+
+    .gallery-main, .gallery-side {
+        height: 300px;
+    }
+
+    .venue-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
     }
 }
 
@@ -543,16 +509,17 @@
     --primary-color: #ffffff;
     --secondary-color: #e0e0e0;
     --text-color: #cccccc;
-    --light-bg: #1a1a1a;
+    --background: #1a1a1a;
+    --card-bg: #2d2d2d;
 }
 
-[data-theme="dark"] .statistics-section {
-    background-color: var(--light-bg);
+[data-theme="dark"] .hero-background {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
 }
 
-[data-theme="dark"] .statistic-card p strong {
-    background: linear-gradient(135deg, #333 0%, #666 100%);
-    -webkit-background-clip: text;
+[data-theme="dark"] .venue-item {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 </style>
+{% endblock %} 
 {% endblock %} 
