@@ -209,62 +209,54 @@
 
 /* Статистика */
 .statistics-section {
-    margin: 100px 0;
-    padding: 80px 0;
+    margin: 80px 0;
+    padding: 60px 0;
     position: relative;
     background: linear-gradient(135deg, 
-        rgba(0, 102, 204, 0.08) 0%,
-        rgba(0, 102, 204, 0.12) 50%,
-        rgba(0, 102, 204, 0.08) 100%
+        rgba(0, 102, 204, 0.15) 0%,
+        rgba(0, 102, 204, 0.25) 50%,
+        rgba(0, 102, 204, 0.15) 100%
     );
-}
-
-.statistics-section::before,
-.statistics-section::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(to right, 
-        transparent,
-        rgba(0, 102, 204, 0.3),
-        rgba(0, 102, 204, 0.5),
-        rgba(0, 102, 204, 0.3),
-        transparent
-    );
+    border-radius: 30px;
+    overflow: hidden;
 }
 
 .statistics-section::before {
+    content: '';
+    position: absolute;
     top: 0;
-}
-
-.statistics-section::after {
-    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='rgba(0,102,204,0.05)' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.5;
 }
 
 .statistics-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 30px;
+    gap: 25px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    position: relative;
+    z-index: 2;
 }
 
 .statistic-card {
     position: relative;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 35px 25px;
-    border-radius: 20px;
-    transition: all 0.4s ease;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 40px 20px;
+    border-radius: 24px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 180px;
-    box-shadow: 0 8px 20px rgba(0, 102, 204, 0.1);
-    border: 1px solid rgba(0, 102, 204, 0.15);
+    min-height: 200px;
+    box-shadow: 0 10px 30px rgba(0, 102, 204, 0.15);
+    border: 2px solid rgba(0, 102, 204, 0.2);
+    overflow: hidden;
 }
 
 .statistic-card::before {
@@ -275,17 +267,17 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, 
-        rgba(0, 102, 204, 0.1) 0%,
-        rgba(0, 102, 204, 0.05) 100%
+        rgba(0, 102, 204, 0.2) 0%,
+        rgba(0, 102, 204, 0.1) 100%
     );
     opacity: 0;
     transition: opacity 0.4s ease;
-    border-radius: 20px;
 }
 
 .statistic-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 102, 204, 0.15);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 102, 204, 0.2);
+    border-color: rgba(0, 102, 204, 0.4);
 }
 
 .statistic-card:hover::before {
@@ -298,6 +290,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     gap: 15px;
 }
 
@@ -306,138 +299,174 @@
     font-weight: 600;
     color: var(--text-color);
     text-transform: uppercase;
-    letter-spacing: 1.2px;
-    text-align: center;
-    margin-bottom: 10px;
+    letter-spacing: 1.5px;
     line-height: 1.4;
+    max-width: 150px;
+    margin: 0 auto;
 }
 
 .stat-number {
-    font-size: 38px;
-    font-weight: 700;
-    color: var(--accent-color);
-    line-height: 1.2;
+    font-size: 44px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.1;
+    margin-top: 10px;
     position: relative;
-    display: inline-block;
 }
 
 .stat-number::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: -12px;
     left: 50%;
     transform: translateX(-50%);
-    width: 50px;
-    height: 3px;
-    background: var(--accent-color);
-    opacity: 0.4;
-    transition: all 0.3s ease;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, var(--accent-color), var(--accent-dark));
     border-radius: 2px;
+    opacity: 0.3;
+    transition: all 0.4s ease;
 }
 
 .statistic-card:hover .stat-number::after {
-    width: 70px;
-    opacity: 0.8;
+    width: 80px;
+    opacity: 0.6;
 }
 
-/* Адаптивность для статистики */
+/* Мобильная адаптация */
 @media (max-width: 1200px) {
     .statistics-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 25px;
+        gap: 20px;
         padding: 0 30px;
     }
     
     .statistic-card {
-        min-height: 160px;
+        min-height: 180px;
         padding: 30px 20px;
+    }
+    
+    .stat-number {
+        font-size: 38px;
+    }
+    
+    .stat-label {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .statistics-section {
+        margin: 60px 15px;
+        border-radius: 20px;
+        padding: 40px 0;
+    }
+
+    .statistics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 0 15px;
+    }
+    
+    .statistic-card {
+        min-height: 160px;
+        padding: 25px 15px;
+        border-radius: 20px;
     }
     
     .stat-number {
         font-size: 34px;
     }
-}
-
-@media (max-width: 768px) {
-    .statistics-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        padding: 0 20px;
-    }
-    
-    .statistics-section {
-        margin: 60px 0;
-        padding: 50px 0;
-    }
-    
-    .stat-number {
-        font-size: 32px;
-    }
     
     .stat-label {
         font-size: 14px;
+        letter-spacing: 1.2px;
+        max-width: 130px;
     }
     
-    .statistic-card {
-        min-height: 150px;
-        padding: 25px 15px;
+    .stat-number::after {
+        bottom: -10px;
+        width: 50px;
+        height: 3px;
+    }
+    
+    .statistic-card:hover {
+        transform: translateY(-5px) scale(1.01);
     }
 }
 
 @media (max-width: 480px) {
+    .statistics-section {
+        margin: 40px 10px;
+        padding: 30px 0;
+    }
+
     .statistics-grid {
         grid-template-columns: 1fr;
-        max-width: 320px;
-        margin: 0 auto;
+        max-width: 280px;
         gap: 15px;
     }
     
     .statistic-card {
         min-height: 140px;
-        padding: 20px 15px;
+        padding: 25px 15px;
     }
     
     .stat-number {
-        font-size: 30px;
+        font-size: 36px;
     }
     
     .stat-label {
         font-size: 13px;
-        letter-spacing: 1px;
+        max-width: 200px;
     }
     
-    .statistics-section {
-        margin: 40px 0;
-        padding: 40px 0;
+    .section-subtitle {
+        font-size: 20px;
+        margin-bottom: 30px;
     }
 }
 
-/* Темная тема для статистики */
+/* Темная тема */
 [data-theme="dark"] .statistics-section {
     background: linear-gradient(135deg, 
-        rgba(0, 102, 204, 0.15) 0%,
-        rgba(0, 102, 204, 0.2) 50%,
-        rgba(0, 102, 204, 0.15) 100%
+        rgba(0, 102, 204, 0.25) 0%,
+        rgba(0, 102, 204, 0.35) 50%,
+        rgba(0, 102, 204, 0.25) 100%
     );
 }
 
 [data-theme="dark"] .statistic-card {
     background: rgba(26, 26, 26, 0.95);
-    border-color: rgba(0, 102, 204, 0.25);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 102, 204, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .statistic-card:hover {
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(0, 102, 204, 0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 [data-theme="dark"] .stat-label {
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 [data-theme="dark"] .stat-number {
-    color: var(--accent-color);
-    text-shadow: 0 0 20px rgba(0, 102, 204, 0.3);
+    background: linear-gradient(135deg, #0088FF, #00CCFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(0, 136, 255, 0.3);
+}
+
+[data-theme="dark"] .stat-number::after {
+    background: linear-gradient(to right, #0088FF, #00CCFF);
+    opacity: 0.4;
+}
+
+[data-theme="dark"] .statistic-card:hover .stat-number::after {
+    opacity: 0.7;
 }
 
 /* Секция найма */
