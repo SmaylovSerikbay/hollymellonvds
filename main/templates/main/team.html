@@ -32,14 +32,16 @@
 
         <!-- Статистика -->
         <div class="statistics-section">
-            <div class="statistics-container">
+            <div class="section-header">
+                <h2 class="section-subtitle">Статистика, которая говорит за себя</h2>
+            </div>
+            <div class="statistics-grid">
                 {% for stat in statistics %}
-                    <div class="stat-card">
+                    <div class="statistic-card">
                         {% with parts=stat.text|split:'—' %}
                             <div class="stat-content">
-                                <div class="stat-number">{{ parts.0|striptags }}</div>
-                                <div class="stat-divider"></div>
-                                <div class="stat-description">{{ parts.1|striptags }}</div>
+                                <div class="stat-number">{{ parts.0 }}</div>
+                                <div class="stat-label">{{ parts.1 }}</div>
                             </div>
                         {% endwith %}
                     </div>
@@ -205,68 +207,79 @@
 
 /* Статистика */
 .statistics-section {
-    padding: 60px 0;
-    background: linear-gradient(to bottom, var(--light-bg), rgba(212, 178, 84, 0.05));
-    margin: 40px 0;
+    margin: 80px 0;
+    padding: 40px 0;
+    background: linear-gradient(to right, rgba(212, 178, 84, 0.05), rgba(212, 178, 84, 0.1), rgba(212, 178, 84, 0.05));
 }
 
-.statistics-container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 24px;
-    max-width: var(--container-width);
+.statistics-grid {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-.stat-card {
+.statistic-card {
+    flex: 1;
+    min-width: 180px;
+    max-width: 220px;
     background: var(--light-bg);
     border-radius: 16px;
-    padding: 32px 24px;
-    text-align: center;
+    padding: 24px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(212, 178, 84, 0.1);
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 180px;
+    overflow: hidden;
 }
 
-.stat-card:hover {
+.statistic-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, var(--accent-color), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.statistic-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    border-color: rgba(212, 178, 84, 0.2);
+}
+
+.statistic-card:hover::before {
+    opacity: 1;
 }
 
 .stat-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    text-align: center;
+    gap: 8px;
 }
 
 .stat-number {
-    font-size: 42px;
+    font-size: 28px;
     font-weight: 700;
     color: var(--accent-color);
-    line-height: 1;
-    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 4px;
 }
 
-.stat-divider {
-    width: 40px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent-color), rgba(212, 178, 84, 0.3));
-    border-radius: 2px;
-}
-
-.stat-description {
+.stat-label {
     font-size: 14px;
-    line-height: 1.4;
-    color: var(--text-color);
     font-weight: 500;
-    max-width: 140px;
-    margin: 0 auto;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* Секция найма */
@@ -430,36 +443,50 @@
 
 /* Адаптивность */
 @media (max-width: 1200px) {
-    .statistics-container {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+    .statistics-grid {
+        max-width: 960px;
+    }
+    
+    .statistic-card {
+        min-width: 160px;
+    }
+}
+
+@media (max-width: 992px) {
+    .statistics-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .statistic-card {
+        min-width: 200px;
+        flex: 0 0 calc(33.333% - 20px);
     }
 }
 
 @media (max-width: 768px) {
-    .statistics-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+    .statistics-section {
+        margin: 60px 0;
+        padding: 30px 0;
     }
     
-    .stat-card {
-        padding: 24px 16px;
-        min-height: 160px;
+    .statistic-card {
+        flex: 0 0 calc(50% - 20px);
     }
     
     .stat-number {
-        font-size: 36px;
+        font-size: 24px;
     }
 }
 
-@media (max-width: 480px) {
-    .statistics-container {
-        grid-template-columns: 1fr;
+@media (max-width: 576px) {
+    .statistics-grid {
+        flex-direction: column;
+        align-items: stretch;
     }
     
-    .stat-card {
-        min-height: auto;
-        padding: 20px;
+    .statistic-card {
+        max-width: none;
     }
 }
 
@@ -473,16 +500,25 @@
 }
 
 [data-theme="dark"] .statistics-section {
-    background: linear-gradient(to bottom, var(--dark-bg), rgba(212, 178, 84, 0.05));
+    background: linear-gradient(to right, rgba(212, 178, 84, 0.02), rgba(212, 178, 84, 0.04), rgba(212, 178, 84, 0.02));
 }
 
-[data-theme="dark"] .stat-card {
+[data-theme="dark"] .statistic-card {
     background: rgba(255, 255, 255, 0.03);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(212, 178, 84, 0.1);
 }
 
-[data-theme="dark"] .stat-description {
-    color: rgba(255, 255, 255, 0.8);
+[data-theme="dark"] .stat-label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .city-block {
+    background-color: #262626;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .recruitment-section {
+    background-color: #262626;
 }
 </style>
 {% endblock %} 
