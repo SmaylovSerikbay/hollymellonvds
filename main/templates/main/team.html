@@ -32,22 +32,17 @@
 
         <!-- Статистика -->
         <div class="statistics-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-subtitle">Статистика, которая говорит за себя</h2>
-                </div>
-                <div class="statistics-wrapper">
-                    {% for stat in statistics %}
-                        <div class="statistic-card">
-                            {% with parts=stat.text|split:'—' %}
-                                <div class="statistic-content">
-                                    <div class="statistic-number">{{ parts.0 }}</div>
-                                    <div class="statistic-description">{{ parts.1 }}</div>
-                                </div>
-                            {% endwith %}
-                        </div>
-                    {% endfor %}
-                </div>
+            <div class="statistics-container">
+                {% for stat in statistics %}
+                    <div class="stat-card">
+                        {% with parts=stat.text|split:'—' %}
+                            <div class="stat-content">
+                                <div class="stat-number">{{ parts.0 }}</div>
+                                <div class="stat-description">{{ parts.1 }}</div>
+                            </div>
+                        {% endwith %}
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
@@ -138,7 +133,7 @@
 :root {
     --primary-color: #1a1a1a;
     --secondary-color: #333333;
-    --accent-color: #2D3436;
+    --accent-color: #d4b254;
     --text-color: #4a4a4a;
     --light-bg: #ffffff;
     --dark-bg: #1a1a1a;
@@ -209,115 +204,84 @@
 
 /* Статистика */
 .statistics-section {
-    margin: 80px 0;
     padding: 80px 0;
-    background: linear-gradient(120deg, #1a1a1a 0%, #2D3436 100%);
+    background: linear-gradient(180deg, var(--light-bg) 0%, rgba(212, 178, 84, 0.05) 100%);
     position: relative;
-    color: var(--light-bg);
     overflow: hidden;
 }
 
-.statistics-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
-    pointer-events: none;
-}
-
-.statistics-section .container {
-    position: relative;
-    z-index: 2;
-}
-
-.statistics-section .section-subtitle {
-    color: var(--light-bg);
-    font-size: 32px;
-    font-weight: 600;
-    margin-bottom: 60px;
-    text-align: center;
-    position: relative;
-}
-
-.statistics-section .section-subtitle::after {
-    content: '';
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.3) 100%);
-    border-radius: 3px;
-}
-
-.statistics-wrapper {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 25px;
-    max-width: 1400px;
+.statistics-container {
+    max-width: var(--container-width);
     margin: 0 auto;
     padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 20px;
+    flex-wrap: nowrap;
 }
 
-.statistic-card {
-    position: relative;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+.stat-card {
+    flex: 1;
+    min-width: 200px;
+    padding: 40px 20px;
+    background: var(--light-bg);
     border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.statistic-card::before {
+.stat-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
-    pointer-events: none;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color) 0%, rgba(212, 178, 84, 0.3) 100%);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
 }
 
-.statistic-card:hover {
+.stat-card:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-.statistic-content {
-    padding: 25px 15px;
+.stat-card:hover::before {
+    opacity: 1;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    position: relative;
-    z-index: 1;
+    height: 100%;
 }
 
-.statistic-number {
-    font-size: 34px;
+.stat-number {
+    font-size: 36px;
     font-weight: 700;
-    margin-bottom: 12px;
-    background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.8) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
+    color: var(--accent-color);
+    margin-bottom: 16px;
+    line-height: 1;
+    font-feature-settings: "tnum" on, "lnum" on;
 }
 
-.statistic-description {
-    font-size: 15px;
-    line-height: 1.4;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 400;
+.stat-description {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-color);
+    max-width: 200px;
+    margin: 0 auto;
 }
 
 /* Секция найма */
 .recruitment-section {
-    background-color: var(--accent-color);
+    background-color: var(--primary-color);
     border-radius: var(--border-radius);
     padding: 60px 40px;
     margin-bottom: var(--section-spacing);
@@ -333,7 +297,7 @@
 .recruitment-highlight {
     font-size: 24px;
     font-weight: 700;
-    color: var(--light-bg);
+    color: var(--accent-color);
     margin: 30px 0;
 }
 
@@ -343,8 +307,14 @@
 }
 
 .email-link {
-    color: var(--light-bg);
-    text-decoration: underline;
+    color: var(--accent-color);
+    text-decoration: none;
+    margin-left: 10px;
+    transition: var(--transition);
+}
+
+.email-link:hover {
+    opacity: 0.8;
 }
 
 /* О нас и Кто мы */
@@ -470,104 +440,67 @@
 
 /* Адаптивность */
 @media (max-width: 1200px) {
-    .statistics-wrapper {
-        gap: 20px;
-        padding: 0 15px;
+    .statistics-container {
+        flex-wrap: wrap;
+        justify-content: center;
     }
-    
-    .statistic-content {
-        padding: 20px 12px;
-    }
-    
-    .statistic-number {
-        font-size: 30px;
-    }
-    
-    .statistic-description {
-        font-size: 14px;
+
+    .stat-card {
+        flex: 0 1 calc(33.333% - 20px);
+        min-width: 280px;
     }
 }
 
 @media (max-width: 992px) {
-    .who-we-are-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .section-title {
-        font-size: 36px;
-    }
-    
-    .section-subtitle {
-        font-size: 20px;
-    }
-    
-    .statistics-section {
-        padding: 60px 0;
-    }
-    
-    .statistics-wrapper {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-        max-width: 800px;
-    }
-    
-    .statistic-number {
-        font-size: 28px;
-        margin-bottom: 10px;
+    .stat-card {
+        flex: 0 1 calc(50% - 20px);
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 576px) {
     .statistics-section {
-        padding: 50px 0;
+        padding: 40px 0;
     }
-    
-    .statistics-wrapper {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        max-width: 500px;
-    }
-    
-    .statistic-content {
-        padding: 20px 15px;
-    }
-}
 
-@media (max-width: 480px) {
-    .statistics-wrapper {
-        grid-template-columns: 1fr;
-        max-width: 300px;
+    .statistics-container {
+        flex-direction: column;
+        gap: 16px;
     }
-    
-    .statistic-card {
-        max-width: 100%;
+
+    .stat-card {
+        flex: 1 1 100%;
     }
-    
-    .statistic-content {
-        padding: 25px 20px;
-    }
-    
-    .statistic-number {
+
+    .stat-number {
         font-size: 32px;
     }
-    
-    .statistic-description {
+
+    .stat-description {
         font-size: 14px;
     }
 }
 
 /* Темная тема */
 [data-theme="dark"] {
-    --primary-color: #1a1a1a;
+    --primary-color: #ffffff;
     --secondary-color: #e0e0e0;
-    --accent-color: #2D3436;
     --text-color: #cccccc;
-    --light-bg: #ffffff;
-    --dark-bg: #1a1a1a;
+    --light-bg: #1a1a1a;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .statistics-section {
-    background-color: var(--accent-color);
+    background: linear-gradient(180deg, var(--dark-bg) 0%, rgba(212, 178, 84, 0.05) 100%);
+}
+
+[data-theme="dark"] .stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .stat-description {
+    color: rgba(255, 255, 255, 0.8);
 }
 </style>
+{% endblock %} 
 {% endblock %} 
